@@ -1,0 +1,48 @@
+import { Account } from '@/types';
+
+export const mockAccounts: Account[] = [
+  {
+    id: "acc-1",
+    name: "Emirates NBD Current",
+    bank: "Emirates NBD",
+    type: "checking",
+    balance: 45230.50,
+    currency: "AED",
+    accountNumber: "****4567",
+    isActive: true,
+    connectedDate: "2024-01-15",
+  },
+  {
+    id: "acc-2",
+    name: "ADCB Savings",
+    bank: "Abu Dhabi Commercial Bank",
+    type: "savings",
+    balance: 125000.00,
+    currency: "AED",
+    accountNumber: "****8901",
+    isActive: true,
+    connectedDate: "2024-01-15",
+  },
+  {
+    id: "acc-3",
+    name: "FAB Credit Card",
+    bank: "First Abu Dhabi Bank",
+    type: "credit",
+    balance: -8450.75,
+    currency: "AED",
+    accountNumber: "****2345",
+    isActive: true,
+    connectedDate: "2024-02-01",
+  },
+  {
+    id: "acc-4",
+    name: "Investment Portfolio",
+    bank: "EFG Hermes",
+    type: "investment",
+    balance: 89650.25,
+    currency: "AED",
+    accountNumber: "****6789",
+    isActive: true,
+    connectedDate: "2024-03-10",
+  },
+];

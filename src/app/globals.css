@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Kasefra Brand Colors */
+    --dark-purple: #272361;
+    --light-purple: #8355a2;
+    --instant-grey: #d0d2d3;
+    --light-grey: #f1f1f2;
+
+    /* shadcn/ui CSS Variables - Light Theme */
+    --background: 240 4 95;              /* Light Grey HSL */
+    --foreground: 244 47 26;             /* Dark Purple HSL */
+    --primary: 244 47 26;                /* Dark Purple HSL */
+    --primary-foreground: 240 4 95;      /* Light Grey HSL */
+    --secondary: 276 31 48;              /* Light Purple HSL */
+    --secondary-foreground: 240 4 95;    /* Light Grey HSL */
+    --accent: 200 3 82;                  /* Instant Grey HSL */
+    --accent-foreground: 244 47 26;      /* Dark Purple HSL */
+    --border: 200 3 82;                  /* Instant Grey HSL */
+    --input: 240 4 95;                   /* Light Grey HSL */
+    --ring: 276 31 48;                   /* Light Purple HSL */
+    --card: 240 4 95;                   /* Light Grey HSL */
+    --card-foreground: 244 47 26;       /* Dark Purple HSL */
+    --popover: 240 4 95;                /* Light Grey HSL */
+    --popover-foreground: 244 47 26;    /* Dark Purple HSL */
+    --muted: 200 3 82;                  /* Instant Grey HSL */
+    --muted-foreground: 244 47 60;      /* Darker Purple for contrast */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --success: 142 73% 42%;
+    --success-foreground: 210 40% 98%;
+    --warning: 280 35 55;               /* Purple-based warning */
+    --warning-foreground: 240 4 95;     /* Light Grey foreground */
+    --radius: 0.5rem;
+  }
+
+  /* shadcn/ui CSS Variables - Dark Theme */
+  .dark {
+    --background: 244 47 26;             /* Dark Purple HSL */
+    --foreground: 240 4 95;              /* Light Grey HSL */
+    --primary: 240 4 95;                 /* Light Grey HSL */
+    --primary-foreground: 244 47 26;     /* Dark Purple HSL */
+    --secondary: 276 31 48;              /* Light Purple HSL */
+    --secondary-foreground: 244 47 26;   /* Dark Purple HSL */
+    --accent: 200 3 82;                  /* Instant Grey HSL */
+    --accent-foreground: 244 47 26;      /* Dark Purple HSL */
+    --border: 276 31 48;                 /* Light Purple HSL */
+    --input: 244 47 35;                  /* Lighter Dark Purple HSL */
+    --ring: 276 31 48;                   /* Light Purple HSL */
+    --card: 244 47 32;                   /* Slightly lighter Dark Purple */
+    --card-foreground: 240 4 95;         /* Light Grey HSL */
+    --popover: 244 47 26;                /* Dark Purple HSL */
+    --popover-foreground: 240 4 95;      /* Light Grey HSL */
+    --muted: 244 47 35;                  /* Lighter Dark Purple HSL */
+    --muted-foreground: 200 3 82;        /* Instant Grey HSL */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --success: 142 73% 42%;
+    --success-foreground: 210 40% 98%;
+    --warning: 280 35 65;               /* Purple-based warning for dark theme */
+    --warning-foreground: 244 47 26;     /* Dark Purple foreground */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/30;
+}
