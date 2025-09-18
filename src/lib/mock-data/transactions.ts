@@ -4,7 +4,7 @@ export const mockTransactions: Transaction[] = [
   {
     id: "txn-1",
     accountId: "acc-1",
-    amount: -125.50,
+    amount: -135.50,
     currency: "AED",
     description: "Carrefour Hypermarket",
     merchant: "Carrefour",

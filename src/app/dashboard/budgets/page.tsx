@@ -23,17 +23,17 @@ import { BudgetCard } from "@/components/budgets/budget-card"
 
 export default function BudgetsPage() {
   return (
-    <div className="space-y-8">
+    <div className="page-container">
       {/* Header Section */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Budgets</h1>
-          <p className="text-muted-foreground">
+        <div className="page-header">
+          <h1 className="page-title">Budgets</h1>
+          <p className="page-subtitle">
             Manage your spending limits and track your financial progress
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="btn-outline-premium">
             <Settings className="h-4 w-4 mr-2" />
             Settings
           </Button>
@@ -42,7 +42,7 @@ export default function BudgetsPage() {
       </div>
 
       {/* Budget Overview Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <BudgetOverview />
         </div>
@@ -52,51 +52,53 @@ export default function BudgetsPage() {
       </div>
 
       {/* Budget Analytics Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <BudgetChart />
 
         {/* Quick Budget Stats */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <PieChart className="h-5 w-5 text-primary" />
+        <Card className="premium-card hover-lift border-0 shadow-lg">
+          <CardHeader className="pb-6">
+            <CardTitle className="flex items-center gap-2 text-xl font-bold">
+              <div className="icon-container bg-primary/10">
+                <PieChart className="h-5 w-5 text-primary" />
+              </div>
               Budget Summary
             </CardTitle>
-            <CardDescription>Current month overview</CardDescription>
+            <CardDescription className="text-base">Current month overview</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-3 bg-muted/50 rounded-lg">
-                <div className="text-2xl font-bold text-primary">AED 8,450</div>
+              <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
+                <div className="text-2xl font-bold text-primary mb-1">AED 8,450</div>
                 <div className="text-sm text-muted-foreground">Total Budget</div>
               </div>
-              <div className="p-3 bg-muted/50 rounded-lg">
-                <div className="text-2xl font-bold text-secondary">AED 6,230</div>
+              <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+                <div className="text-2xl font-bold text-blue-600 mb-1">AED 6,230</div>
                 <div className="text-sm text-muted-foreground">Total Spent</div>
               </div>
             </div>
 
             <div className="space-y-3">
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-sm font-medium">
                 <span>Overall Progress</span>
-                <span>74% of budget used</span>
+                <span className="text-primary">74% of budget used</span>
               </div>
-              <Progress value={74} className="h-2" />
+              <Progress value={74} className="h-3" />
             </div>
 
             {/* Top Categories */}
-            <div className="space-y-3">
-              <h4 className="font-medium text-sm">Top Spending Categories</h4>
+            <div className="space-y-4">
+              <h4 className="font-semibold text-sm text-foreground">Top Spending Categories</h4>
               {[
                 { name: "Food & Dining", spent: 1850, budget: 2000, percentage: 93 },
                 { name: "Transportation", spent: 980, budget: 1200, percentage: 82 },
                 { name: "Utilities", spent: 450, budget: 600, percentage: 75 }
               ].map((category) => (
-                <div key={category.name} className="space-y-2">
+                <div key={category.name} className="space-y-2 p-3 bg-muted/30 rounded-lg">
                   <div className="flex items-center justify-between text-sm">
-                    <span>{category.name}</span>
+                    <span className="font-medium">{category.name}</span>
                     <div className="flex items-center gap-2">
-                      <span>AED {category.spent.toLocaleString()}</span>
+                      <span className="font-semibold">AED {category.spent.toLocaleString()}</span>
                       <Badge
                         variant={category.percentage > 90 ? "destructive" : category.percentage > 75 ? "default" : "secondary"}
                         className="text-xs"
@@ -105,12 +107,12 @@ export default function BudgetsPage() {
                       </Badge>
                     </div>
                   </div>
-                  <Progress value={category.percentage} className="h-1" />
+                  <Progress value={category.percentage} className="h-2" />
                 </div>
               ))}
             </div>
 
-            <Button variant="outline" className="w-full mt-4">
+            <Button variant="outline" className="w-full mt-4 btn-outline-premium">
               View All Categories
             </Button>
           </CardContent>
@@ -118,13 +120,15 @@ export default function BudgetsPage() {
       </div>
 
       {/* Budget Management Section */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Target className="h-5 w-5 text-primary" />
+      <Card className="premium-card hover-lift border-0 shadow-lg">
+        <CardHeader className="pb-6">
+          <CardTitle className="flex items-center gap-2 text-xl font-bold">
+            <div className="icon-container bg-primary/10">
+              <Target className="h-5 w-5 text-primary" />
+            </div>
             Active Budgets
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-base">
             Manage your spending limits and track progress
           </CardDescription>
         </CardHeader>

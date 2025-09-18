@@ -13,6 +13,7 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const router = useRouter()
 
   // Check authentication on mount
@@ -23,11 +24,16 @@ export default function DashboardLayout({
     }
   }, [router])
 
+  const toggleSidebarCollapse = () => {
+    setSidebarCollapsed(!sidebarCollapsed)
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Sidebar */}
       <Sidebar
         isOpen={sidebarOpen}
+        isCollapsed={sidebarCollapsed}
         onClose={() => setSidebarOpen(false)}
       />
 
@@ -35,12 +41,16 @@ export default function DashboardLayout({
       <MobileHeader onMenuOpen={() => setSidebarOpen(true)} />
 
       {/* Main content */}
-      <div className="lg:pl-64">
-        <Header onMenuClick={() => setSidebarOpen(true)} />
+      <div className={`transition-all duration-300 ${sidebarCollapsed ? 'lg:pl-16' : 'lg:pl-64'}`}>
+        <Header
+          onMenuClick={() => setSidebarOpen(true)}
+          onToggleCollapse={toggleSidebarCollapse}
+          isCollapsed={sidebarCollapsed}
+        />
 
         {/* Page content */}
-        <main className="py-6 pb-20 lg:pb-6">
-          <div className="px-4 lg:px-6">
+        <main className="py-8 pb-20 lg:pb-8">
+          <div className="px-6 lg:px-8">
             {children}
           </div>
         </main>

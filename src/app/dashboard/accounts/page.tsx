@@ -76,21 +76,21 @@ export default function AccountsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="page-container">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Accounts</h1>
-          <p className="text-muted-foreground">
+        <div className="page-header">
+          <h1 className="page-title">Accounts</h1>
+          <p className="page-subtitle">
             Manage your connected financial accounts
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="btn-outline-premium">
             <RefreshCw className="mr-2 h-4 w-4" />
             Sync All
           </Button>
-          <Button>
+          <Button className="btn-premium">
             <Plus className="mr-2 h-4 w-4" />
             Add Account
           </Button>
@@ -98,66 +98,73 @@ export default function AccountsPage() {
       </div>
 
       {/* Account Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Net Worth</CardTitle>
-            <Wallet className="h-4 w-4 text-muted-foreground" />
+      <div className="metrics-grid">
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Net Worth</CardTitle>
+            <div className="icon-container bg-primary/10">
+              <Wallet className="h-5 w-5 text-primary" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-3xl font-bold mb-2">
               {formatBalance(totalBalance, 'AED', 'checking')}
             </div>
-            <p className="text-xs text-muted-foreground">
-              <span className="text-green-600">+2.1%</span> from last month
+            <p className="text-sm text-muted-foreground flex items-center gap-1">
+              <span className="text-emerald-600 font-semibold">+2.1%</span> from last month
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Assets</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Assets</CardTitle>
+            <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
+              <TrendingUp className="h-5 w-5 text-emerald-600" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-3xl font-bold mb-2">
               {formatBalance(totalAssets, 'AED', 'savings')}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Assets across {activeAccounts} accounts
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Debt</CardTitle>
-            <TrendingDown className="h-4 w-4 text-muted-foreground" />
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Debt</CardTitle>
+            <div className="icon-container bg-red-100 dark:bg-red-900/20">
+              <TrendingDown className="h-5 w-5 text-red-600" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-3xl font-bold mb-2">
               {formatBalance(totalLiabilities, 'AED', 'credit')}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Credit card balances
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Accounts</CardTitle>
-            <Button 
-              variant="ghost" 
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Active Accounts</CardTitle>
+            <Button
+              variant="ghost"
               size="sm"
               onClick={() => setHideBalances(!hideBalances)}
+              className="hover:bg-primary/10"
             >
               {hideBalances ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
             </Button>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{activeAccounts}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-3xl font-bold mb-2">{activeAccounts}</div>
+            <p className="text-sm text-muted-foreground">
               Across {new Set(mockAccounts.map(a => a.bank)).size} banks
             </p>
           </CardContent>
@@ -165,24 +172,24 @@ export default function AccountsPage() {
       </div>
 
       {/* Accounts List */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Your Accounts</CardTitle>
-          <CardDescription>
+      <Card className="premium-card hover-lift border-0 shadow-lg">
+        <CardHeader className="pb-6">
+          <CardTitle className="text-xl font-bold">Your Accounts</CardTitle>
+          <CardDescription className="text-base">
             All connected accounts and their current balances
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {mockAccounts.map((account) => (
-              <div key={account.id} className="flex items-center justify-between p-4 rounded-lg border hover:bg-accent/50 transition-colors">
+              <div key={account.id} className="flex items-center justify-between p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors duration-200 border border-border/50">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-xl">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-xl">
                     {getAccountIcon(account.type)}
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-semibold">{account.name}</h3>
+                      <h3 className="font-semibold text-base">{account.name}</h3>
                       <Badge className={getAccountTypeColor(account.type)}>
                         {account.type}
                       </Badge>

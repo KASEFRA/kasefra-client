@@ -6,7 +6,7 @@ export const mockAccounts: Account[] = [
     name: "Emirates NBD Current",
     bank: "Emirates NBD",
     type: "checking",
-    balance: 45230.50,
+    balance: 251430.00,
     currency: "AED",
     accountNumber: "****4567",
     isActive: true,

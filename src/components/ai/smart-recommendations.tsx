@@ -29,14 +29,16 @@ export function SmartRecommendations() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Lightbulb className="h-5 w-5 text-primary" />
+    <Card className="premium-card hover-lift border-0 shadow-md">
+      <CardHeader className="pb-4">
+        <CardTitle className="flex items-center gap-2 text-lg font-bold">
+          <div className="icon-container bg-primary/10">
+            <Lightbulb className="h-5 w-5 text-primary" />
+          </div>
           Smart Recommendations
         </CardTitle>
-        <CardDescription>
-          AI-powered suggestions to optimize your finances
+        <CardDescription className="text-base">
+          AI-powered financial optimization
         </CardDescription>
       </CardHeader>
       <CardContent>

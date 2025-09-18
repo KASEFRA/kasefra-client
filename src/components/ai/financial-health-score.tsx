@@ -28,15 +28,18 @@ export function FinancialHealthScore() {
   }
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="premium-card hover-lift border-0 shadow-md">
+      <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="flex items-center gap-2">
-              Financial Health Score
+            <CardTitle className="flex items-center gap-2 text-lg font-bold">
+              <div className="icon-container bg-primary/10">
+                <TrendingUp className="h-5 w-5 text-primary" />
+              </div>
+              Financial Health
               {getTrendIcon()}
             </CardTitle>
-            <CardDescription>AI-powered analysis of your financial wellness</CardDescription>
+            <CardDescription className="text-base">AI-powered wellness analysis</CardDescription>
           </div>
           <div className="text-right">
             <div className="text-3xl font-bold text-primary">{overall}</div>

@@ -161,12 +161,14 @@ export function PredictiveAlerts() {
   const warningAlerts = alerts.filter(alert => alert.severity === 'warning').length
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="premium-card hover-lift border-0 shadow-md">
+      <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-primary" />
-            <CardTitle>Predictive Insights</CardTitle>
+            <div className="icon-container bg-primary/10">
+              <TrendingUp className="h-5 w-5 text-primary" />
+            </div>
+            <CardTitle className="text-lg font-bold">Predictive Insights</CardTitle>
             {criticalAlerts > 0 && (
               <Badge variant="destructive" className="text-xs">
                 {criticalAlerts} Critical
@@ -188,8 +190,8 @@ export function PredictiveAlerts() {
             </Button>
           )}
         </div>
-        <CardDescription>
-          AI-powered predictions for your financial future
+        <CardDescription className="text-base">
+          AI-powered financial predictions
         </CardDescription>
       </CardHeader>
       <CardContent>

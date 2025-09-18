@@ -61,58 +61,58 @@
     --instant-grey: #d0d2d3;
     --light-grey: #f1f1f2;
 
-    /* shadcn/ui CSS Variables - Light Theme */
-    --background: 240 4 95;              /* Light Grey HSL */
-    --foreground: 244 47 26;             /* Dark Purple HSL */
-    --primary: 244 47 26;                /* Dark Purple HSL */
-    --primary-foreground: 240 4 95;      /* Light Grey HSL */
-    --secondary: 276 31 48;              /* Light Purple HSL */
-    --secondary-foreground: 240 4 95;    /* Light Grey HSL */
-    --accent: 200 3 82;                  /* Instant Grey HSL */
-    --accent-foreground: 244 47 26;      /* Dark Purple HSL */
-    --border: 200 3 82;                  /* Instant Grey HSL */
-    --input: 240 4 95;                   /* Light Grey HSL */
-    --ring: 276 31 48;                   /* Light Purple HSL */
-    --card: 240 4 95;                   /* Light Grey HSL */
-    --card-foreground: 244 47 26;       /* Dark Purple HSL */
-    --popover: 240 4 95;                /* Light Grey HSL */
-    --popover-foreground: 244 47 26;    /* Dark Purple HSL */
-    --muted: 200 3 82;                  /* Instant Grey HSL */
-    --muted-foreground: 244 47 60;      /* Darker Purple for contrast */
+    /* shadcn/ui CSS Variables - Light Theme - Enhanced */
+    --background: 220 13% 98%;           /* Softer white background */
+    --foreground: 244 47 15%;            /* Deeper purple for text */
+    --primary: 244 47 26%;               /* Rich purple primary */
+    --primary-foreground: 0 0% 100%;     /* Pure white */
+    --secondary: 220 13% 95%;            /* Light neutral secondary */
+    --secondary-foreground: 244 47 15%;  /* Deep purple text */
+    --accent: 220 13% 92%;               /* Subtle accent background */
+    --accent-foreground: 244 47 15%;     /* Deep purple text */
+    --border: 220 13% 91%;               /* Soft border color */
+    --input: 0 0% 100%;                  /* White input background */
+    --ring: 244 47 50%;                  /* Purple focus ring */
+    --card: 0 0% 100%;                   /* Pure white cards */
+    --card-foreground: 244 47 15%;       /* Deep purple text */
+    --popover: 0 0% 100%;                /* White popover */
+    --popover-foreground: 244 47 15%;    /* Deep purple text */
+    --muted: 220 13% 95%;                /* Light muted background */
+    --muted-foreground: 220 9% 46%;      /* Medium grey text */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --success: 142 73% 42%;
-    --success-foreground: 210 40% 98%;
-    --warning: 280 35 55;               /* Purple-based warning */
-    --warning-foreground: 240 4 95;     /* Light Grey foreground */
-    --radius: 0.5rem;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 76% 36%;              /* Rich green */
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;               /* Vibrant amber */
+    --warning-foreground: 0 0% 100%;
+    --radius: 0.75rem;                   /* Slightly more rounded */
   }
 
-  /* shadcn/ui CSS Variables - Dark Theme */
+  /* shadcn/ui CSS Variables - Dark Theme - Premium Purple */
   .dark {
-    --background: 244 47 26;             /* Dark Purple HSL */
-    --foreground: 240 4 95;              /* Light Grey HSL */
-    --primary: 240 4 95;                 /* Light Grey HSL */
-    --primary-foreground: 244 47 26;     /* Dark Purple HSL */
-    --secondary: 276 31 48;              /* Light Purple HSL */
-    --secondary-foreground: 244 47 26;   /* Dark Purple HSL */
-    --accent: 200 3 82;                  /* Instant Grey HSL */
-    --accent-foreground: 244 47 26;      /* Dark Purple HSL */
-    --border: 276 31 48;                 /* Light Purple HSL */
-    --input: 244 47 35;                  /* Lighter Dark Purple HSL */
-    --ring: 276 31 48;                   /* Light Purple HSL */
-    --card: 244 47 32;                   /* Slightly lighter Dark Purple */
-    --card-foreground: 240 4 95;         /* Light Grey HSL */
-    --popover: 244 47 26;                /* Dark Purple HSL */
-    --popover-foreground: 240 4 95;      /* Light Grey HSL */
-    --muted: 244 47 35;                  /* Lighter Dark Purple HSL */
-    --muted-foreground: 200 3 82;        /* Instant Grey HSL */
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --success: 142 73% 42%;
-    --success-foreground: 210 40% 98%;
-    --warning: 280 35 65;               /* Purple-based warning for dark theme */
-    --warning-foreground: 244 47 26;     /* Dark Purple foreground */
+    --background: 244 47 8%;             /* Deep premium purple background */
+    --foreground: 220 13% 95%;           /* Clean white text */
+    --primary: 244 47 55%;               /* Vibrant purple primary */
+    --primary-foreground: 0 0% 100%;     /* Pure white */
+    --secondary: 244 30 20%;             /* Rich dark purple secondary */
+    --secondary-foreground: 220 13% 95%; /* Clean white text */
+    --accent: 244 47 15%;                /* Premium dark purple accent */
+    --accent-foreground: 220 13% 95%;    /* Clean white text */
+    --border: 244 30 25%;                /* Elegant purple border */
+    --input: 244 47 12%;                 /* Deep purple input background */
+    --ring: 244 47 55%;                  /* Bright purple focus ring */
+    --card: 244 30 12%;                  /* Premium purple card background */
+    --card-foreground: 220 13% 95%;      /* Clean white text */
+    --popover: 244 47 8%;                /* Deep purple popover */
+    --popover-foreground: 220 13% 95%;   /* Clean white text */
+    --muted: 244 30 15%;                 /* Muted purple background */
+    --muted-foreground: 244 15% 70%;     /* Light purple-grey text */
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 76% 46%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 60%;
+    --warning-foreground: 0 0% 100%;
   }
 }
 
@@ -125,19 +125,83 @@
   }
 }
 
+/* Premium Custom Styles */
+@layer components {
+  /* Premium card styling */
+  .premium-card {
+    @apply bg-card border border-border/50 shadow-lg shadow-primary/5 backdrop-blur-sm;
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card)) 100%);
+  }
+
+  /* Enhanced gradient backgrounds */
+  .premium-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.8) 100%);
+  }
+
+  /* Glass morphism effect */
+  .glass-effect {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+
+  /* Subtle animations */
+  .hover-lift {
+    @apply transition-all duration-200 ease-out hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5;
+  }
+
+  /* Unified Page Styles */
+  .page-container {
+    @apply space-y-8 p-1;
+  }
+
+  .page-header {
+    @apply space-y-2;
+  }
+
+  .page-title {
+    @apply text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent;
+  }
+
+  .page-subtitle {
+    @apply text-lg text-muted-foreground;
+  }
+
+  /* Unified metrics cards */
+  .metrics-grid {
+    @apply grid gap-6 md:grid-cols-2 lg:grid-cols-4;
+  }
+
+  .metrics-grid-3 {
+    @apply grid gap-6 md:grid-cols-3;
+  }
+
+  /* Enhanced icon container */
+  .icon-container {
+    @apply p-2 rounded-lg;
+  }
+
+  /* Premium button variants */
+  .btn-premium {
+    @apply premium-gradient text-white hover:opacity-90 transition-opacity;
+  }
+
+  .btn-outline-premium {
+    @apply border-primary/20 hover:bg-primary/10 hover:border-primary/40 transition-all duration-200;
+  }
+}
+
 /* Custom scrollbar for webkit browsers */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-muted;
+  @apply bg-muted/50 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary/20 rounded-full;
+  @apply bg-primary/30 rounded-full hover:bg-primary/40;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary/30;
+  @apply bg-primary/50;
 }

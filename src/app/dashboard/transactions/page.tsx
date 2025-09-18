@@ -127,28 +127,29 @@ export default function TransactionsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="page-container">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Transactions</h1>
-          <p className="text-muted-foreground">
+        <div className="page-header">
+          <h1 className="page-title">Transactions</h1>
+          <p className="page-subtitle">
             Track and manage all your financial transactions
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="sm"
+            className="btn-outline-premium"
             onClick={() => setShowAiCategorizer(!showAiCategorizer)}
           >
             AI Categorize
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="btn-outline-premium">
             <Download className="mr-2 h-4 w-4" />
             Export
           </Button>
-          <Button>
+          <Button className="btn-premium">
             <Plus className="mr-2 h-4 w-4" />
             Add Transaction
           </Button>
@@ -156,56 +157,62 @@ export default function TransactionsPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Income</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+      <div className="metrics-grid-3">
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Income</CardTitle>
+            <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
+              <TrendingUp className="h-5 w-5 text-emerald-600" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">
+            <div className="text-3xl font-bold text-emerald-600 mb-2">
               {totalIncome.toLocaleString('en-AE', {
                 style: 'currency',
                 currency: 'AED'
               })}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               From {filteredTransactions.filter(t => t.type === 'income').length} transactions
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
-            <TrendingDown className="h-4 w-4 text-muted-foreground" />
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Expenses</CardTitle>
+            <div className="icon-container bg-red-100 dark:bg-red-900/20">
+              <TrendingDown className="h-5 w-5 text-red-600" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-red-600">
+            <div className="text-3xl font-bold text-red-600 mb-2">
               {totalExpenses.toLocaleString('en-AE', {
                 style: 'currency',
                 currency: 'AED'
               })}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               From {filteredTransactions.filter(t => t.type === 'expense').length} transactions
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Net Flow</CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Net Flow</CardTitle>
+            <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
+              <Calendar className="h-5 w-5 text-blue-600" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className={`text-2xl font-bold ${totalIncome - totalExpenses >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            <div className={`text-3xl font-bold mb-2 ${totalIncome - totalExpenses >= 0 ? 'text-emerald-600' : 'text-red-600'}`}>
               {(totalIncome - totalExpenses).toLocaleString('en-AE', {
                 style: 'currency',
                 currency: 'AED'
               })}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               {filteredTransactions.length} transactions shown
             </p>
           </CardContent>
@@ -221,13 +228,13 @@ export default function TransactionsPage() {
       )}
 
       {/* Transactions Table with Integrated Filters */}
-      <Card>
-        <CardHeader>
+      <Card className="premium-card hover-lift border-0 shadow-lg">
+        <CardHeader className="pb-6">
           <div className="flex flex-col space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Transactions</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-xl font-bold">Transactions</CardTitle>
+                <CardDescription className="text-base">
                   Showing {paginatedTransactions.length} of {filteredTransactions.length} transactions
                 </CardDescription>
               </div>

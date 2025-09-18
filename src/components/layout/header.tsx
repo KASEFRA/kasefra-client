@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Bell, Menu, Search, LogOut, User, Settings, CreditCard } from "lucide-react"
+import { Bell, Menu, Search, LogOut, User, Settings, CreditCard, PanelLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -18,9 +18,11 @@ import { mockUser } from "@/lib/mock-data"
 
 interface HeaderProps {
   onMenuClick?: () => void
+  onToggleCollapse?: () => void
+  isCollapsed?: boolean
 }
 
-export function Header({ onMenuClick }: HeaderProps) {
+export function Header({ onMenuClick, onToggleCollapse, isCollapsed }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const router = useRouter()
 
@@ -60,8 +62,19 @@ export function Header({ onMenuClick }: HeaderProps) {
             <span className="sr-only">Toggle menu</span>
           </Button>
 
+          {/* Desktop sidebar toggle button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hidden lg:flex"
+            onClick={onToggleCollapse}
+          >
+            <PanelLeft className={`h-5 w-5 transition-transform duration-200 ${isCollapsed ? 'rotate-180' : ''}`} />
+            <span className="sr-only">Toggle sidebar</span>
+          </Button>
+
           {/* Search */}
-          <form onSubmit={handleSearch} className="w-64 sm:w-80 md:w-96">
+          <form onSubmit={handleSearch} className="w-48 sm:w-64 md:w-80">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input

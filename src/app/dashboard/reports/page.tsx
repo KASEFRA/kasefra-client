@@ -25,21 +25,21 @@ import { ExportOptions } from "@/components/reports/export-options"
 
 export default function ReportsPage() {
   return (
-    <div className="space-y-8">
+    <div className="page-container">
       {/* Header Section */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Reports & Analytics</h1>
-          <p className="text-muted-foreground">
+        <div className="page-header">
+          <h1 className="page-title">Reports & Analytics</h1>
+          <p className="page-subtitle">
             Comprehensive financial insights and performance tracking
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="btn-outline-premium">
             <Filter className="h-4 w-4 mr-2" />
             Filters
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="btn-outline-premium">
             <Share className="h-4 w-4 mr-2" />
             Share
           </Button>
@@ -48,67 +48,67 @@ export default function ReportsPage() {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-medium">Net Worth</CardTitle>
-              <TrendingUp className="h-4 w-4 text-secondary" />
+      <div className="metrics-grid">
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Net Worth</CardTitle>
+            <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
+              <TrendingUp className="h-5 w-5 text-emerald-600" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-secondary">AED 145.2K</div>
-            <div className="flex items-center gap-1 text-xs">
-              <TrendingUp className="h-3 w-3 text-secondary" />
-              <span className="text-secondary">+8.2%</span>
+            <div className="text-3xl font-bold text-emerald-600 mb-2">AED 145.2K</div>
+            <div className="flex items-center gap-1 text-sm">
+              <TrendingUp className="h-4 w-4 text-emerald-600" />
+              <span className="text-emerald-600 font-semibold">+8.2%</span>
               <span className="text-muted-foreground">vs last month</span>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="pb-2">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-medium">Monthly Income</CardTitle>
-              <DollarSign className="h-4 w-4 text-primary" />
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Monthly Income</CardTitle>
+            <div className="icon-container bg-primary/10">
+              <DollarSign className="h-5 w-5 text-primary" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-primary">AED 15.5K</div>
-            <div className="flex items-center gap-1 text-xs">
-              <span className="text-muted-foreground">Consistent</span>
+            <div className="text-3xl font-bold mb-2">AED 15.5K</div>
+            <div className="flex items-center gap-1 text-sm">
+              <span className="text-muted-foreground">Consistent monthly income</span>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="pb-2">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-medium">Monthly Expenses</CardTitle>
-              <Activity className="h-4 w-4 text-accent" />
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Monthly Expenses</CardTitle>
+            <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
+              <Activity className="h-5 w-5 text-blue-600" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-accent">AED 8.7K</div>
-            <div className="flex items-center gap-1 text-xs">
-              <span className="text-accent">-12%</span>
+            <div className="text-3xl font-bold text-blue-600 mb-2">AED 8.7K</div>
+            <div className="flex items-center gap-1 text-sm">
+              <span className="text-blue-600 font-semibold">-12%</span>
               <span className="text-muted-foreground">vs last month</span>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="pb-2">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-medium">Savings Rate</CardTitle>
-              <PieChart className="h-4 w-4 text-secondary" />
+        <Card className="premium-card hover-lift border-0 shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Savings Rate</CardTitle>
+            <div className="icon-container bg-purple-100 dark:bg-purple-900/20">
+              <PieChart className="h-5 w-5 text-purple-600" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-secondary">44%</div>
-            <div className="flex items-center gap-1 text-xs">
-              <TrendingUp className="h-3 w-3 text-secondary" />
-              <span className="text-secondary">Above target</span>
+            <div className="text-3xl font-bold text-purple-600 mb-2">44%</div>
+            <div className="flex items-center gap-1 text-sm">
+              <TrendingUp className="h-4 w-4 text-purple-600" />
+              <span className="text-purple-600 font-semibold">Above target</span>
             </div>
           </CardContent>
         </Card>
@@ -129,13 +129,15 @@ export default function ReportsPage() {
       {/* Report Categories */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Financial Performance */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <BarChart3 className="h-5 w-5 text-primary" />
+        <Card className="premium-card hover-lift border-0 shadow-lg">
+          <CardHeader className="pb-6">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold">
+              <div className="icon-container bg-primary/10">
+                <BarChart3 className="h-5 w-5 text-primary" />
+              </div>
               Financial Performance
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-base">
               Income, expenses, and savings analysis
             </CardDescription>
           </CardHeader>
@@ -147,36 +149,38 @@ export default function ReportsPage() {
                 { name: "Savings Analysis", status: "Available", date: "Jan 2024" },
                 { name: "Cash Flow Statement", status: "Available", date: "Jan 2024" }
               ].map((report, index) => (
-                <div key={index} className="flex items-center justify-between p-2 rounded border">
+                <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/50 hover:bg-muted/40 transition-colors">
                   <div>
-                    <div className="font-medium text-sm">{report.name}</div>
+                    <div className="font-semibold text-sm">{report.name}</div>
                     <div className="text-xs text-muted-foreground">{report.date}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <Badge variant="secondary" className="text-xs">
                       {report.status}
                     </Badge>
-                    <Button size="sm" variant="outline" className="h-6 px-2">
+                    <Button size="sm" variant="outline" className="h-7 px-2 btn-outline-premium">
                       <Eye className="h-3 w-3" />
                     </Button>
                   </div>
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full btn-outline-premium">
               View All Reports
             </Button>
           </CardContent>
         </Card>
 
         {/* Investment Tracking */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <TrendingUp className="h-5 w-5 text-secondary" />
+        <Card className="premium-card hover-lift border-0 shadow-lg">
+          <CardHeader className="pb-6">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold">
+              <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
+                <TrendingUp className="h-5 w-5 text-emerald-600" />
+              </div>
               Investment Tracking
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-base">
               Portfolio performance and analytics
             </CardDescription>
           </CardHeader>
@@ -188,9 +192,9 @@ export default function ReportsPage() {
                 { name: "Performance Report", status: "Available", growth: "+8.1%" },
                 { name: "Risk Analysis", status: "Coming Soon", growth: "N/A" }
               ].map((report, index) => (
-                <div key={index} className="flex items-center justify-between p-2 rounded border">
+                <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/50 hover:bg-muted/40 transition-colors">
                   <div>
-                    <div className="font-medium text-sm">{report.name}</div>
+                    <div className="font-semibold text-sm">{report.name}</div>
                     <div className="text-xs text-muted-foreground">{report.growth}</div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -200,7 +204,7 @@ export default function ReportsPage() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="h-6 px-2"
+                      className="h-7 px-2 btn-outline-premium"
                       disabled={report.status !== "Available"}
                     >
                       <Eye className="h-3 w-3" />
@@ -209,23 +213,25 @@ export default function ReportsPage() {
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full" disabled>
+            <Button variant="outline" className="w-full btn-outline-premium" disabled>
               View Investment Reports
             </Button>
           </CardContent>
         </Card>
 
         {/* UAE-Specific Reports */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <FileText className="h-5 w-5 text-accent" />
+        <Card className="premium-card hover-lift border-0 shadow-lg">
+          <CardHeader className="pb-6">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold">
+              <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
+                <FileText className="h-5 w-5 text-blue-600" />
+              </div>
               UAE Market Reports
               <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100 text-xs">
                 UAE
               </Badge>
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-base">
               Local market insights and compliance
             </CardDescription>
           </CardHeader>
@@ -237,23 +243,23 @@ export default function ReportsPage() {
                 { name: "Zakat Calculator", status: "Available", insight: "AED 2.1K" },
                 { name: "Hajj Savings Progress", status: "Available", insight: "42%" }
               ].map((report, index) => (
-                <div key={index} className="flex items-center justify-between p-2 rounded border">
+                <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border/50 hover:bg-muted/40 transition-colors">
                   <div>
-                    <div className="font-medium text-sm">{report.name}</div>
+                    <div className="font-semibold text-sm">{report.name}</div>
                     <div className="text-xs text-muted-foreground">{report.insight}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <Badge variant="secondary" className="text-xs">
                       {report.status}
                     </Badge>
-                    <Button size="sm" variant="outline" className="h-6 px-2">
+                    <Button size="sm" variant="outline" className="h-7 px-2 btn-outline-premium">
                       <Eye className="h-3 w-3" />
                     </Button>
                   </div>
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full btn-outline-premium">
               View UAE Reports
             </Button>
           </CardContent>
