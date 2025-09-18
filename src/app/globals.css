@@ -4,6 +4,55 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile Performance Optimizations */
+@layer base {
+  /* Improve font loading performance */
+  @font-face {
+    font-family: 'Raleway';
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Inter';
+    font-display: swap;
+  }
+
+  /* Optimize scroll performance on mobile */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Improve touch responsiveness */
+  button, [role="button"], input, select, textarea {
+    touch-action: manipulation;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --muted-foreground: 244 47 20;
+      --border: 244 47 30;
+    }
+  }
+
+  /* Optimize for mobile viewport */
+  @supports (-webkit-touch-callout: none) {
+    body {
+      -webkit-text-size-adjust: 100%;
+    }
+  }
+}
+
 @layer base {
   :root {
     /* Kasefra Brand Colors */

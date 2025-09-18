@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -74,9 +75,10 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
         <div
           className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
           onClick={onClose}
+          onTouchStart={onClose}
         />
       )}
-      
+
       {/* Sidebar */}
       <aside
         className={cn(
@@ -88,25 +90,29 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
           {/* Logo */}
           <div className="flex h-16 items-center px-6 border-b">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">K</span>
-              </div>
-              <h1 className="text-xl font-bold text-foreground">Kasefra</h1>
+              <Image
+                src="/logo.png"
+                alt="Kasefra Logo"
+                width={140}
+                height={60}
+                className="rounded-lg"
+              />
+
             </div>
           </div>
 
           {/* Navigation */}
           <nav className="flex-1 px-4 py-6 space-y-1">
             {navigation.map((item) => {
-              const isActive = pathname === item.href || 
+              const isActive = pathname === item.href ||
                 (item.href !== "/dashboard" && pathname?.startsWith(item.href))
-              
+
               return (
                 <Link key={item.name} href={item.href}>
                   <Button
                     variant={isActive ? "secondary" : "ghost"}
                     className={cn(
-                      "w-full justify-start h-12 px-4",
+                      "w-full justify-start h-12 px-4 touch-manipulation",
                       isActive && "bg-primary/10 text-primary hover:bg-primary/20"
                     )}
                     onClick={onClose}

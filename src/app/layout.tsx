@@ -11,6 +11,11 @@ const raleway = Raleway({
 export const metadata: Metadata = {
   title: 'Kasefra - Personal Finance Management',
   description: 'UAE-focused personal finance management with AI-powered insights',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/logo.png',
+  },
 }
 
 export default function RootLayout({

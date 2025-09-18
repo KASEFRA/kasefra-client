@@ -2,18 +2,23 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-4 py-1 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">K</span>
-            </div>
-            <h1 className="text-2xl font-bold text-foreground">Kasefra</h1>
+            <Image
+              src="/logo.png"
+              alt="Kasefra Logo"
+              width={140}
+              height={60}
+              className="rounded-lg"
+            />
+
           </div>
           <div className="flex items-center space-x-4">
             <ThemeToggle />
@@ -31,11 +36,11 @@ export default function Home() {
       <section className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-            Smart Finance Management for the 
+            Smart Finance Management for the
             <span className="text-primary"> UAE</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Take control of your finances with AI-powered insights, 
+            Take control of your finances with AI-powered insights,
             UAE-specific features, and Shariah-compliant options.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
