@@ -83,7 +83,7 @@ export function ReportsOverview() {
   const yearOverYearGrowth = ((snapshot.netWorth - 125000) / 125000 * 100).toFixed(1)
 
   return (
-    <Card>
+    <Card className="bg-card border shadow-sm">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>

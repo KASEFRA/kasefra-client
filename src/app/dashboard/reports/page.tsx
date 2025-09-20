@@ -25,21 +25,21 @@ import { ExportOptions } from "@/components/reports/export-options"
 
 export default function ReportsPage() {
   return (
-    <div className="page-container">
+    <div className="space-y-6 p-6">
       {/* Header Section */}
       <div className="flex items-center justify-between">
-        <div className="page-header">
-          <h1 className="page-title">Reports & Analytics</h1>
-          <p className="page-subtitle">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold tracking-tight">Reports & Analytics</h1>
+          <p className="text-muted-foreground">
             Comprehensive financial insights and performance tracking
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" className="btn-outline-premium">
+          <Button variant="outline" size="sm" >
             <Filter className="h-4 w-4 mr-2" />
             Filters
           </Button>
-          <Button variant="outline" size="sm" className="btn-outline-premium">
+          <Button variant="outline" size="sm" >
             <Share className="h-4 w-4 mr-2" />
             Share
           </Button>
@@ -48,16 +48,16 @@ export default function ReportsPage() {
       </div>
 
       {/* Quick Stats */}
-      <div className="metrics-grid">
-        <Card className="premium-card hover-lift border-0 shadow-md">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Net Worth</CardTitle>
-            <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
-              <TrendingUp className="h-5 w-5 text-emerald-600" />
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Net Worth</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-emerald-100 dark:bg-emerald-900/20">
+              <TrendingUp className="h-4 w-4 text-emerald-600" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-emerald-600 mb-2">AED 145.2K</div>
+            <div className="text-2xl font-bold">AED 145.2K</div>
             <div className="flex items-center gap-1 text-sm">
               <TrendingUp className="h-4 w-4 text-emerald-600" />
               <span className="text-emerald-600 font-semibold">+8.2%</span>
@@ -66,30 +66,30 @@ export default function ReportsPage() {
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift border-0 shadow-md">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Monthly Income</CardTitle>
-            <div className="icon-container bg-primary/10">
-              <DollarSign className="h-5 w-5 text-primary" />
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Monthly Income</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+              <DollarSign className="h-4 w-4 text-primary" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold mb-2">AED 15.5K</div>
+            <div className="text-2xl font-bold">AED 15.5K</div>
             <div className="flex items-center gap-1 text-sm">
               <span className="text-muted-foreground">Consistent monthly income</span>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift border-0 shadow-md">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Monthly Expenses</CardTitle>
-            <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
-              <Activity className="h-5 w-5 text-blue-600" />
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Monthly Expenses</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-blue-100 dark:bg-blue-900/20">
+              <Activity className="h-4 w-4 text-blue-600" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-blue-600 mb-2">AED 8.7K</div>
+            <div className="text-2xl font-bold">AED 8.7K</div>
             <div className="flex items-center gap-1 text-sm">
               <span className="text-blue-600 font-semibold">-12%</span>
               <span className="text-muted-foreground">vs last month</span>
@@ -97,15 +97,15 @@ export default function ReportsPage() {
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift border-0 shadow-md">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Savings Rate</CardTitle>
-            <div className="icon-container bg-purple-100 dark:bg-purple-900/20">
-              <PieChart className="h-5 w-5 text-purple-600" />
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Savings Rate</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-purple-100 dark:bg-purple-900/20">
+              <PieChart className="h-4 w-4 text-purple-600" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-purple-600 mb-2">44%</div>
+            <div className="text-2xl font-bold">44%</div>
             <div className="flex items-center gap-1 text-sm">
               <TrendingUp className="h-4 w-4 text-purple-600" />
               <span className="text-purple-600 font-semibold">Above target</span>
@@ -129,10 +129,10 @@ export default function ReportsPage() {
       {/* Report Categories */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Financial Performance */}
-        <Card className="premium-card hover-lift border-0 shadow-lg">
+        <Card className="bg-card border shadow-sm">
           <CardHeader className="pb-6">
             <CardTitle className="flex items-center gap-2 text-lg font-bold">
-              <div className="icon-container bg-primary/10">
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
                 <BarChart3 className="h-5 w-5 text-primary" />
               </div>
               Financial Performance
@@ -158,25 +158,25 @@ export default function ReportsPage() {
                     <Badge variant="secondary" className="text-xs">
                       {report.status}
                     </Badge>
-                    <Button size="sm" variant="outline" className="h-7 px-2 btn-outline-premium">
+                    <Button size="sm" variant="outline" className="h-7 px-2 ">
                       <Eye className="h-3 w-3" />
                     </Button>
                   </div>
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full btn-outline-premium">
+            <Button variant="outline" className="w-full ">
               View All Reports
             </Button>
           </CardContent>
         </Card>
 
         {/* Investment Tracking */}
-        <Card className="premium-card hover-lift border-0 shadow-lg">
+        <Card className="bg-card border shadow-sm">
           <CardHeader className="pb-6">
             <CardTitle className="flex items-center gap-2 text-lg font-bold">
-              <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
-                <TrendingUp className="h-5 w-5 text-emerald-600" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-emerald-100 dark:bg-emerald-900/20">
+                <TrendingUp className="h-4 w-4 text-emerald-600" />
               </div>
               Investment Tracking
             </CardTitle>
@@ -204,7 +204,7 @@ export default function ReportsPage() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="h-7 px-2 btn-outline-premium"
+                      className="h-7 px-2 "
                       disabled={report.status !== "Available"}
                     >
                       <Eye className="h-3 w-3" />
@@ -213,17 +213,17 @@ export default function ReportsPage() {
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full btn-outline-premium" disabled>
+            <Button variant="outline" className="w-full " disabled>
               View Investment Reports
             </Button>
           </CardContent>
         </Card>
 
         {/* UAE-Specific Reports */}
-        <Card className="premium-card hover-lift border-0 shadow-lg">
+        <Card className="bg-card border shadow-sm">
           <CardHeader className="pb-6">
             <CardTitle className="flex items-center gap-2 text-lg font-bold">
-              <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-blue-100 dark:bg-blue-900/20">
                 <FileText className="h-5 w-5 text-blue-600" />
               </div>
               UAE Market Reports
@@ -252,14 +252,14 @@ export default function ReportsPage() {
                     <Badge variant="secondary" className="text-xs">
                       {report.status}
                     </Badge>
-                    <Button size="sm" variant="outline" className="h-7 px-2 btn-outline-premium">
+                    <Button size="sm" variant="outline" className="h-7 px-2 ">
                       <Eye className="h-3 w-3" />
                     </Button>
                   </div>
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full btn-outline-premium">
+            <Button variant="outline" className="w-full ">
               View UAE Reports
             </Button>
           </CardContent>

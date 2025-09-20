@@ -203,7 +203,7 @@ export function ThemeSettings() {
                     <div className="font-medium text-sm">{scheme.name}</div>
                     <div className="text-xs text-muted-foreground">{scheme.description}</div>
                     {scheme.id === 'kasefra' && (
-                      <Badge size="sm" className="bg-blue-100 text-blue-800 hover:bg-blue-100 text-xs mt-1">
+                      <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10 text-xs mt-1">
                         Default
                       </Badge>
                     )}

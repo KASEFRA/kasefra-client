@@ -234,14 +234,14 @@ export function LoadingFailed({ onRetry }: { onRetry?: () => void }) {
 export function NoUAEBanks({ onConnectBank }: { onConnectBank?: () => void }) {
   return (
     <div className="text-center space-y-4 py-12">
-      <div className="w-16 h-16 bg-blue-50 dark:bg-blue-950/20 rounded-full flex items-center justify-center mx-auto">
-        <Database className="w-8 h-8 text-blue-600" />
+      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+        <Database className="w-8 h-8 text-primary" />
       </div>
 
       <div className="space-y-2">
         <div className="flex items-center justify-center gap-2">
           <h3 className="text-lg font-semibold text-foreground">Connect your UAE bank</h3>
-          <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100 text-xs">
+          <Badge className="bg-primary/10 text-primary hover:bg-primary/10 text-xs">
             UAE
           </Badge>
         </div>

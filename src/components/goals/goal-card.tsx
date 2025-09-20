@@ -125,7 +125,7 @@ export function GoalCard({ goal, onUpdate }: GoalCardProps) {
               <div className="flex items-center gap-2 mb-1">
                 <CardTitle className="text-lg font-semibold">{goal.name}</CardTitle>
                 {goal.isUAESpecific && (
-                  <Badge size="sm" className="bg-blue-100 text-blue-800 hover:bg-blue-100 text-xs">
+                  <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10 text-xs">
                     UAE
                   </Badge>
                 )}

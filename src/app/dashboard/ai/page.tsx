@@ -189,11 +189,11 @@ export default function AIAssistantPage() {
   }
 
   return (
-    <div className="page-container">
+    <div className="space-y-6 p-6">
       {/* Main Chat Interface - Full Width */}
       <div className="max-w-4xl mx-auto">
         <div className="space-y-6">
-          <Card className="premium-card hover-lift border-0 shadow-xl h-[600px] flex flex-col bg-gradient-to-br from-card via-card to-muted/20">
+          <Card className="bg-card border shadow-sm h-[600px] flex flex-col bg-gradient-to-br from-card via-card to-muted/20">
 
             {/* Messages Area */}
             <CardContent className="flex-1 overflow-y-auto p-6 space-y-4">
@@ -269,7 +269,7 @@ export default function AIAssistantPage() {
                             key={index}
                             variant="outline"
                             size="sm"
-                            className="text-xs h-7 px-3 btn-outline-premium"
+                            className="text-xs h-7 px-3 "
                             onClick={() => handleActionClick(action)}
                           >
                             {action.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
@@ -340,7 +340,7 @@ export default function AIAssistantPage() {
               onClick={() => toggleWidget('health')}
               className={`group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                 activeWidget === 'health'
-                  ? 'bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 text-emerald-600 border border-emerald-500/30 shadow-lg shadow-emerald-500/10'
+                  ? 'bg-gradient-to-r from-success/20 to-success/30 text-success border border-success/30 shadow-lg shadow-success/10'
                   : 'bg-gradient-to-r from-muted/30 to-muted/20 text-muted-foreground border border-border/30 hover:border-primary/30 hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5'
               }`}
             >
@@ -353,7 +353,7 @@ export default function AIAssistantPage() {
               onClick={() => toggleWidget('recommendations')}
               className={`group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                 activeWidget === 'recommendations'
-                  ? 'bg-gradient-to-r from-blue-500/20 to-blue-600/20 text-blue-600 border border-blue-500/30 shadow-lg shadow-blue-500/10'
+                  ? 'bg-gradient-to-r from-primary/20 to-primary/30 text-primary border border-primary/30 shadow-lg shadow-primary/10'
                   : 'bg-gradient-to-r from-muted/30 to-muted/20 text-muted-foreground border border-border/30 hover:border-primary/30 hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5'
               }`}
             >
@@ -366,7 +366,7 @@ export default function AIAssistantPage() {
               onClick={() => toggleWidget('predictions')}
               className={`group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                 activeWidget === 'predictions'
-                  ? 'bg-gradient-to-r from-purple-500/20 to-purple-600/20 text-purple-600 border border-purple-500/30 shadow-lg shadow-purple-500/10'
+                  ? 'bg-gradient-to-r from-accent/20 to-accent/30 text-accent-foreground border border-accent/30 shadow-lg shadow-accent/10'
                   : 'bg-gradient-to-r from-muted/30 to-muted/20 text-muted-foreground border border-border/30 hover:border-primary/30 hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5'
               }`}
             >

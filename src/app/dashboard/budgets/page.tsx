@@ -23,48 +23,53 @@ import { BudgetCard } from "@/components/budgets/budget-card"
 
 export default function BudgetsPage() {
   return (
-    <div className="page-container">
+    <div className="space-y-6 p-6">
       {/* Header Section */}
-      <div className="flex items-center justify-between">
-        <div className="page-header">
-          <h1 className="page-title">Budgets</h1>
-          <p className="page-subtitle">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">Budgets</h1>
+          <p className="text-muted-foreground">
             Manage your spending limits and track your financial progress
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" className="btn-outline-premium">
-            <Settings className="h-4 w-4 mr-2" />
-            Settings
-          </Button>
-          <CreateBudgetWizard />
-        </div>
-      </div>
 
       {/* Budget Overview Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
-          <BudgetOverview />
-        </div>
-        <div>
-          <AIBudgetRecommendations />
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="lg:col-span-2">
+            <BudgetOverview />
+          </div>
+          <div>
+            <AIBudgetRecommendations />
+          </div>
         </div>
       </div>
 
       {/* Budget Analytics Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <BudgetChart />
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <BudgetChart />
 
-        {/* Quick Budget Stats */}
-        <Card className="premium-card hover-lift border-0 shadow-lg">
+          {/* Quick Budget Stats */}
+          <Card className="bg-card border shadow-sm">
           <CardHeader className="pb-6">
-            <CardTitle className="flex items-center gap-2 text-xl font-bold">
-              <div className="icon-container bg-primary/10">
-                <PieChart className="h-5 w-5 text-primary" />
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="flex items-center gap-2 text-xl font-bold">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+                    <PieChart className="h-5 w-5 text-primary" />
+                  </div>
+                  Budget Summary
+                </CardTitle>
+                <CardDescription className="text-base">Current month overview</CardDescription>
               </div>
-              Budget Summary
-            </CardTitle>
-            <CardDescription className="text-base">Current month overview</CardDescription>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" >
+                  <Settings className="h-4 w-4 mr-2" />
+                  Settings
+                </Button>
+                <CreateBudgetWizard />
+              </div>
+            </div>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
@@ -72,8 +77,8 @@ export default function BudgetsPage() {
                 <div className="text-2xl font-bold text-primary mb-1">AED 8,450</div>
                 <div className="text-sm text-muted-foreground">Total Budget</div>
               </div>
-              <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
-                <div className="text-2xl font-bold text-blue-600 mb-1">AED 6,230</div>
+              <div className="p-4 bg-secondary/50 rounded-xl border border-secondary">
+                <div className="text-2xl font-bold text-secondary-foreground mb-1">AED 6,230</div>
                 <div className="text-sm text-muted-foreground">Total Spent</div>
               </div>
             </div>
@@ -112,18 +117,19 @@ export default function BudgetsPage() {
               ))}
             </div>
 
-            <Button variant="outline" className="w-full mt-4 btn-outline-premium">
+            <Button variant="outline" className="w-full mt-4 ">
               View All Categories
             </Button>
           </CardContent>
         </Card>
+        </div>
       </div>
 
       {/* Budget Management Section */}
-      <Card className="premium-card hover-lift border-0 shadow-lg">
+      <Card className="bg-card border shadow-sm">
         <CardHeader className="pb-6">
           <CardTitle className="flex items-center gap-2 text-xl font-bold">
-            <div className="icon-container bg-primary/10">
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
               <Target className="h-5 w-5 text-primary" />
             </div>
             Active Budgets

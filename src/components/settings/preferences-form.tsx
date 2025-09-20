@@ -180,7 +180,7 @@ export function PreferencesForm() {
                         <span>{language.flag}</span>
                         <span>{language.name}</span>
                         {language.code === 'ar' && (
-                          <Badge size="sm" className="bg-blue-100 text-blue-800 hover:bg-blue-100 text-xs ml-2">
+                          <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10 text-xs ml-2">
                             Coming Soon
                           </Badge>
                         )}
@@ -321,9 +321,9 @@ export function PreferencesForm() {
         </div>
 
         {/* UAE-Specific Features */}
-        <div className="p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800 space-y-4">
+        <div className="p-4 bg-primary/10 dark:bg-primary/10/20 rounded-lg border border-blue-200 dark:border-blue-800 space-y-4">
           <div className="flex items-center gap-2">
-            <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
+            <Badge className="bg-primary/10 text-primary hover:bg-primary/10">
               UAE
             </Badge>
             <h4 className="font-medium text-sm">UAE-Specific Features</h4>

@@ -45,24 +45,24 @@ export default function Page() {
   }
 
   return (
-    <div className="page-container">
+    <div className="space-y-6 p-6">
               {/* Welcome Section */}
-              <div className="page-header">
-                <h1 className="page-title">
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tight">
                   Welcome back, {mockUser.name.split(' ')[0]}
                 </h1>
-                <p className="page-subtitle">
+                <p className="text-muted-foreground">
                   Here's what's happening with your finances today.
                 </p>
               </div>
 
               {/* Financial Stats Cards */}
-              <div className="metrics-grid">
-                  <Card className="premium-card">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  <Card className="bg-card border shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">Net Worth</CardTitle>
-                      <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
-                        <Wallet className="h-4 w-4 text-emerald-600" />
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-success/10">
+                        <Wallet className="h-4 w-4 text-success" />
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -73,16 +73,16 @@ export default function Page() {
                         })}
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        <span className="text-green-600">+2.1%</span> from last month
+                        <span className="text-success">+2.1%</span> from last month
                       </p>
                     </CardContent>
                   </Card>
 
-                  <Card className="premium-card">
+                  <Card className="bg-card border shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">Monthly Spending</CardTitle>
-                      <div className="icon-container bg-red-100 dark:bg-red-900/20">
-                        <TrendingDown className="h-4 w-4 text-red-600" />
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-destructive/10">
+                        <TrendingDown className="h-4 w-4 text-destructive" />
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -93,16 +93,16 @@ export default function Page() {
                         })}
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        <span className="text-red-600">+5.2%</span> from last month
+                        <span className="text-destructive">+5.2%</span> from last month
                       </p>
                     </CardContent>
                   </Card>
 
-                  <Card className="premium-card">
+                  <Card className="bg-card border shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">Savings Rate</CardTitle>
-                      <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
-                        <TrendingUp className="h-4 w-4 text-blue-600" />
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+                        <TrendingUp className="h-4 w-4 text-primary" />
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -113,11 +113,11 @@ export default function Page() {
                     </CardContent>
                   </Card>
 
-                  <Card className="premium-card">
+                  <Card className="bg-card border shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">Active Accounts</CardTitle>
-                      <div className="icon-container bg-purple-100 dark:bg-purple-900/20">
-                        <Eye className="h-4 w-4 text-purple-600" />
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent/20">
+                        <Eye className="h-4 w-4 text-accent-foreground" />
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -130,17 +130,17 @@ export default function Page() {
                 </div>
 
               {/* Main Content Grid */}
-              <div className="content-section">
+              <div className="space-y-4">
                 <div className="grid gap-4 lg:grid-cols-12">
                   {/* Left Column - Account Overview */}
-                  <div className="lg:col-span-8 content-section">
-                    <Card className="premium-card">
+                  <div className="lg:col-span-8 space-y-4">
+                    <Card className="bg-card border shadow-sm">
                       <CardHeader className="flex flex-row items-center justify-between">
                         <div>
                           <CardTitle>Account Overview</CardTitle>
                           <CardDescription>Your connected accounts and balances</CardDescription>
                         </div>
-                        <Button size="sm" className="btn-premium">
+                        <Button size="sm" >
                           <Plus className="mr-2 h-4 w-4" />
                           Add Account
                         </Button>
@@ -159,7 +159,7 @@ export default function Page() {
                                 </div>
                               </div>
                               <div className="text-right">
-                                <p className={`font-medium ${account.balance < 0 ? 'text-red-600' : 'text-foreground'}`}>
+                                <p className={`font-medium ${account.balance < 0 ? 'text-destructive' : 'text-foreground'}`}>
                                   {account.balance.toLocaleString('en-AE', {
                                     style: 'currency',
                                     currency: account.currency
@@ -180,14 +180,14 @@ export default function Page() {
                   </div>
 
                   {/* Right Column - Recent Transactions and AI Components */}
-                  <div className="lg:col-span-4 content-section">
-                    <Card className="premium-card">
+                  <div className="lg:col-span-4 space-y-4">
+                    <Card className="bg-card border shadow-sm">
                       <CardHeader className="flex flex-row items-center justify-between">
                         <div>
                           <CardTitle>Recent Transactions</CardTitle>
                           <CardDescription>Latest activity</CardDescription>
                         </div>
-                        <Button variant="outline" size="sm" className="btn-outline-premium">
+                        <Button variant="outline" size="sm" >
                           <ArrowUpDown className="mr-2 h-4 w-4" />
                           View All
                         </Button>
@@ -198,9 +198,9 @@ export default function Page() {
                             <div key={transaction.id} className="flex items-center justify-between">
                               <div className="flex items-center space-x-3">
                                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                                  transaction.type === 'income' ? 'bg-green-100 text-green-700' :
-                                  transaction.type === 'expense' ? 'bg-red-100 text-red-700' :
-                                  'bg-blue-100 text-blue-700'
+                                  transaction.type === 'income' ? 'bg-success/10 text-success' :
+                                  transaction.type === 'expense' ? 'bg-destructive/10 text-destructive' :
+                                  'bg-primary/10 text-primary'
                                 }`}>
                                   {transaction.merchant.charAt(0)}
                                 </div>
@@ -211,7 +211,7 @@ export default function Page() {
                               </div>
                               <div className="text-right">
                                 <p className={`font-medium text-sm ${
-                                  transaction.amount > 0 ? 'text-green-600' : 'text-red-600'
+                                  transaction.amount > 0 ? 'text-success' : 'text-destructive'
                                 }`}>
                                   {transaction.amount > 0 ? '+' : ''}
                                   {transaction.amount.toLocaleString('en-AE', {
@@ -234,13 +234,13 @@ export default function Page() {
               </div>
 
               {/* Bottom Section - AI Recommendations & Quick Actions */}
-              <div className="content-section">
+              <div className="space-y-4">
                 <div className="grid gap-4 lg:grid-cols-2">
                   {/* Smart Recommendations */}
                   <SmartRecommendations />
 
                   {/* Quick Actions */}
-                  <Card className="premium-card">
+                  <Card className="bg-card border shadow-sm">
                     <CardHeader>
                       <CardTitle>Quick Actions</CardTitle>
                       <CardDescription>Common tasks to manage your finances</CardDescription>
@@ -249,7 +249,7 @@ export default function Page() {
                       <div className="grid gap-3 md:grid-cols-2">
                         <Button
                           variant="outline"
-                          className="btn-outline-premium h-20 flex flex-col items-center justify-center space-y-2"
+                          className="h-20 flex flex-col items-center justify-center space-y-2"
                           onClick={handleAddTransaction}
                         >
                           <Plus className="h-5 w-5" />
@@ -257,7 +257,7 @@ export default function Page() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="btn-outline-premium h-20 flex flex-col items-center justify-center space-y-2"
+                          className="h-20 flex flex-col items-center justify-center space-y-2"
                           onClick={handleLinkAccount}
                         >
                           <Wallet className="h-5 w-5" />
@@ -265,7 +265,7 @@ export default function Page() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="btn-outline-premium h-20 flex flex-col items-center justify-center space-y-2"
+                          className="h-20 flex flex-col items-center justify-center space-y-2"
                           onClick={handleCreateBudget}
                         >
                           <TrendingUp className="h-5 w-5" />
@@ -273,7 +273,7 @@ export default function Page() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="btn-outline-premium h-20 flex flex-col items-center justify-center space-y-2"
+                          className="h-20 flex flex-col items-center justify-center space-y-2"
                           onClick={handleSetGoal}
                         >
                           <Target className="h-5 w-5" />

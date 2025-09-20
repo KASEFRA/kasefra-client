@@ -125,7 +125,7 @@ export function ThemeValidator() {
       case 'AAA':
         return <CheckCircle className="w-4 h-4 text-green-500" />
       case 'AA':
-        return <CheckCircle className="w-4 h-4 text-blue-500" />
+        return <CheckCircle className="w-4 h-4 text-primary" />
       case 'fail':
         return <XCircle className="w-4 h-4 text-red-500" />
     }
@@ -277,7 +277,7 @@ export function ThemeValidator() {
 
         {/* Recommendations */}
         {validationResults.length > 0 && (
-          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
+          <Card className="bg-primary/5 border-primary/20">
             <CardHeader className="pb-3">
               <CardTitle className="text-base">Recommendations</CardTitle>
             </CardHeader>

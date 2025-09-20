@@ -218,7 +218,7 @@ export function CashFlowChart() {
   }
 
   return (
-    <Card>
+    <Card className="bg-card border shadow-sm">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>

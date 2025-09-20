@@ -212,7 +212,7 @@ export function CreateBudgetWizard({ trigger }: CreateBudgetWizardProps) {
                       <div className="flex items-center gap-2">
                         <h4 className="font-medium">{template.name}</h4>
                         {template.uaeSpecific && (
-                          <Badge size="sm" className="bg-blue-100 text-blue-800 hover:bg-blue-100">
+                          <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10">
                             UAE
                           </Badge>
                         )}

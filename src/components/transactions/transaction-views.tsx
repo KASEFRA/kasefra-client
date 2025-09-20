@@ -140,14 +140,14 @@ export function TransactionViews({
                           <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg ${
                             transaction.type === 'income' ? 'bg-green-100' :
                             transaction.type === 'expense' ? 'bg-red-100' :
-                            'bg-blue-100'
+                            'bg-primary/10'
                           }`}>
                             {getCategoryIcon(transaction.category)}
                           </div>
                           <div className={`absolute -bottom-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center ${
                             transaction.type === 'income' ? 'bg-green-600' :
                             transaction.type === 'expense' ? 'bg-red-600' :
-                            'bg-blue-600'
+                            'bg-primary'
                           }`}>
                             {transaction.type === 'income' ? (
                               <ArrowDownLeft className="w-3 h-3 text-white" />
@@ -216,7 +216,7 @@ export function TransactionViews({
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${
                       transaction.type === 'income' ? 'bg-green-100' :
                       transaction.type === 'expense' ? 'bg-red-100' :
-                      'bg-blue-100'
+                      'bg-primary/10'
                     }`}>
                       {getCategoryIcon(transaction.category)}
                     </div>
@@ -315,7 +315,7 @@ export function TransactionViews({
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${
                             transaction.type === 'income' ? 'bg-green-100' :
                             transaction.type === 'expense' ? 'bg-red-100' :
-                            'bg-blue-100'
+                            'bg-primary/10'
                           }`}>
                             {getCategoryIcon(transaction.category)}
                           </div>

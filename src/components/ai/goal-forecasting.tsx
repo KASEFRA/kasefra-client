@@ -227,7 +227,7 @@ export function GoalForecasting() {
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <span>Target: {formatDate(goal.targetDate)}</span>
                       {goal.isUAESpecific && (
-                        <Badge size="sm" className="bg-blue-100 text-blue-800 hover:bg-blue-100">
+                        <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10">
                           UAE
                         </Badge>
                       )}
@@ -275,7 +275,7 @@ export function GoalForecasting() {
               {/* AI Prediction */}
               <div className="p-3 bg-muted/50 rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="h-4 w-4 text-blue-600" />
+                  <TrendingUp className="h-4 w-4 text-primary" />
                   <span className="font-medium text-sm">AI Forecast</span>
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-sm">

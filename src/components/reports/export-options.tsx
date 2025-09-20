@@ -353,9 +353,9 @@ export function ExportOptions() {
           </div>
 
           {/* UAE-Specific Options */}
-          <div className="p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
+          <div className="p-3 bg-primary/5 rounded-lg border border-primary/20">
             <div className="flex items-center gap-2 mb-3">
-              <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100 text-xs">
+              <Badge className="bg-primary/10 text-primary hover:bg-primary/10 text-xs">
                 UAE
               </Badge>
               <span className="font-medium text-sm">UAE Compliance Features</span>

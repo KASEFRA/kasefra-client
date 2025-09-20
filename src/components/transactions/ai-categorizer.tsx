@@ -226,7 +226,7 @@ export function AiCategorizer({ transactions, onCategorize }: AiCategorizerProps
             <span>{learningStats.totalCategorized} categorized</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+            <span className="w-2 h-2 bg-primary rounded-full"></span>
             <span>{learningStats.userCorrections} corrections learned</span>
           </div>
           <div className="flex items-center gap-1">

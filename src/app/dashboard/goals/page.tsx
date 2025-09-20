@@ -155,17 +155,17 @@ export default function GoalsPage() {
   const overallProgress = (totalCurrentAmount / totalTargetAmount) * 100
 
   return (
-    <div className="page-container">
+    <div className="space-y-6 p-6">
       {/* Header Section */}
-      <div className="page-header">
-        <h1 className="page-title">Financial Goals</h1>
-        <p className="page-subtitle">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">Financial Goals</h1>
+        <p className="text-muted-foreground">
           Track your savings goals and achieve your dreams
         </p>
       </div>
 
       {/* Goals Overview Section */}
-      <div className="content-section">
+      <div className="space-y-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2">
             <GoalsOverview goals={mockGoals} />
@@ -177,80 +177,80 @@ export default function GoalsPage() {
       </div>
 
       {/* AI Goal Forecasting */}
-      <div className="content-section">
+      <div className="space-y-4">
         <GoalForecasting goals={mockGoals} />
       </div>
 
       {/* Quick Stats */}
-      <div className="metrics-grid">
-        <Card className="premium-card hover-lift">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Active Goals</CardTitle>
-            <div className="icon-container bg-primary/10">
-              <Target className="h-5 w-5 text-primary" />
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active Goals</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+              <Target className="h-4 w-4 text-primary" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold mb-2">{activeGoals}</div>
-            <p className="text-sm text-muted-foreground">
+            <div className="text-2xl font-bold mb-2">{activeGoals}</div>
+            <p className="text-xs text-muted-foreground">
               {mockGoals.filter(g => g.aiPredictions.successProbability > 0.8).length} on track
             </p>
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Target</CardTitle>
-            <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
-              <DollarSign className="h-5 w-5 text-blue-600" />
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Target</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+              <DollarSign className="h-4 w-4 text-primary" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-blue-600 mb-2">
+            <div className="text-2xl font-bold text-primary mb-2">
               AED {(totalTargetAmount / 1000).toFixed(0)}K
             </div>
-            <p className="text-sm text-muted-foreground">Across all goals</p>
+            <p className="text-xs text-muted-foreground">Across all goals</p>
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Saved</CardTitle>
-            <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
-              <TrendingUp className="h-5 w-5 text-emerald-600" />
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Saved</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-success/10">
+              <TrendingUp className="h-4 w-4 text-success" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-emerald-600 mb-2">
+            <div className="text-2xl font-bold text-success mb-2">
               AED {(totalCurrentAmount / 1000).toFixed(0)}K
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               {overallProgress.toFixed(1)}% of total target
             </p>
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Next Milestone</CardTitle>
-            <div className="icon-container bg-purple-100 dark:bg-purple-900/20">
-              <Calendar className="h-5 w-5 text-purple-600" />
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Next Milestone</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent/20">
+              <Calendar className="h-4 w-4 text-accent-foreground" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-purple-600 mb-2">2</div>
-            <p className="text-sm text-muted-foreground">Goals due this year</p>
+            <div className="text-2xl font-bold text-accent-foreground mb-2">2</div>
+            <p className="text-xs text-muted-foreground">Goals due this year</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Active Goals Grid */}
-      <Card className="premium-card hover-lift">
+      <Card className="bg-card border shadow-sm">
         <CardHeader className="pb-6">
           <div className="flex items-center justify-between">
             <div>
               <CardTitle className="flex items-center gap-2 text-xl font-bold">
-                <div className="icon-container bg-primary/10">
+                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
                   <Trophy className="h-5 w-5 text-primary" />
                 </div>
                 Your Goals
@@ -263,7 +263,7 @@ export default function GoalsPage() {
               <Badge variant="secondary" className="text-sm">
                 {activeGoals} Active
               </Badge>
-              <Button variant="outline" size="sm" className="btn-outline-premium">
+              <Button variant="outline" size="sm" >
                 <Settings className="h-4 w-4 mr-2" />
                 Settings
               </Button>
@@ -284,11 +284,11 @@ export default function GoalsPage() {
               trigger={
                 <Card className="border-dashed border-2 border-primary/30 hover:border-primary/50 cursor-pointer transition-all duration-200 hover:shadow-md">
                   <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                    <div className="icon-container bg-primary/10 mb-4">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 mb-4">
                       <Plus className="h-8 w-8 text-primary" />
                     </div>
                     <h3 className="font-semibold text-primary mb-2">Create New Goal</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       Set a new financial target and track your progress
                     </p>
                   </CardContent>
@@ -300,10 +300,10 @@ export default function GoalsPage() {
       </Card>
 
       {/* AI Insights Section */}
-      <Card className="premium-card hover-lift">
+      <Card className="bg-card border shadow-sm">
         <CardHeader className="pb-6">
           <CardTitle className="flex items-center gap-2 text-xl font-bold">
-            <div className="icon-container bg-primary/10">
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
               <Zap className="h-5 w-5 text-primary" />
             </div>
             AI Goal Insights
@@ -314,51 +314,51 @@ export default function GoalsPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
+            <div className="p-4 bg-success/5 rounded-xl border border-success/20">
               <div className="flex items-start gap-3">
-                <div className="icon-container bg-green-100 dark:bg-green-900/30">
-                  <CheckCircle className="h-5 w-5 text-green-600" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-success/10">
+                  <CheckCircle className="h-5 w-5 text-success" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-sm mb-1">Optimize Your Hajj Fund</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     Increasing your monthly contribution by AED 500 would put you back on track for your 2025 target date.
                   </p>
-                  <Button size="sm" variant="outline" className="btn-outline-premium">
+                  <Button size="sm" variant="outline" >
                     Adjust Contribution
                   </Button>
                 </div>
               </div>
             </div>
 
-            <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+            <div className="p-4 bg-primary/5 rounded-xl border border-primary/20">
               <div className="flex items-start gap-3">
-                <div className="icon-container bg-blue-100 dark:bg-blue-900/30">
-                  <TrendingUp className="h-5 w-5 text-blue-600" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+                  <TrendingUp className="h-5 w-5 text-primary" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-sm mb-1">Property Investment Opportunity</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     You're ahead on your property goal! Consider exploring pre-construction deals that might offer better value.
                   </p>
-                  <Button size="sm" variant="outline" className="btn-outline-premium">
+                  <Button size="sm" variant="outline" >
                     Explore Options
                   </Button>
                 </div>
               </div>
             </div>
 
-            <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl border border-purple-200 dark:border-purple-800">
+            <div className="p-4 bg-accent/10 rounded-xl border border-accent/30">
               <div className="flex items-start gap-3">
-                <div className="icon-container bg-purple-100 dark:bg-purple-900/30">
-                  <Target className="h-5 w-5 text-purple-600" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent/20">
+                  <Target className="h-5 w-5 text-accent-foreground" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-sm mb-1">Emergency Fund Priority</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     Your emergency fund is progressing excellently. Consider automating transfers to maintain consistency.
                   </p>
-                  <Button size="sm" variant="outline" className="btn-outline-premium">
+                  <Button size="sm" variant="outline" >
                     Set Automation
                   </Button>
                 </div>

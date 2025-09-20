@@ -51,97 +51,22 @@
       -webkit-text-size-adjust: 100%;
     }
   }
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
 }
 
 @layer base {
   :root {
-    /* Kasefra Brand Colors */
-    --dark-purple: #272361;
-    --light-purple: #8355a2;
-    --instant-grey: #d0d2d3;
-    --light-grey: #f1f1f2;
-
-    /* shadcn/ui CSS Variables - Light Theme - Enhanced */
+    /* Kasefra Enhanced Purple Theme - Light Mode */
     --background: 220 13% 98%;           /* Softer white background */
-    --foreground: 244 47 15%;            /* Deeper purple for text */
-    --primary: 244 47 26%;               /* Rich purple primary */
+    --foreground: 270 34% 25%;           /* Darker Kasefra purple for text */
+    --primary: 270 34% 43%;              /* Kasefra purple #6e4993 */
     --primary-foreground: 0 0% 100%;     /* Pure white */
     --secondary: 220 13% 95%;            /* Light neutral secondary */
-    --secondary-foreground: 244 47 15%;  /* Deep purple text */
+    --secondary-foreground: 270 34% 25%; /* Darker Kasefra purple text */
     --accent: 220 13% 92%;               /* Subtle accent background */
-    --accent-foreground: 244 47 15%;     /* Deep purple text */
+    --accent-foreground: 270 34% 25%;    /* Darker Kasefra purple text */
     --border: 220 13% 91%;               /* Soft border color */
     --input: 0 0% 100%;                  /* White input background */
-    --ring: 244 47 50%;                  /* Purple focus ring */
+    --ring: 270 34% 50%;                 /* Kasefra purple focus ring */
     --card: 0 0% 100%;                   /* Pure white cards */
     --card-foreground: 244 47 15%;       /* Deep purple text */
     --popover: 0 0% 100%;                /* White popover */
@@ -155,13 +80,30 @@
     --warning: 38 92% 50%;               /* Vibrant amber */
     --warning-foreground: 0 0% 100%;
     --radius: 0.75rem;                   /* Slightly more rounded */
+
+    /* Chart colors aligned with Kasefra theme */
+    --chart-1: 244 47% 50%;              /* Primary purple */
+    --chart-2: 142 76% 45%;              /* Success green */
+    --chart-3: 38 92% 55%;               /* Warning amber */
+    --chart-4: 0 84% 65%;                /* Destructive red */
+    --chart-5: 220 13% 70%;              /* Muted grey */
+
+    /* Sidebar alignment */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 270 34% 25%;
+    --sidebar-primary: 270 34% 43%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 13% 95%;
+    --sidebar-accent-foreground: 270 34% 25%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 270 34% 50%;
   }
 
-  /* shadcn/ui CSS Variables - Dark Theme - Premium Purple */
+  /* Kasefra Enhanced Purple Theme - Dark Mode */
   .dark {
     --background: 244 47 8%;             /* Deep premium purple background */
     --foreground: 220 13% 95%;           /* Clean white text */
-    --primary: 244 47 55%;               /* Vibrant purple primary */
+    --primary: 270 34% 60%;              /* Lighter Kasefra purple for dark mode */
     --primary-foreground: 0 0% 100%;     /* Pure white */
     --secondary: 244 30 20%;             /* Rich dark purple secondary */
     --secondary-foreground: 220 13% 95%; /* Clean white text */
@@ -182,6 +124,23 @@
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 60%;
     --warning-foreground: 0 0% 100%;
+
+    /* Chart colors for dark mode */
+    --chart-1: 244 47% 60%;              /* Brighter primary purple */
+    --chart-2: 142 76% 55%;              /* Brighter success green */
+    --chart-3: 38 92% 65%;               /* Brighter warning amber */
+    --chart-4: 0 84% 70%;                /* Brighter destructive red */
+    --chart-5: 220 13% 75%;              /* Lighter muted grey */
+
+    /* Sidebar alignment for dark mode */
+    --sidebar-background: 244 47 8%;
+    --sidebar-foreground: 220 13% 95%;
+    --sidebar-primary: 270 34% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 244 30 20%;
+    --sidebar-accent-foreground: 220 13% 95%;
+    --sidebar-border: 244 30 25%;
+    --sidebar-ring: 270 34% 65%;
   }
 }
 
@@ -194,81 +153,24 @@
   }
 }
 
-/* Sidebar-Aligned Custom Styles */
+/* Force Kasefra Purple Theme Override */
 @layer components {
-  /* Clean card styling - aligned with sidebar aesthetics */
-  .premium-card {
-    @apply bg-card border border-border rounded-lg;
-    /* Removed heavy shadows and gradients for clean sidebar-like appearance */
+  .sidebar-primary {
+    @apply text-primary bg-primary/10;
   }
 
-  /* Subtle hover effects - matching sidebar patterns */
-  .hover-lift {
-    @apply transition-all duration-200 ease-linear hover:bg-accent/50;
-    /* Simplified to match sidebar's clean hover states */
+  /* Force sidebar to use Kasefra purple theme */
+  [data-sidebar] {
+    --sidebar-primary: 270 34% 43% !important;
+    --sidebar-ring: 270 34% 50% !important;
   }
 
-  /* Unified Page Styles - aligned with sidebar spacing */
-  .page-container {
-    @apply space-y-6 px-4 lg:px-6;
-    /* Matches header padding and reduces space-y for cleaner look */
-  }
-
-  .page-header {
-    @apply space-y-1;
-    /* Reduced spacing to match sidebar's systematic approach */
-  }
-
-  .page-title {
-    @apply text-3xl font-semibold tracking-tight text-foreground;
-    /* Simplified from gradient text to clean foreground, reduced size */
-  }
-
-  .page-subtitle {
-    @apply text-sm text-muted-foreground;
-    /* Smaller, more subtle subtitle */
-  }
-
-  /* Unified metrics cards - cleaner grid system */
-  .metrics-grid {
-    @apply grid gap-4 md:grid-cols-2 lg:grid-cols-4;
-    /* Reduced gap to match sidebar's systematic spacing */
-  }
-
-  .metrics-grid-3 {
-    @apply grid gap-4 md:grid-cols-3;
-    /* Consistent with metrics-grid spacing */
-  }
-
-  /* Clean icon container - matches sidebar icon styling */
-  .icon-container {
-    @apply flex h-8 w-8 items-center justify-center rounded-lg;
-    /* Matches sidebar's icon button sizing and removes variable padding */
-  }
-
-  /* Sidebar-aligned button variants */
-  .btn-premium {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 ease-linear;
-    /* Simplified to match sidebar button patterns */
-  }
-
-  .btn-outline-premium {
-    @apply border border-border hover:bg-accent hover:text-accent-foreground transition-colors duration-200 ease-linear;
-    /* Aligned with sidebar's outline button aesthetic */
-  }
-
-  /* Content sections with sidebar-like spacing */
-  .content-section {
-    @apply space-y-4;
-    /* Systematic spacing for content sections */
-  }
-
-  /* Clean separator styling */
-  .content-separator {
-    @apply border-t border-border;
-    /* Matches sidebar separator styling */
+  /* Force all primary colors to Kasefra purple */
+  :root {
+    --primary: 270 34% 43% !important;
   }
 }
+
 
 /* Custom scrollbar for webkit browsers */
 ::-webkit-scrollbar {

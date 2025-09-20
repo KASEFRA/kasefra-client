@@ -112,10 +112,10 @@ export default function TransactionsPage() {
 
   const getTransactionTypeColor = (type: string) => {
     switch (type) {
-      case 'income': return 'bg-green-100 text-green-800 hover:bg-green-100'
-      case 'expense': return 'bg-red-100 text-red-800 hover:bg-red-100'
-      case 'transfer': return 'bg-blue-100 text-blue-800 hover:bg-blue-100'
-      default: return 'bg-gray-100 text-gray-800 hover:bg-gray-100'
+      case 'income': return 'bg-success/10 text-success hover:bg-success/10'
+      case 'expense': return 'bg-destructive/10 text-destructive hover:bg-destructive/10'
+      case 'transfer': return 'bg-primary/10 text-primary hover:bg-primary/10'
+      default: return 'bg-muted text-muted-foreground hover:bg-muted'
     }
   }
 
@@ -128,72 +128,72 @@ export default function TransactionsPage() {
   }
 
   return (
-    <div className="page-container">
+    <div className="space-y-6 p-6">
       {/* Header */}
-      <div className="page-header">
-        <h1 className="page-title">Transactions</h1>
-        <p className="page-subtitle">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">Transactions</h1>
+        <p className="text-muted-foreground">
           Track and manage all your financial transactions
         </p>
       </div>
 
       {/* Summary Cards */}
-      <div className="metrics-grid-3">
-        <Card className="premium-card hover-lift">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Income</CardTitle>
-            <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
-              <TrendingUp className="h-5 w-5 text-emerald-600" />
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4-3">
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Income</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-success/10">
+              <TrendingUp className="h-4 w-4 text-success" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-emerald-600 mb-2">
+            <div className="text-2xl font-bold text-success mb-2">
               {totalIncome.toLocaleString('en-AE', {
                 style: 'currency',
                 currency: 'AED'
               })}
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               From {filteredTransactions.filter(t => t.type === 'income').length} transactions
             </p>
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Expenses</CardTitle>
-            <div className="icon-container bg-red-100 dark:bg-red-900/20">
-              <TrendingDown className="h-5 w-5 text-red-600" />
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-destructive/10">
+              <TrendingDown className="h-4 w-4 text-destructive" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-red-600 mb-2">
+            <div className="text-2xl font-bold text-destructive mb-2">
               {totalExpenses.toLocaleString('en-AE', {
                 style: 'currency',
                 currency: 'AED'
               })}
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               From {filteredTransactions.filter(t => t.type === 'expense').length} transactions
             </p>
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Net Flow</CardTitle>
-            <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
-              <Calendar className="h-5 w-5 text-blue-600" />
+        <Card className="bg-card border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Net Flow</CardTitle>
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
+              <Calendar className="h-4 w-4 text-primary" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className={`text-3xl font-bold mb-2 ${totalIncome - totalExpenses >= 0 ? 'text-emerald-600' : 'text-red-600'}`}>
+            <div className={`text-3xl font-bold mb-2 ${totalIncome - totalExpenses >= 0 ? 'text-success' : 'text-destructive'}`}>
               {(totalIncome - totalExpenses).toLocaleString('en-AE', {
                 style: 'currency',
                 currency: 'AED'
               })}
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               {filteredTransactions.length} transactions shown
             </p>
           </CardContent>
@@ -202,7 +202,7 @@ export default function TransactionsPage() {
 
       {/* AI Categorizer */}
       {showAiCategorizer && (
-        <div className="content-section">
+        <div className="space-y-4">
           <AiCategorizer
             transactions={transactions}
             onCategorize={handleCategorize}
@@ -211,7 +211,7 @@ export default function TransactionsPage() {
       )}
 
       {/* Transaction Views */}
-      <div className="content-section">
+      <div className="space-y-4">
         <TransactionViews
           transactions={filteredTransactions}
           accounts={mockAccounts}
@@ -219,7 +219,7 @@ export default function TransactionsPage() {
       </div>
 
       {/* Transactions Table with Integrated Filters */}
-      <Card className="premium-card hover-lift">
+      <Card className="bg-card border shadow-sm">
         <CardHeader className="pb-6">
           <div className="flex flex-col space-y-4">
             <div className="flex items-center justify-between">
@@ -233,16 +233,15 @@ export default function TransactionsPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="btn-outline-premium"
-                  onClick={() => setShowAiCategorizer(!showAiCategorizer)}
+                                    onClick={() => setShowAiCategorizer(!showAiCategorizer)}
                 >
                   AI Categorize
                 </Button>
-                <Button variant="outline" size="sm" className="btn-outline-premium">
+                <Button variant="outline" size="sm" >
                   <Download className="mr-2 h-4 w-4" />
                   Export
                 </Button>
-                <Button size="sm" className="btn-premium">
+                <Button size="sm" >
                   <Plus className="mr-2 h-4 w-4" />
                   Add Transaction
                 </Button>
@@ -373,7 +372,7 @@ export default function TransactionsPage() {
                         >
                           <div>
                             <p className="font-medium">{transaction.description}</p>
-                            <p className="text-sm text-muted-foreground">{transaction.merchant}</p>
+                            <p className="text-xs text-muted-foreground">{transaction.merchant}</p>
                           </div>
                         </Link>
                       </td>
@@ -392,7 +391,7 @@ export default function TransactionsPage() {
                       </td>
                       <td className="py-3 px-4 text-right">
                         <span className={`font-semibold ${
-                          transaction.amount > 0 ? 'text-green-600' : 'text-red-600'
+                          transaction.amount > 0 ? 'text-success' : 'text-destructive'
                         }`}>
                           {transaction.amount > 0 ? '+' : ''}
                           {transaction.amount.toLocaleString('en-AE', {
@@ -418,7 +417,7 @@ export default function TransactionsPage() {
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex items-center justify-between mt-6 pt-6 border-t">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 Page {currentPage} of {totalPages}
               </p>
               <div className="flex items-center gap-2">

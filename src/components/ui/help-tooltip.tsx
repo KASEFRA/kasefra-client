@@ -30,7 +30,7 @@ const iconMap = {
 
 const colorMap = {
   help: "text-muted-foreground hover:text-primary",
-  info: "text-blue-500 hover:text-blue-600",
+  info: "text-primary-500 hover:text-primary-600",
   tip: "text-yellow-500 hover:text-yellow-600",
   warning: "text-orange-500 hover:text-orange-600"
 }

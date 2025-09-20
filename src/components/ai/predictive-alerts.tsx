@@ -127,7 +127,7 @@ export function PredictiveAlerts() {
     switch (severity) {
       case 'critical': return <AlertTriangle className="h-4 w-4 text-red-600" />
       case 'warning': return <TrendingUp className="h-4 w-4 text-yellow-600" />
-      case 'info': return <Info className="h-4 w-4 text-blue-600" />
+      case 'info': return <Info className="h-4 w-4 text-primary" />
       default: return <Info className="h-4 w-4" />
     }
   }
@@ -210,7 +210,7 @@ export function PredictiveAlerts() {
                         {alert.title}
                       </AlertTitle>
                       {alert.isUAESpecific && (
-                        <Badge size="sm" className="bg-blue-100 text-blue-800 hover:bg-blue-100">
+                        <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10">
                           UAE
                         </Badge>
                       )}

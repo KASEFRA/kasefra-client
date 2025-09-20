@@ -269,7 +269,7 @@ export function NetWorthChart() {
   }
 
   return (
-    <Card>
+    <Card className="bg-card border shadow-sm">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
@@ -372,24 +372,24 @@ export function NetWorthChart() {
         )}
 
         {/* UAE-Specific Insights */}
-        <div className="p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
+        <div className="p-3 bg-primary/5 rounded-lg border border-primary/20">
           <div className="flex items-center gap-2 mb-2">
-            <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100 text-xs">
+            <Badge className="bg-primary/10 text-primary hover:bg-primary/10 text-xs">
               UAE
             </Badge>
             <span className="font-medium text-sm">UAE Market Context</span>
           </div>
           <div className="space-y-1 text-sm text-muted-foreground">
             <div className="flex items-start gap-2">
-              <Home className="h-3 w-3 mt-1 text-blue-600" />
+              <Home className="h-3 w-3 mt-1 text-primary" />
               <span>UAE property values increased 8.2% YoY in Dubai market</span>
             </div>
             <div className="flex items-start gap-2">
-              <Car className="h-3 w-3 mt-1 text-blue-600" />
+              <Car className="h-3 w-3 mt-1 text-primary" />
               <span>Vehicle depreciation rate in UAE: 15-20% annually</span>
             </div>
             <div className="flex items-start gap-2">
-              <Briefcase className="h-3 w-3 mt-1 text-blue-600" />
+              <Briefcase className="h-3 w-3 mt-1 text-primary" />
               <span>Your net worth is above UAE expat median by 23%</span>
             </div>
           </div>
