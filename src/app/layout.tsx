@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { Raleway } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/lib/theme-provider'
 
-const raleway = Raleway({ 
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-raleway',
+  variable: '--font-inter',
 })
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${raleway.variable} font-raleway`}>
+      <body className={`${inter.variable} font-inter`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

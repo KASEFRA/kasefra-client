@@ -19,6 +19,7 @@ import { GoalsOverview } from "@/components/goals/goals-overview"
 import { GoalChart } from "@/components/goals/goal-chart"
 import { CreateGoalForm } from "@/components/goals/create-goal-form"
 import { GoalCard } from "@/components/goals/goal-card"
+import { GoalForecasting } from "@/components/ai/goal-forecasting"
 
 const mockGoals = [
   {
@@ -156,35 +157,33 @@ export default function GoalsPage() {
   return (
     <div className="page-container">
       {/* Header Section */}
-      <div className="flex items-center justify-between">
-        <div className="page-header">
-          <h1 className="page-title">Financial Goals</h1>
-          <p className="page-subtitle">
-            Track your savings goals and achieve your dreams
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" className="btn-outline-premium">
-            <Settings className="h-4 w-4 mr-2" />
-            Settings
-          </Button>
-          <CreateGoalForm />
-        </div>
+      <div className="page-header">
+        <h1 className="page-title">Financial Goals</h1>
+        <p className="page-subtitle">
+          Track your savings goals and achieve your dreams
+        </p>
       </div>
 
       {/* Goals Overview Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <GoalsOverview goals={mockGoals} />
+      <div className="content-section">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="lg:col-span-2">
+            <GoalsOverview goals={mockGoals} />
+          </div>
+          <div>
+            <GoalChart goals={mockGoals} />
+          </div>
         </div>
-        <div>
-          <GoalChart goals={mockGoals} />
-        </div>
+      </div>
+
+      {/* AI Goal Forecasting */}
+      <div className="content-section">
+        <GoalForecasting goals={mockGoals} />
       </div>
 
       {/* Quick Stats */}
       <div className="metrics-grid">
-        <Card className="premium-card hover-lift border-0 shadow-md">
+        <Card className="premium-card hover-lift">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Active Goals</CardTitle>
             <div className="icon-container bg-primary/10">
@@ -199,7 +198,7 @@ export default function GoalsPage() {
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift border-0 shadow-md">
+        <Card className="premium-card hover-lift">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Target</CardTitle>
             <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
@@ -214,7 +213,7 @@ export default function GoalsPage() {
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift border-0 shadow-md">
+        <Card className="premium-card hover-lift">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Saved</CardTitle>
             <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
@@ -231,7 +230,7 @@ export default function GoalsPage() {
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift border-0 shadow-md">
+        <Card className="premium-card hover-lift">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Next Milestone</CardTitle>
             <div className="icon-container bg-purple-100 dark:bg-purple-900/20">
@@ -246,7 +245,7 @@ export default function GoalsPage() {
       </div>
 
       {/* Active Goals Grid */}
-      <Card className="premium-card hover-lift border-0 shadow-lg">
+      <Card className="premium-card hover-lift">
         <CardHeader className="pb-6">
           <div className="flex items-center justify-between">
             <div>
@@ -260,9 +259,16 @@ export default function GoalsPage() {
                 Track progress and manage your financial objectives
               </CardDescription>
             </div>
-            <Badge variant="secondary" className="text-sm">
-              {activeGoals} Active
-            </Badge>
+            <div className="flex items-center gap-3">
+              <Badge variant="secondary" className="text-sm">
+                {activeGoals} Active
+              </Badge>
+              <Button variant="outline" size="sm" className="btn-outline-premium">
+                <Settings className="h-4 w-4 mr-2" />
+                Settings
+              </Button>
+              <CreateGoalForm />
+            </div>
           </div>
         </CardHeader>
         <CardContent>
@@ -294,7 +300,7 @@ export default function GoalsPage() {
       </Card>
 
       {/* AI Insights Section */}
-      <Card className="premium-card hover-lift border-0 shadow-lg">
+      <Card className="premium-card hover-lift">
         <CardHeader className="pb-6">
           <CardTitle className="flex items-center gap-2 text-xl font-bold">
             <div className="icon-container bg-primary/10">

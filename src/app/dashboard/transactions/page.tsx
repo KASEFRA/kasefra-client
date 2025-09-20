@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { mockTransactions, mockAccounts } from "@/lib/mock-data"
 import { AiCategorizer } from "@/components/transactions/ai-categorizer"
+import { TransactionViews } from "@/components/transactions/transaction-views"
 import Link from "next/link"
 
 export default function TransactionsPage() {
@@ -129,36 +130,16 @@ export default function TransactionsPage() {
   return (
     <div className="page-container">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="page-header">
-          <h1 className="page-title">Transactions</h1>
-          <p className="page-subtitle">
-            Track and manage all your financial transactions
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="btn-outline-premium"
-            onClick={() => setShowAiCategorizer(!showAiCategorizer)}
-          >
-            AI Categorize
-          </Button>
-          <Button variant="outline" size="sm" className="btn-outline-premium">
-            <Download className="mr-2 h-4 w-4" />
-            Export
-          </Button>
-          <Button className="btn-premium">
-            <Plus className="mr-2 h-4 w-4" />
-            Add Transaction
-          </Button>
-        </div>
+      <div className="page-header">
+        <h1 className="page-title">Transactions</h1>
+        <p className="page-subtitle">
+          Track and manage all your financial transactions
+        </p>
       </div>
 
       {/* Summary Cards */}
       <div className="metrics-grid-3">
-        <Card className="premium-card hover-lift border-0 shadow-md">
+        <Card className="premium-card hover-lift">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Income</CardTitle>
             <div className="icon-container bg-emerald-100 dark:bg-emerald-900/20">
@@ -178,7 +159,7 @@ export default function TransactionsPage() {
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift border-0 shadow-md">
+        <Card className="premium-card hover-lift">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Total Expenses</CardTitle>
             <div className="icon-container bg-red-100 dark:bg-red-900/20">
@@ -198,7 +179,7 @@ export default function TransactionsPage() {
           </CardContent>
         </Card>
 
-        <Card className="premium-card hover-lift border-0 shadow-md">
+        <Card className="premium-card hover-lift">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Net Flow</CardTitle>
             <div className="icon-container bg-blue-100 dark:bg-blue-900/20">
@@ -221,14 +202,24 @@ export default function TransactionsPage() {
 
       {/* AI Categorizer */}
       {showAiCategorizer && (
-        <AiCategorizer 
-          transactions={transactions}
-          onCategorize={handleCategorize}
-        />
+        <div className="content-section">
+          <AiCategorizer
+            transactions={transactions}
+            onCategorize={handleCategorize}
+          />
+        </div>
       )}
 
+      {/* Transaction Views */}
+      <div className="content-section">
+        <TransactionViews
+          transactions={filteredTransactions}
+          accounts={mockAccounts}
+        />
+      </div>
+
       {/* Transactions Table with Integrated Filters */}
-      <Card className="premium-card hover-lift border-0 shadow-lg">
+      <Card className="premium-card hover-lift">
         <CardHeader className="pb-6">
           <div className="flex flex-col space-y-4">
             <div className="flex items-center justify-between">
@@ -237,6 +228,24 @@ export default function TransactionsPage() {
                 <CardDescription className="text-base">
                   Showing {paginatedTransactions.length} of {filteredTransactions.length} transactions
                 </CardDescription>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="btn-outline-premium"
+                  onClick={() => setShowAiCategorizer(!showAiCategorizer)}
+                >
+                  AI Categorize
+                </Button>
+                <Button variant="outline" size="sm" className="btn-outline-premium">
+                  <Download className="mr-2 h-4 w-4" />
+                  Export
+                </Button>
+                <Button size="sm" className="btn-premium">
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add Transaction
+                </Button>
               </div>
             </div>
             

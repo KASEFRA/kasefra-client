@@ -1,19 +1,16 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Sidebar } from "@/components/layout/sidebar"
-import { Header } from "@/components/layout/header"
-import { MobileHeader } from "@/components/layout/mobile-header"
-import { MobileNav } from "@/components/layout/mobile-nav"
+import { AppSidebar } from "@/components/app-sidebar"
+import { SiteHeader } from "@/components/site-header"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const router = useRouter()
 
   // Check authentication on mount
@@ -24,40 +21,19 @@ export default function DashboardLayout({
     }
   }, [router])
 
-  const toggleSidebarCollapse = () => {
-    setSidebarCollapsed(!sidebarCollapsed)
-  }
-
   return (
-    <div className="min-h-screen bg-background">
-      {/* Sidebar */}
-      <Sidebar
-        isOpen={sidebarOpen}
-        isCollapsed={sidebarCollapsed}
-        onClose={() => setSidebarOpen(false)}
-      />
-
-      {/* Mobile Header */}
-      <MobileHeader onMenuOpen={() => setSidebarOpen(true)} />
-
-      {/* Main content */}
-      <div className={`transition-all duration-300 ${sidebarCollapsed ? 'lg:pl-16' : 'lg:pl-64'}`}>
-        <Header
-          onMenuClick={() => setSidebarOpen(true)}
-          onToggleCollapse={toggleSidebarCollapse}
-          isCollapsed={sidebarCollapsed}
-        />
-
-        {/* Page content */}
-        <main className="py-8 pb-20 lg:pb-8">
-          <div className="px-6 lg:px-8">
-            {children}
+    <SidebarProvider>
+      <AppSidebar variant="inset" />
+      <SidebarInset>
+        <SiteHeader />
+        <div className="flex flex-1 flex-col">
+          <div className="@container/main flex flex-1 flex-col gap-2">
+            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+              {children}
+            </div>
           </div>
-        </main>
-      </div>
-
-      {/* Mobile Navigation */}
-      <MobileNav />
-    </div>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }

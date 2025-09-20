@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "account": "Emirates NBD Current",
+    "bank": "Emirates NBD",
+    "balance": 15750.00,
+    "currency": "AED",
+    "type": "current",
+    "status": "Active"
+  },
+  {
+    "id": 2,
+    "account": "ADCB Savings",
+    "bank": "ADCB",
+    "balance": 45250.00,
+    "currency": "AED",
+    "type": "savings",
+    "status": "Active"
+  },
+  {
+    "id": 3,
+    "account": "FAB Premium",
+    "bank": "First Abu Dhabi Bank",
+    "balance": 28900.00,
+    "currency": "AED",
+    "type": "current",
+    "status": "Active"
+  },
+  {
+    "id": 4,
+    "account": "RAKBANK Credit Card",
+    "bank": "RAKBANK",
+    "balance": -3250.00,
+    "currency": "AED",
+    "type": "credit",
+    "status": "Active"
+  },
+  {
+    "id": 5,
+    "account": "HSBC Investment",
+    "bank": "HSBC UAE",
+    "balance": 75400.00,
+    "currency": "AED",
+    "type": "investment",
+    "status": "Active"
+  }
+]
