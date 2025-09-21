@@ -40,15 +40,15 @@ interface UserProfile {
 }
 
 const mockProfile: UserProfile = {
-  firstName: "Ahmed",
-  lastName: "Al-Mansouri",
-  email: "ahmed.almansouri@email.com",
+  firstName: "Omar",
+  lastName: "Hassan",
+  email: "omar.hassan@email.com",
   phone: "+971 50 123 4567",
   dateOfBirth: "1990-03-15",
   nationality: "UAE",
   emirate: "Dubai",
   occupation: "Software Engineer",
-  avatar: ""
+  avatar: "/profile.PNG"
 }
 
 const uaeEmirates = [

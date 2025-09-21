@@ -14,7 +14,9 @@ const pageTitles: Record<string, string> = {
   "/dashboard/transactions": "Transactions",
   "/dashboard/budgets": "Budgets",
   "/dashboard/goals": "Goals",
+  "/dashboard/investments": "Investments",
   "/dashboard/reports": "Reports",
+  "/dashboard/profile": "Profile",
   "/dashboard/ai": "AI Assistant",
   "/dashboard/settings": "Settings",
   "/dashboard/help": "Help",
@@ -38,8 +40,29 @@ export function SiteHeader() {
       )
     }
 
-    const title = pageTitles[pathname] || "Dashboard"
-    return <h1 className="text-base font-medium text-foreground">{title}</h1>
+    // Handle dynamic routes
+    if (pathname.startsWith("/dashboard/accounts/") && pathname !== "/dashboard/accounts") {
+      return <h1 className="text-base font-medium text-foreground">Account Details</h1>
+    }
+
+    if (pathname.startsWith("/dashboard/transactions/") && pathname !== "/dashboard/transactions") {
+      return <h1 className="text-base font-medium text-foreground">Transaction Details</h1>
+    }
+
+    // Check for exact matches in pageTitles
+    const exactTitle = pageTitles[pathname]
+    if (exactTitle) {
+      return <h1 className="text-base font-medium text-foreground">{exactTitle}</h1>
+    }
+
+    // Fallback: extract page name from pathname
+    const pathSegments = pathname.split('/').filter(Boolean)
+    const lastSegment = pathSegments[pathSegments.length - 1]
+    const fallbackTitle = lastSegment
+      ? lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1)
+      : "Dashboard"
+
+    return <h1 className="text-base font-medium text-foreground">{fallbackTitle}</h1>
   }
 
   return (

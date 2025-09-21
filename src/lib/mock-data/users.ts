@@ -2,9 +2,9 @@ import { User } from '@/types';
 
 export const mockUser: User = {
   id: "user-123",
-  name: "Ahmed Al Mansouri",
-  email: "ahmed.almansouri@example.com",
-  avatar: "/avatars/ahmed.jpg",
+  name: "Omar Hassan",
+  email: "omar.hassan@example.com",
+  avatar: "/profile.PNG",
   currency: "AED",
   language: "en",
   joinedDate: "2024-01-15",

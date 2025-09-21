@@ -23,14 +23,7 @@ import { BudgetCard } from "@/components/budgets/budget-card"
 
 export default function BudgetsPage() {
   return (
-    <div className="space-y-6 p-6">
-      {/* Header Section */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Budgets</h1>
-          <p className="text-muted-foreground">
-            Manage your spending limits and track your financial progress
-          </p>
-        </div>
+    <div className="space-y-6 px-6">
 
       {/* Budget Overview Section */}
       <div className="space-y-4">

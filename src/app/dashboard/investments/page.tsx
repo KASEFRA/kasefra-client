@@ -99,14 +99,7 @@ export default function InvestmentsPage() {
   }
 
   return (
-    <div className="space-y-6 p-6">
-      {/* Header */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Investments</h1>
-        <p className="text-muted-foreground">
-          Manage your investment portfolio across stocks, crypto, commodities, and real estate
-        </p>
-      </div>
+    <div className="space-y-6 px-6">
 
       {/* Investment Summary Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

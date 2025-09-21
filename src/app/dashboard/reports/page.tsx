@@ -25,15 +25,9 @@ import { ExportOptions } from "@/components/reports/export-options"
 
 export default function ReportsPage() {
   return (
-    <div className="space-y-6 p-6">
-      {/* Header Section */}
-      <div className="flex items-center justify-between">
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight">Reports & Analytics</h1>
-          <p className="text-muted-foreground">
-            Comprehensive financial insights and performance tracking
-          </p>
-        </div>
+    <div className="space-y-6 px-6">
+      {/* Action Buttons */}
+      <div className="flex justify-end">
         <div className="flex items-center gap-3">
           <Button variant="outline" size="sm" >
             <Filter className="h-4 w-4 mr-2" />

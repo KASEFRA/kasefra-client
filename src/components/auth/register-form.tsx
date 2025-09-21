@@ -80,7 +80,7 @@ export function RegisterForm({ onSubmit }: RegisterFormProps) {
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="Ahmed"
+                        placeholder="Omar"
                         disabled={isLoading}
                       />
                     </FormControl>
@@ -97,7 +97,7 @@ export function RegisterForm({ onSubmit }: RegisterFormProps) {
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="Al Mansouri"
+                        placeholder="Hassan"
                         disabled={isLoading}
                       />
                     </FormControl>
@@ -116,7 +116,7 @@ export function RegisterForm({ onSubmit }: RegisterFormProps) {
                     <Input
                       {...field}
                       type="email"
-                      placeholder="ahmed@example.com"
+                      placeholder="omar@example.com"
                       disabled={isLoading}
                     />
                   </FormControl>

@@ -25,7 +25,7 @@ import { AIAssistantSettings } from "@/components/settings/ai-assistant-settings
 
 export default function SettingsPage() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 px-6">
       {/* Header Section */}
       <div className="flex items-center justify-between">
         <div>
@@ -125,7 +125,7 @@ export default function SettingsPage() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Profile:</span>
-                  <span className="font-medium">Ahmed Al-Mansouri</span>
+                  <span className="font-medium">Omar Hassan</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Location:</span>

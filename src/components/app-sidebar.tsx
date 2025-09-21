@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
 import {
   ArrowUpCircleIcon,
   BarChartIcon,
@@ -14,6 +13,7 @@ import {
   PieChartIcon,
   SettingsIcon,
   TrendingUpIcon,
+  UserIcon,
   WalletIcon,
   BrainIcon,
 } from "lucide-react"
@@ -22,6 +22,7 @@ import { NavDocuments } from "@/components/nav-documents"
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
+import { DynamicLogo } from "@/components/ui/dynamic-logo"
 import {
   Sidebar,
   SidebarContent,
@@ -34,9 +35,9 @@ import {
 
 const data = {
   user: {
-    name: "Munsif",
-    email: "munsif@kasefra.com",
-    avatar: "/avatars/user.jpg",
+    name: "Omar Hassan",
+    email: "omar.hassan@kasefra.com",
+    avatar: "/profile.PNG",
   },
   navMain: [
     {
@@ -154,26 +155,16 @@ const data = {
   ],
   documents: [
     {
-      name: "Financial Reports",
-      url: "/dashboard/reports",
-      icon: FileTextIcon,
-    },
-    {
-      name: "Export Data",
-      url: "/dashboard/reports?export=true",
-      icon: FileTextIcon,
-    },
-    {
-      name: "Account Statements",
-      url: "/dashboard/accounts",
-      icon: FileTextIcon,
+      name: "Profile",
+      url: "/dashboard/profile",
+      icon: UserIcon,
     },
   ],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -182,14 +173,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <a href="/dashboard">
-                <Image
-                  src="/logo.png"
-                  alt="Kasefra Logo"
+                <DynamicLogo
                   width={240}
                   height={120}
                   className="h-auto w-24 rounded"
                 />
-
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

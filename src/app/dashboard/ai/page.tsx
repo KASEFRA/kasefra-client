@@ -189,7 +189,7 @@ export default function AIAssistantPage() {
   }
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6 px-6">
       {/* Main Chat Interface - Full Width */}
       <div className="max-w-4xl mx-auto">
         <div className="space-y-6">

@@ -76,14 +76,7 @@ export default function AccountsPage() {
   }
 
   return (
-    <div className="space-y-6 p-6">
-      {/* Header */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Accounts</h1>
-        <p className="text-muted-foreground">
-          Manage your connected financial accounts
-        </p>
-      </div>
+    <div className="space-y-6 px-6">
 
       {/* Account Summary Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

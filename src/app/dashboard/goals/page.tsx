@@ -155,14 +155,7 @@ export default function GoalsPage() {
   const overallProgress = (totalCurrentAmount / totalTargetAmount) * 100
 
   return (
-    <div className="space-y-6 p-6">
-      {/* Header Section */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Financial Goals</h1>
-        <p className="text-muted-foreground">
-          Track your savings goals and achieve your dreams
-        </p>
-      </div>
+    <div className="space-y-6 px-6">
 
       {/* Goals Overview Section */}
       <div className="space-y-4">

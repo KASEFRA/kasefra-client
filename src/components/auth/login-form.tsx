@@ -67,7 +67,7 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
                     <Input
                       {...field}
                       type="email"
-                      placeholder="ahmed@example.com"
+                      placeholder="omar@example.com"
                       disabled={isLoading}
                     />
                   </FormControl>

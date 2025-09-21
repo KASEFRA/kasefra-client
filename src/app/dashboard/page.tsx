@@ -2,7 +2,20 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ArrowUpDown } from "lucide-react"
+import {
+  ArrowUpDown,
+  ShoppingCart,
+  Car,
+  DollarSign,
+  ShoppingBag,
+  Zap,
+  ArrowLeftRight,
+  UtensilsCrossed,
+  Plane,
+  Receipt,
+  Coffee,
+  Home
+} from "lucide-react"
 import { mockTransactions } from "@/lib/mock-data"
 import { FinancialHealthScore } from "@/components/ai/financial-health-score"
 import { NetWorthChart } from "@/components/dashboard/net-worth-chart"
@@ -45,8 +58,32 @@ export default function Page() {
     router.push('/dashboard/goals')
   }
 
+  // Get icon for transaction category
+  const getTransactionIcon = (category: string) => {
+    switch (category.toLowerCase()) {
+      case 'groceries':
+        return ShoppingCart
+      case 'transportation':
+        return Car
+      case 'income':
+        return DollarSign
+      case 'shopping':
+        return ShoppingBag
+      case 'utilities':
+        return Zap
+      case 'transfer':
+        return ArrowLeftRight
+      case 'dining':
+        return UtensilsCrossed
+      case 'travel':
+        return Plane
+      default:
+        return Receipt
+    }
+  }
+
   return (
-    <div className="space-y-8 p-6">
+    <div className="space-y-8 px-6">
       {/* Net Worth Chart - Full Width with Dropdown */}
       <NetWorthChart />
 
@@ -77,12 +114,14 @@ export default function Page() {
                 {recentTransactions.map((transaction) => (
                   <div key={transaction.id} className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium ${
-                        transaction.type === 'income' ? 'bg-success/10 text-success' :
-                        transaction.type === 'expense' ? 'bg-destructive/10 text-destructive' :
-                        'bg-primary/10 text-primary'
-                      }`}>
-                        {transaction.merchant.charAt(0)}
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${transaction.type === 'income' ? 'bg-success/10 text-success' :
+                          transaction.type === 'expense' ? 'bg-destructive/10 text-destructive' :
+                            'bg-primary/10 text-primary'
+                        }`}>
+                        {(() => {
+                          const IconComponent = getTransactionIcon(transaction.category)
+                          return <IconComponent className="h-4 w-4" />
+                        })()}
                       </div>
                       <div>
                         <p className="font-medium text-sm">{transaction.description}</p>
@@ -94,9 +133,8 @@ export default function Page() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className={`font-medium text-sm ${
-                        transaction.amount > 0 ? 'text-success' : 'text-destructive'
-                      }`}>
+                      <p className={`font-medium text-sm ${transaction.amount > 0 ? 'text-success' : 'text-destructive'
+                        }`}>
                         {transaction.amount > 0 ? '+' : ''}
                         {transaction.amount.toLocaleString('en-AE', {
                           style: 'currency',
