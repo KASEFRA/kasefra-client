@@ -4,7 +4,9 @@ import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
+import { CommandPalette } from "@/components/ui/command-palette"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import { useCommandPalette } from "@/hooks/use-command-palette"
 
 export default function DashboardLayout({
   children,
@@ -12,6 +14,7 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   const router = useRouter()
+  const { isOpen, setIsOpen } = useCommandPalette()
 
   // Check authentication on mount
   useEffect(() => {
@@ -34,6 +37,7 @@ export default function DashboardLayout({
           </div>
         </div>
       </SidebarInset>
+      <CommandPalette open={isOpen} onOpenChange={setIsOpen} />
     </SidebarProvider>
   )
 }

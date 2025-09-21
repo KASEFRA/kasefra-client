@@ -1,5 +1,26 @@
 import { Budget, BudgetCategory } from '@/types';
 
+// Enhanced budget data for Monarch-style dashboard
+export interface BudgetSummary {
+  fixed: {
+    budgeted: number;
+    spent: number;
+    remaining: number;
+    categories: BudgetCategory[];
+  };
+  flexible: {
+    budgeted: number;
+    spent: number;
+    remaining: number;
+    categories: BudgetCategory[];
+  };
+  total: {
+    budgeted: number;
+    spent: number;
+    remaining: number;
+  };
+}
+
 export const mockBudgetCategories: BudgetCategory[] = [
   {
     id: "cat-1",
@@ -113,3 +134,35 @@ export const mockBudgets: Budget[] = [
     isActive: true,
   },
 ];
+
+// Calculate budget summary for Monarch-style dashboard
+export const mockBudgetSummary: BudgetSummary = (() => {
+  const fixedCategories = mockBudgetCategories.filter(cat => !cat.isFlexible);
+  const flexibleCategories = mockBudgetCategories.filter(cat => cat.isFlexible);
+
+  const fixedBudgeted = fixedCategories.reduce((sum, cat) => sum + cat.budgetedAmount, 0);
+  const fixedSpent = fixedCategories.reduce((sum, cat) => sum + cat.spentAmount, 0);
+
+  const flexibleBudgeted = flexibleCategories.reduce((sum, cat) => sum + cat.budgetedAmount, 0);
+  const flexibleSpent = flexibleCategories.reduce((sum, cat) => sum + cat.spentAmount, 0);
+
+  return {
+    fixed: {
+      budgeted: fixedBudgeted,
+      spent: fixedSpent,
+      remaining: fixedBudgeted - fixedSpent,
+      categories: fixedCategories
+    },
+    flexible: {
+      budgeted: flexibleBudgeted,
+      spent: flexibleSpent,
+      remaining: flexibleBudgeted - flexibleSpent,
+      categories: flexibleCategories
+    },
+    total: {
+      budgeted: fixedBudgeted + flexibleBudgeted,
+      spent: fixedSpent + flexibleSpent,
+      remaining: (fixedBudgeted + flexibleBudgeted) - (fixedSpent + flexibleSpent)
+    }
+  };
+})();

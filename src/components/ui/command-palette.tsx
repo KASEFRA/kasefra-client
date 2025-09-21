@@ -243,14 +243,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Search pages, actions, and more..."
-            className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none border-0 focus:ring-0 placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+            className="h-11 w-full bg-transparent text-sm outline-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground"
           />
-          <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-            <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
-              <Command className="h-3 w-3" />
-              K
-            </kbd>
-          </div>
         </div>
 
         <div className="max-h-96 overflow-y-auto">

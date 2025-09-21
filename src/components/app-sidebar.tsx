@@ -65,6 +65,11 @@ const data = {
       icon: GoalIcon,
     },
     {
+      title: "Investments",
+      url: "/dashboard/investments",
+      icon: TrendingUpIcon,
+    },
+    {
       title: "Reports",
       url: "/dashboard/reports",
       icon: BarChartIcon,
