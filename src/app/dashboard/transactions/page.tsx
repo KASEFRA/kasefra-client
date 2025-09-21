@@ -88,7 +88,7 @@ export default function TransactionsPage() {
     })
 
     return filtered
-  }, [searchQuery, selectedAccount, selectedCategory, selectedType, sortBy, sortOrder])
+  }, [searchQuery, selectedAccount, selectedCategory, selectedType, sortBy, sortOrder, transactions])
 
   // Pagination
   const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage)

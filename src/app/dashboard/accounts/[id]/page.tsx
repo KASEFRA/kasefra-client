@@ -31,7 +31,7 @@ export default function AccountDetailPage() {
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-2">Account Not Found</h2>
-          <p className="text-muted-foreground mb-4">The account you're looking for doesn't exist.</p>
+          <p className="text-muted-foreground mb-4">The account you&apos;re looking for doesn&apos;t exist.</p>
           <Button asChild>
             <Link href="/dashboard/accounts">
               <ArrowLeft className="mr-2 h-4 w-4" />

@@ -339,7 +339,7 @@ export default function GoalsPage() {
                 <div>
                   <h4 className="font-semibold text-sm mb-1">Property Investment Opportunity</h4>
                   <p className="text-sm text-muted-foreground mb-3">
-                    You're ahead on your property goal! Consider exploring pre-construction deals that might offer better value.
+                    You&apos;re ahead on your property goal! Consider exploring pre-construction deals that might offer better value.
                   </p>
                   <Button size="sm" variant="outline" >
                     Explore Options

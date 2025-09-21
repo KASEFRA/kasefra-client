@@ -33,7 +33,7 @@ function DefaultErrorFallback({ error, resetError }: ErrorFallbackProps) {
           </div>
           <CardTitle className="text-xl">Something went wrong</CardTitle>
           <CardDescription>
-            We encountered an unexpected error. Don't worry, your data is safe.
+            We encountered an unexpected error. Don&apos;t worry, your data is safe.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
