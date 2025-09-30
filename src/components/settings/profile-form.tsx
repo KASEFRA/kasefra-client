@@ -40,9 +40,9 @@ interface UserProfile {
 }
 
 const mockProfile: UserProfile = {
-  firstName: "Omar",
-  lastName: "Hassan",
-  email: "omar.hassan@email.com",
+  firstName: "Areeb",
+  lastName: "Hafeel",
+  email: "areebhafeel@technx.com",
   phone: "+971 50 123 4567",
   dateOfBirth: "1990-03-15",
   nationality: "UAE",

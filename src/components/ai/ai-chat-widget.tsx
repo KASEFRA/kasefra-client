@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import ReactMarkdown from "react-markdown"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -150,34 +151,36 @@ export function AIChatWidget() {
             </div>
           </div>
         </CardHeader>
-        
+
         {!isMinimized && (
           <CardContent className="p-0 flex flex-col h-80">
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {messages.map((message) => (
                 <div key={message.id} className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`max-w-[80%] space-y-2 ${
-                    message.isBot ? 'items-start' : 'items-end'
-                  }`}>
-                    <div className={`p-3 rounded-lg text-sm ${
-                      message.isBot
+                  <div className={`max-w-[80%] space-y-2 ${message.isBot ? 'items-start' : 'items-end'
+                    }`}>
+                    <div className={`p-3 rounded-lg text-sm ${message.isBot
                         ? message.isTyping
                           ? 'bg-muted/60 text-muted-foreground animate-pulse'
                           : 'bg-muted text-foreground'
                         : 'bg-primary text-primary-foreground'
-                    }`}>
+                      }`}>
                       {message.isTyping ? (
                         <div className="flex items-center space-x-1">
                           <div className="flex space-x-1">
                             <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
-                            <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                            <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                            <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                           </div>
                           <span className="ml-2">Thinking...</span>
                         </div>
                       ) : (
-                        message.content
+                        message.isBot ? (
+                          <ReactMarkdown>{message.content}</ReactMarkdown>
+                        ) : (
+                          message.content
+                        )
                       )}
                     </div>
 
@@ -216,7 +219,7 @@ export function AIChatWidget() {
                   className="text-sm"
                   disabled={isTyping}
                 />
-                <Button 
+                <Button
                   onClick={handleSendMessage}
                   size="sm"
                   disabled={!inputValue.trim()}

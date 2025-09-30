@@ -4,10 +4,74 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { TrendingUp, TrendingDown, Minus } from "lucide-react"
-import { mockFinancialHealthScore } from "@/lib/mock-data"
+import { mockUser, mockAccounts } from "@/lib/mock-data"
 
 export function FinancialHealthScore() {
-  const { overall, components, trend, recommendations } = mockFinancialHealthScore
+  // Calculate financial metrics from actual mock data
+  const monthlyIncome = mockUser.financialProfile.monthlyIncome
+  const monthlyExpenses = mockUser.financialProfile.monthlyExpenses
+  const emergencyFund = mockUser.financialProfile.emergencyFund
+
+  // Calculate savings rate
+  const savingsRate = ((monthlyIncome - monthlyExpenses) / monthlyIncome) * 100
+
+  // Calculate debt from accounts
+  const totalDebt = mockAccounts
+    .filter(acc => acc.type === 'credit')
+    .reduce((sum, acc) => sum + Math.abs(Math.min(0, acc.balance)), 0)
+  const debtRatio = (totalDebt / monthlyIncome) * 100
+
+  // Calculate emergency fund in months
+  const emergencyFundMonths = emergencyFund / monthlyExpenses
+
+  // Calculate component scores (0-100)
+  const savingsRateScore = Math.min((savingsRate / 20) * 100, 100) // 20% target
+  const debtRatioScore = Math.max(100 - (debtRatio / 30) * 100, 0) // <30% good
+  const emergencyFundScore = Math.min((emergencyFundMonths / 3) * 100, 100) // 3 months target
+
+  // Calculate overall score (weighted average)
+  const overall = Math.round((savingsRateScore * 0.4 + debtRatioScore * 0.3 + emergencyFundScore * 0.3))
+
+  // Create components object
+  const components = {
+    savingsRate: {
+      score: Math.round(savingsRateScore),
+      value: Number(savingsRate.toFixed(1)),
+      benchmark: 20,
+      status: savingsRate >= 20 ? "excellent" : savingsRate >= 15 ? "good" : savingsRate >= 10 ? "fair" : "poor",
+    },
+    debtRatio: {
+      score: Math.round(debtRatioScore),
+      value: Number(debtRatio.toFixed(1)),
+      benchmark: 30,
+      status: debtRatio <= 10 ? "excellent" : debtRatio <= 30 ? "good" : debtRatio <= 50 ? "fair" : "poor",
+    },
+    emergencyFund: {
+      score: Math.round(emergencyFundScore),
+      months: Number(emergencyFundMonths.toFixed(1)),
+      target: 3,
+      status: emergencyFundMonths >= 3 ? "excellent" : emergencyFundMonths >= 2 ? "good" : emergencyFundMonths >= 1 ? "fair" : "poor",
+    },
+  }
+
+  // Determine trend based on overall score
+  const trend = overall >= 80 ? "improving" : overall >= 60 ? "stable" : "declining"
+
+  // Generate recommendations based on scores
+  const recommendations = []
+  if (emergencyFundScore < 100) {
+    const needed = Math.round((3 - emergencyFundMonths) * monthlyExpenses)
+    recommendations.push(`Add AED ${needed.toLocaleString()} more to reach your 3-month emergency fund target`)
+  }
+  if (savingsRateScore < 100) {
+    recommendations.push("Consider increasing your savings rate to reach the 20% target for optimal financial health")
+  }
+  if (debtRatioScore < 100) {
+    recommendations.push("Focus on reducing debt to improve your debt-to-income ratio")
+  }
+  if (overall >= 80) {
+    recommendations.push("Excellent financial health - maintain current savings discipline")
+  }
 
   const getStatusColor = (status: string) => {
     switch (status) {

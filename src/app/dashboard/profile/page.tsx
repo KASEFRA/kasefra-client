@@ -25,17 +25,21 @@ import {
   mockGoals,
   mockFinancialData
 } from "@/lib/mock-data"
+import { NetWorthChart } from "@/components/dashboard/net-worth-chart"
 
 export default function ProfilePage() {
   // Calculate financial metrics
-  const totalBankBalance = mockAccounts.reduce((sum, acc) => sum + acc.balance, 0)
+  const netWorth = mockAccounts.reduce((sum, acc) => sum + acc.balance, 0)
   const totalInvestments = mockInvestments.reduce((sum, inv) => sum + inv.currentValue, 0)
-  const totalAssets = totalBankBalance + totalInvestments
+  const totalCash = mockAccounts
+    .filter(acc => ['checking', 'savings'].includes(acc.type))
+    .reduce((sum, acc) => sum + acc.balance, 0)
   const totalLiabilities = mockAccounts
     .filter(acc => acc.type === 'credit')
     .reduce((sum, acc) => sum + Math.abs(Math.min(0, acc.balance)), 0)
-
-  const netWorth = totalAssets - totalLiabilities
+  const investmentPortfolioValue = mockAccounts
+    .filter(acc => acc.type === 'investment')
+    .reduce((sum, acc) => sum + acc.balance, 0)
   const latestNetWorthData = mockFinancialData.monthly.data[mockFinancialData.monthly.data.length - 1]
   const monthlyIncome = mockUser.financialProfile.monthlyIncome
   const monthlyExpenses = mockUser.financialProfile.monthlyExpenses
@@ -91,12 +95,7 @@ export default function ProfilePage() {
   return (
     <div className="space-y-6 p-6">
       {/* Header */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Financial Profile</h1>
-        <p className="text-muted-foreground">
-          Comprehensive overview of your financial journey and wealth building progress
-        </p>
-      </div>
+
 
       {/* Hero Section - Financial Identity */}
       <div className="grid gap-6 md:grid-cols-3">
@@ -126,7 +125,7 @@ export default function ProfilePage() {
                 <div className="text-sm text-muted-foreground">Net Worth</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold">{formatCurrency(monthlyIncome)}</div>
+                <div className="text-2xl font-bold">{formatCurrency(monthlyIncome)}+</div>
                 <div className="text-sm text-muted-foreground">Monthly Income</div>
               </div>
               <div className="text-center">
@@ -147,18 +146,21 @@ export default function ProfilePage() {
           <CardContent>
             <div className="text-center">
               <div className={`text-4xl font-bold ${getHealthScoreColor(financialHealthScore)}`}>
-                {financialHealthScore}
+                86
               </div>
               <div className="text-sm text-muted-foreground mb-4">out of 100</div>
               <Progress value={financialHealthScore} className="h-2" />
               <div className="text-xs text-muted-foreground mt-2">
                 {financialHealthScore >= 80 ? 'Excellent' :
-                 financialHealthScore >= 60 ? 'Good' : 'Needs Improvement'}
+                  financialHealthScore >= 60 ? 'Good' : 'Needs Improvement'}
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
+
+      {/* Net Worth Growth Chart */}
+      <NetWorthChart />
 
       {/* Net Worth & Assets Overview */}
       <div className="grid gap-6 md:grid-cols-2">
@@ -175,33 +177,19 @@ export default function ProfilePage() {
                 <Wallet className="h-4 w-4 text-primary" />
                 <span>Bank Accounts</span>
               </div>
-              <span className="font-semibold">{formatCurrency(totalBankBalance)}</span>
+              <span className="font-semibold">{formatCurrency(totalCash)}</span>
             </div>
             <div className="flex justify-between items-center p-3 rounded-lg bg-muted/30">
               <div className="flex items-center gap-3">
                 <TrendingUp className="h-4 w-4 text-green-600" />
                 <span>Investments</span>
               </div>
-              <span className="font-semibold">{formatCurrency(totalInvestments)}</span>
-            </div>
-            <div className="flex justify-between items-center p-3 rounded-lg bg-muted/30">
-              <div className="flex items-center gap-3">
-                <Building className="h-4 w-4 text-purple-600" />
-                <span>Real Estate</span>
-              </div>
-              <span className="font-semibold">{formatCurrency(850000)}</span>
-            </div>
-            <div className="flex justify-between items-center p-3 rounded-lg bg-muted/30">
-              <div className="flex items-center gap-3">
-                <Car className="h-4 w-4 text-blue-600" />
-                <span>Vehicles</span>
-              </div>
-              <span className="font-semibold">{formatCurrency(120000)}</span>
+              <span className="font-semibold">{formatCurrency(investmentPortfolioValue)}</span>
             </div>
             <div className="border-t pt-3">
               <div className="flex justify-between items-center font-semibold text-lg">
                 <span>Total Assets</span>
-                <span className="text-green-600">{formatCurrency(totalAssets + 970000)}</span>
+                <span className="text-green-600">{formatCurrency(totalCash + investmentPortfolioValue)}</span>
               </div>
             </div>
           </CardContent>
@@ -233,6 +221,91 @@ export default function ProfilePage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Investment Performance Dashboard */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <TrendingUp className="h-5 w-5" />
+            Investment Performance
+          </CardTitle>
+          <CardDescription>
+            Portfolio performance metrics and analysis
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-6 md:grid-cols-3">
+            {/* Total Portfolio Value */}
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-muted-foreground">Total Portfolio Value</div>
+              <div className="text-2xl font-bold text-primary">{formatCurrency(totalInvestments)}</div>
+              <div className="flex items-center gap-1 text-sm">
+                <TrendingUp className="h-4 w-4 text-green-600" />
+                <span className="text-green-600">+AED 12,400</span>
+                <span className="text-muted-foreground">(+4.3%) this month</span>
+              </div>
+            </div>
+
+            {/* Daily Performance */}
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-muted-foreground">Daily Change</div>
+              <div className="text-2xl font-bold text-green-600">+AED 2,340</div>
+              <div className="flex items-center gap-1 text-sm">
+                <TrendingUp className="h-4 w-4 text-green-600" />
+                <span className="text-green-600">+0.79%</span>
+                <span className="text-muted-foreground">today</span>
+              </div>
+            </div>
+
+            {/* Annual Performance */}
+            <div className="space-y-3">
+              <div className="text-sm font-medium text-muted-foreground">Annual Return</div>
+              <div className="text-2xl font-bold text-green-600">+8.7%</div>
+              <div className="flex items-center gap-1 text-sm">
+                <span className="text-muted-foreground">vs S&P 500:</span>
+                <span className="text-green-600">+1.2%</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Performance by Category */}
+          <div className="mt-6 space-y-4">
+            <h4 className="font-semibold">Performance by Category</h4>
+            <div className="grid gap-3 md:grid-cols-2">
+              {Object.entries(investmentsByCategory).map(([category, value]) => {
+                const performanceData = {
+                  stocks: { return: '+12.4%', change: '+AED 5,600', trend: 'up' },
+                  crypto: { return: '+8.1%', change: '+AED 3,620', trend: 'up' },
+                  commodity: { return: '+5.3%', change: '+AED 3,695', trend: 'up' },
+                  'real-estate': { return: '-2.1%', change: '-AED 1,575', trend: 'down' }
+                }
+                const perf = performanceData[category as keyof typeof performanceData] || { return: '0%', change: 'AED 0', trend: 'up' }
+                const TrendIcon = perf.trend === 'up' ? TrendingUp : TrendingDown
+                const trendColor = perf.trend === 'up' ? 'text-green-600' : 'text-red-600'
+
+                return (
+                  <div key={category} className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-3 h-3 rounded-full ${getCategoryColor(category)}`} />
+                      <div>
+                        <div className="font-medium capitalize">{category.replace('-', ' ')}</div>
+                        <div className="text-sm text-muted-foreground">{formatCurrency(value)}</div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className={`font-semibold ${trendColor}`}>{perf.return}</div>
+                      <div className={`text-sm flex items-center gap-1 ${trendColor}`}>
+                        <TrendIcon className="h-3 w-3" />
+                        {perf.change}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Goals Progress & Financial Milestones */}
       <div className="grid gap-6 md:grid-cols-2">

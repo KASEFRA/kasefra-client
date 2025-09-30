@@ -15,67 +15,87 @@ import {
   DollarSign,
   Settings
 } from "lucide-react"
-import { BudgetOverview } from "@/components/budgets/budget-overview"
-import { BudgetChart } from "@/components/budgets/budget-chart"
-import { AIBudgetRecommendations } from "@/components/budgets/ai-budget-recommendations"
 import { CreateBudgetWizard } from "@/components/budgets/create-budget-wizard"
 import { BudgetCard } from "@/components/budgets/budget-card"
 
 export default function BudgetsPage() {
   return (
-    <div className="space-y-6 px-6">
+    <div className="space-y-8 px-6">
 
-      {/* Budget Overview Section */}
-      <div className="space-y-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2">
-            <BudgetOverview />
-          </div>
-          <div>
-            <AIBudgetRecommendations />
-          </div>
-        </div>
+      {/* Budget Summary Cards */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Budget</CardTitle>
+            <Target className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">AED 8,450</div>
+            <p className="text-xs text-muted-foreground">
+              October 2025 budget
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Spent</CardTitle>
+            <TrendingDown className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">AED 6,230</div>
+            <p className="text-xs text-muted-foreground">
+              Across all categories
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Remaining</CardTitle>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-green-600">AED 2,220</div>
+            <p className="text-xs text-muted-foreground">
+              Available to spend
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Budget Usage</CardTitle>
+            <PieChart className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">74%</div>
+            <p className="text-xs text-muted-foreground">
+              Of monthly budget used
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Budget Analytics Section */}
-      <div className="space-y-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <BudgetChart />
-
-          {/* Quick Budget Stats */}
-          <Card className="bg-card border shadow-sm">
-          <CardHeader className="pb-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="flex items-center gap-2 text-xl font-bold">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
-                    <PieChart className="h-5 w-5 text-primary" />
-                  </div>
-                  Budget Summary
-                </CardTitle>
-                <CardDescription className="text-base">Current month overview</CardDescription>
-              </div>
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" >
-                  <Settings className="h-4 w-4 mr-2" />
-                  Settings
-                </Button>
-                <CreateBudgetWizard />
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
-                <div className="text-2xl font-bold text-primary mb-1">AED 8,450</div>
-                <div className="text-sm text-muted-foreground">Total Budget</div>
-              </div>
-              <div className="p-4 bg-secondary/50 rounded-xl border border-secondary">
-                <div className="text-2xl font-bold text-secondary-foreground mb-1">AED 6,230</div>
-                <div className="text-sm text-muted-foreground">Total Spent</div>
-              </div>
-            </div>
-
+      {/* Budget Progress Overview */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+          <div>
+            <CardTitle className="text-lg font-semibold">Budget Progress</CardTitle>
+            <CardDescription>
+              October 2025 spending overview
+            </CardDescription>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm">
+              <Settings className="mr-2 h-4 w-4" />
+              Settings
+            </Button>
+            <CreateBudgetWizard />
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
             <div className="space-y-3">
               <div className="flex justify-between text-sm font-medium">
                 <span>Overall Progress</span>
@@ -109,27 +129,20 @@ export default function BudgetsPage() {
                 </div>
               ))}
             </div>
-
-            <Button variant="outline" className="w-full mt-4 ">
-              View All Categories
-            </Button>
-          </CardContent>
-        </Card>
-        </div>
-      </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Budget Management Section */}
-      <Card className="bg-card border shadow-sm">
-        <CardHeader className="pb-6">
-          <CardTitle className="flex items-center gap-2 text-xl font-bold">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
-              <Target className="h-5 w-5 text-primary" />
-            </div>
-            Active Budgets
-          </CardTitle>
-          <CardDescription className="text-base">
-            Manage your spending limits and track progress
-          </CardDescription>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+          <div>
+            <CardTitle className="text-lg font-semibold">Active Budgets</CardTitle>
+            <CardDescription>
+              Manage your spending limits and track progress
+            </CardDescription>
+          </div>
+          <CreateBudgetWizard />
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

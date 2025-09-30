@@ -24,14 +24,13 @@ import { GoalsSummary } from "@/components/dashboard/goals-summary"
 import { RecurringPayments } from "@/components/dashboard/recurring-payments"
 import { InvestmentSummary } from "@/components/dashboard/investment-summary"
 import { useRouter } from "next/navigation"
-
-import data from "./data.json"
+import { mockAccounts } from "@/lib/mock-data"
 
 export default function Page() {
   const router = useRouter()
 
-  // Calculate net worth from new data structure
-  const totalBalance = data.reduce((sum, account) => sum + account.balance, 0)
+  // Calculate net worth from accounts data
+  const totalBalance = mockAccounts.reduce((sum, account) => sum + account.balance, 0)
 
   // Get recent transactions (first 5 from mock data)
   const recentTransactions = mockTransactions.slice(0, 5)

@@ -125,7 +125,7 @@ export default function SettingsPage() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Profile:</span>
-                  <span className="font-medium">Omar Hassan</span>
+                  <span className="font-medium">Areeb Hafeel</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Location:</span>

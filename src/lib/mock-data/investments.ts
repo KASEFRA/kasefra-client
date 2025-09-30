@@ -41,19 +41,19 @@ export const mockInvestments: Investment[] = [
     name: "Emaar Properties",
     type: "stock",
     category: "stocks",
-    currentValue: 18450.00,
-    purchaseValue: 17800.00,
+    currentValue: 35000.00,
+    purchaseValue: 33800.00,
     quantity: 500,
     currency: "AED",
-    currentPrice: 36.90,
-    purchasePrice: 35.60,
+    currentPrice: 70.00,
+    purchasePrice: 67.60,
     dailyChange: 285.00,
     dailyChangePercent: 1.57,
-    totalGainLoss: 650.00,
-    totalGainLossPercent: 3.65,
+    totalGainLoss: 1200.00,
+    totalGainLossPercent: 3.55,
     sector: "Real Estate",
     exchange: "DFM",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
   {
     id: "inv-2",
@@ -61,19 +61,19 @@ export const mockInvestments: Investment[] = [
     name: "Abu Dhabi Commercial Bank",
     type: "stock",
     category: "stocks",
-    currentValue: 24750.00,
-    purchaseValue: 24000.00,
+    currentValue: 28500.00,
+    purchaseValue: 27600.00,
     quantity: 300,
     currency: "AED",
-    currentPrice: 82.50,
-    purchasePrice: 80.00,
+    currentPrice: 95.00,
+    purchasePrice: 92.00,
     dailyChange: 165.00,
     dailyChangePercent: 0.67,
-    totalGainLoss: 750.00,
-    totalGainLossPercent: 3.13,
+    totalGainLoss: 900.00,
+    totalGainLossPercent: 3.26,
     sector: "Banking",
     exchange: "ADX",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
   {
     id: "inv-3",
@@ -81,8 +81,8 @@ export const mockInvestments: Investment[] = [
     name: "Apple Inc.",
     type: "stock",
     category: "stocks",
-    currentValue: 52650.00,
-    purchaseValue: 51200.00,
+    currentValue: 45000.00,
+    purchaseValue: 43750.00,
     quantity: 300,
     currency: "USD",
     currentPrice: 175.50,
@@ -93,7 +93,7 @@ export const mockInvestments: Investment[] = [
     totalGainLossPercent: 2.83,
     sector: "Technology",
     exchange: "NASDAQ",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
 
   // CRYPTO
@@ -103,19 +103,19 @@ export const mockInvestments: Investment[] = [
     name: "Bitcoin",
     type: "crypto",
     category: "crypto",
-    currentValue: 147800.00,
-    purchaseValue: 140000.00,
-    quantity: 3.5,
+    currentValue: 28200.00,
+    purchaseValue: 26800.00,
+    quantity: 0.67,
     currency: "USD",
-    currentPrice: 42228.57,
+    currentPrice: 42089.55,
     purchasePrice: 40000.00,
     dailyChange: 1890.00,
     dailyChangePercent: 1.29,
-    totalGainLoss: 7800.00,
-    totalGainLossPercent: 5.57,
+    totalGainLoss: 1400.00,
+    totalGainLossPercent: 5.22,
     sector: "Cryptocurrency",
     exchange: "Binance",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
   {
     id: "inv-5",
@@ -123,19 +123,19 @@ export const mockInvestments: Investment[] = [
     name: "Ethereum",
     type: "crypto",
     category: "crypto",
-    currentValue: 59400.00,
-    purchaseValue: 56000.00,
-    quantity: 24,
+    currentValue: 16500.00,
+    purchaseValue: 15600.00,
+    quantity: 6.67,
     currency: "USD",
-    currentPrice: 2475.00,
-    purchasePrice: 2333.33,
+    currentPrice: 2474.14,
+    purchasePrice: 2339.10,
     dailyChange: -726.00,
     dailyChangePercent: -1.21,
-    totalGainLoss: 3400.00,
-    totalGainLossPercent: 6.07,
+    totalGainLoss: 900.00,
+    totalGainLossPercent: 5.77,
     sector: "Cryptocurrency",
     exchange: "Coinbase",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
 
   // COMMODITY
@@ -145,19 +145,19 @@ export const mockInvestments: Investment[] = [
     name: "Gold Bullion",
     type: "commodity",
     category: "commodity",
-    currentValue: 73150.00,
-    purchaseValue: 71000.00,
-    quantity: 1000,
+    currentValue: 35000.00,
+    purchaseValue: 34000.00,
+    quantity: 479,
     currency: "USD",
-    currentPrice: 73.15,
+    currentPrice: 73.07,
     purchasePrice: 71.00,
-    dailyChange: 585.00,
-    dailyChangePercent: 0.81,
-    totalGainLoss: 2150.00,
-    totalGainLossPercent: 3.03,
+    dailyChange: 285.00,
+    dailyChangePercent: 0.82,
+    totalGainLoss: 1000.00,
+    totalGainLossPercent: 2.94,
     sector: "Precious Metals",
     exchange: "COMEX",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
   {
     id: "inv-7",
@@ -165,19 +165,19 @@ export const mockInvestments: Investment[] = [
     name: "Silver Bullion",
     type: "commodity",
     category: "commodity",
-    currentValue: 24680.00,
-    purchaseValue: 25200.00,
-    quantity: 1000,
+    currentValue: 9700.00,
+    purchaseValue: 10000.00,
+    quantity: 393,
     currency: "USD",
     currentPrice: 24.68,
-    purchasePrice: 25.20,
-    dailyChange: -98.72,
+    purchasePrice: 25.45,
+    dailyChange: -39.30,
     dailyChangePercent: -0.40,
-    totalGainLoss: -520.00,
-    totalGainLossPercent: -2.06,
+    totalGainLoss: -300.00,
+    totalGainLossPercent: -3.00,
     sector: "Precious Metals",
     exchange: "COMEX",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
   {
     id: "inv-8",
@@ -185,8 +185,8 @@ export const mockInvestments: Investment[] = [
     name: "Crude Oil WTI",
     type: "commodity",
     category: "commodity",
-    currentValue: 18720.00,
-    purchaseValue: 18000.00,
+    currentValue: 25000.00,
+    purchaseValue: 24000.00,
     quantity: 240,
     currency: "USD",
     currentPrice: 78.00,
@@ -197,7 +197,7 @@ export const mockInvestments: Investment[] = [
     totalGainLossPercent: 4.00,
     sector: "Energy",
     exchange: "NYMEX",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
 
   // REAL ESTATE
@@ -207,8 +207,8 @@ export const mockInvestments: Investment[] = [
     name: "Dubai Real Estate Investment Trust",
     type: "real-estate",
     category: "real-estate",
-    currentValue: 85200.00,
-    purchaseValue: 82000.00,
+    currentValue: 30000.00,
+    purchaseValue: 29000.00,
     quantity: 400,
     currency: "AED",
     currentPrice: 213.00,
@@ -219,7 +219,7 @@ export const mockInvestments: Investment[] = [
     totalGainLossPercent: 3.90,
     sector: "Real Estate",
     exchange: "DFM",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
   {
     id: "inv-10",
@@ -227,8 +227,8 @@ export const mockInvestments: Investment[] = [
     name: "Vanguard Real Estate ETF",
     type: "real-estate",
     category: "real-estate",
-    currentValue: 32480.00,
-    purchaseValue: 31500.00,
+    currentValue: 25100.00,
+    purchaseValue: 24500.00,
     quantity: 350,
     currency: "USD",
     currentPrice: 92.80,
@@ -239,7 +239,7 @@ export const mockInvestments: Investment[] = [
     totalGainLossPercent: 3.11,
     sector: "Real Estate",
     exchange: "NYSE",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   },
   {
     id: "inv-11",
@@ -247,8 +247,8 @@ export const mockInvestments: Investment[] = [
     name: "Abu Dhabi Property Fund",
     type: "real-estate",
     category: "real-estate",
-    currentValue: 47850.00,
-    purchaseValue: 46000.00,
+    currentValue: 20000.00,
+    purchaseValue: 19500.00,
     quantity: 200,
     currency: "AED",
     currentPrice: 239.25,
@@ -259,7 +259,7 @@ export const mockInvestments: Investment[] = [
     totalGainLossPercent: 4.02,
     sector: "Real Estate",
     exchange: "ADX",
-    lastUpdated: "2024-01-24T16:00:00Z"
+    lastUpdated: "2025-10-03T16:00:00Z"
   }
 ];
 
@@ -285,7 +285,7 @@ export const mockPortfolioSummary: PortfolioSummary = (() => {
     dailyChange: Math.round(dailyChange),
     dailyChangePercent: Number(dailyChangePercent.toFixed(2)),
     currency: "AED", // Base currency
-    lastUpdated: "2024-01-24T16:00:00Z",
+    lastUpdated: "2025-10-03T16:00:00Z",
     topMovers
   };
 })();
@@ -293,17 +293,17 @@ export const mockPortfolioSummary: PortfolioSummary = (() => {
 // Performance data for charts
 export const mockInvestmentPerformance = {
   daily: [
-    { date: '2024-01-18', value: 68850, change: 450 },
-    { date: '2024-01-19', value: 69200, change: 350 },
-    { date: '2024-01-20', value: 69550, change: 350 },
-    { date: '2024-01-21', value: 69100, change: -450 },
-    { date: '2024-01-22', value: 69800, change: 700 },
-    { date: '2024-01-23', value: 70150, change: 350 },
-    { date: '2024-01-24', value: 70421, change: 271 }
+    { date: '2025-09-25', value: 295200, change: -1850 },
+    { date: '2025-09-26', value: 296800, change: 1600 },
+    { date: '2025-09-27', value: 297150, change: 350 },
+    { date: '2025-09-30', value: 298450, change: 1300 },
+    { date: '2025-10-01', value: 297800, change: -650 },
+    { date: '2025-10-02', value: 298900, change: 1100 },
+    { date: '2025-10-03', value: 298000, change: -900 }
   ],
   monthly: [
-    { date: '2023-12-01', value: 65200, change: 0 },
-    { date: '2024-01-01', value: 68450, change: 3250 },
-    { date: '2024-01-24', value: 70421, change: 1971 }
+    { date: '2025-08-01', value: 289500, change: 2150 },
+    { date: '2025-09-01', value: 294200, change: 4700 },
+    { date: '2025-10-01', value: 298000, change: 3800 }
   ]
 };

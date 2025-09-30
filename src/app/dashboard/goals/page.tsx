@@ -15,11 +15,8 @@ import {
   Zap,
   CheckCircle
 } from "lucide-react"
-import { GoalsOverview } from "@/components/goals/goals-overview"
-import { GoalChart } from "@/components/goals/goal-chart"
 import { CreateGoalForm } from "@/components/goals/create-goal-form"
 import { GoalCard } from "@/components/goals/goal-card"
-import { GoalForecasting } from "@/components/ai/goal-forecasting"
 
 const mockGoals = [
   {
@@ -28,7 +25,7 @@ const mockGoals = [
     type: "savings" as const,
     targetAmount: 20000,
     currentAmount: 8500,
-    targetDate: "2025-06-15",
+    targetDate: "2026-10-15",
     currency: "AED",
     category: "Religious",
     icon: "🕋",
@@ -37,7 +34,7 @@ const mockGoals = [
     monthlyContribution: 800,
     aiPredictions: {
       successProbability: 0.72,
-      projectedCompletionDate: "2025-10-15",
+      projectedCompletionDate: "2026-1-15",
       recommendedMonthlyAmount: 1300,
       monthsAhead: -4
     },
@@ -53,7 +50,7 @@ const mockGoals = [
     type: "purchase" as const,
     targetAmount: 300000,
     currentAmount: 145000,
-    targetDate: "2026-12-31",
+    targetDate: "2027-01-31",
     currency: "AED",
     category: "Real Estate",
     icon: "🏠",
@@ -78,7 +75,7 @@ const mockGoals = [
     type: "savings" as const,
     targetAmount: 150000,
     currentAmount: 25000,
-    targetDate: "2030-09-01",
+    targetDate: "2030-10-01",
     currency: "AED",
     category: "Education",
     icon: "🎓",
@@ -103,7 +100,7 @@ const mockGoals = [
     type: "savings" as const,
     targetAmount: 35000,
     currentAmount: 12000,
-    targetDate: "2024-12-31",
+    targetDate: "2025-12-31",
     currency: "AED",
     category: "Emergency",
     icon: "🛡️",
@@ -127,7 +124,7 @@ const mockGoals = [
     type: "purchase" as const,
     targetAmount: 80000,
     currentAmount: 15000,
-    targetDate: "2025-03-15",
+    targetDate: "2026-03-15",
     currency: "AED",
     category: "Personal",
     icon: "💍",
@@ -155,33 +152,14 @@ export default function GoalsPage() {
   const overallProgress = (totalCurrentAmount / totalTargetAmount) * 100
 
   return (
-    <div className="space-y-6 px-6">
+    <div className="space-y-8 px-6">
 
-      {/* Goals Overview Section */}
-      <div className="space-y-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2">
-            <GoalsOverview goals={mockGoals} />
-          </div>
-          <div>
-            <GoalChart goals={mockGoals} />
-          </div>
-        </div>
-      </div>
-
-      {/* AI Goal Forecasting */}
-      <div className="space-y-4">
-        <GoalForecasting goals={mockGoals} />
-      </div>
-
-      {/* Quick Stats */}
+      {/* Goals Summary Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-card border shadow-sm">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Goals</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
-              <Target className="h-4 w-4 text-primary" />
-            </div>
+            <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold mb-2">{activeGoals}</div>
@@ -191,30 +169,26 @@ export default function GoalsPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-card border shadow-sm">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Target</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
-              <DollarSign className="h-4 w-4 text-primary" />
-            </div>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-primary mb-2">
+            <div className="text-2xl font-bold mb-2">
               AED {(totalTargetAmount / 1000).toFixed(0)}K
             </div>
             <p className="text-xs text-muted-foreground">Across all goals</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-card border shadow-sm">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Saved</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-success/10">
-              <TrendingUp className="h-4 w-4 text-success" />
-            </div>
+            <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-success mb-2">
+            <div className="text-2xl font-bold text-green-600 mb-2">
               AED {(totalCurrentAmount / 1000).toFixed(0)}K
             </div>
             <p className="text-xs text-muted-foreground">
@@ -223,45 +197,36 @@ export default function GoalsPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-card border shadow-sm">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Next Milestone</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent/20">
-              <Calendar className="h-4 w-4 text-accent-foreground" />
-            </div>
+            <CardTitle className="text-sm font-medium">Progress Rate</CardTitle>
+            <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-accent-foreground mb-2">2</div>
-            <p className="text-xs text-muted-foreground">Goals due this year</p>
+            <div className="text-2xl font-bold mb-2">{overallProgress.toFixed(1)}%</div>
+            <p className="text-xs text-muted-foreground">Overall completion</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Active Goals Grid */}
-      <Card className="bg-card border shadow-sm">
-        <CardHeader className="pb-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="flex items-center gap-2 text-xl font-bold">
-                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
-                  <Trophy className="h-5 w-5 text-primary" />
-                </div>
-                Your Goals
-              </CardTitle>
-              <CardDescription className="text-base">
-                Track progress and manage your financial objectives
-              </CardDescription>
-            </div>
-            <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="text-sm">
-                {activeGoals} Active
-              </Badge>
-              <Button variant="outline" size="sm" >
-                <Settings className="h-4 w-4 mr-2" />
-                Settings
-              </Button>
-              <CreateGoalForm />
-            </div>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+          <div>
+            <CardTitle className="text-lg font-semibold">Your Goals</CardTitle>
+            <CardDescription>
+              Track progress and manage your financial objectives
+            </CardDescription>
+          </div>
+          <div className="flex items-center gap-2">
+            <Badge variant="secondary" className="text-sm">
+              {activeGoals} Active
+            </Badge>
+            <Button variant="outline" size="sm">
+              <Settings className="h-4 w-4 mr-2" />
+              Settings
+            </Button>
+            <CreateGoalForm />
           </div>
         </CardHeader>
         <CardContent>
@@ -292,74 +257,7 @@ export default function GoalsPage() {
         </CardContent>
       </Card>
 
-      {/* AI Insights Section */}
-      <Card className="bg-card border shadow-sm">
-        <CardHeader className="pb-6">
-          <CardTitle className="flex items-center gap-2 text-xl font-bold">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
-              <Zap className="h-5 w-5 text-primary" />
-            </div>
-            AI Goal Insights
-          </CardTitle>
-          <CardDescription className="text-base">
-            Smart recommendations to accelerate your progress
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div className="p-4 bg-success/5 rounded-xl border border-success/20">
-              <div className="flex items-start gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-success/10">
-                  <CheckCircle className="h-5 w-5 text-success" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">Optimize Your Hajj Fund</h4>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Increasing your monthly contribution by AED 500 would put you back on track for your 2025 target date.
-                  </p>
-                  <Button size="sm" variant="outline" >
-                    Adjust Contribution
-                  </Button>
-                </div>
-              </div>
-            </div>
 
-            <div className="p-4 bg-primary/5 rounded-xl border border-primary/20">
-              <div className="flex items-start gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
-                  <TrendingUp className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">Property Investment Opportunity</h4>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    You&apos;re ahead on your property goal! Consider exploring pre-construction deals that might offer better value.
-                  </p>
-                  <Button size="sm" variant="outline" >
-                    Explore Options
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 bg-accent/10 rounded-xl border border-accent/30">
-              <div className="flex items-start gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent/20">
-                  <Target className="h-5 w-5 text-accent-foreground" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm mb-1">Emergency Fund Priority</h4>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Your emergency fund is progressing excellently. Consider automating transfers to maintain consistency.
-                  </p>
-                  <Button size="sm" variant="outline" >
-                    Set Automation
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   )
 }

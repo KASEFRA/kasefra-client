@@ -189,11 +189,10 @@ export function CreateGoalForm({ trigger }: CreateGoalFormProps) {
               {uaeGoalTemplates.map((template) => (
                 <div
                   key={template.id}
-                  className={`p-4 rounded-lg border cursor-pointer transition-all ${
-                    selectedTemplate?.id === template.id
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
-                  }`}
+                  className={`p-4 rounded-lg border cursor-pointer transition-all ${selectedTemplate?.id === template.id
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border hover:border-primary/50'
+                    }`}
                   onClick={() => setSelectedTemplate(template)}
                 >
                   <div className="flex items-start justify-between">
@@ -220,7 +219,14 @@ export function CreateGoalForm({ trigger }: CreateGoalFormProps) {
                 </div>
               ))}
 
-              <div className="p-4 rounded-lg border border-dashed border-primary/30 text-center cursor-pointer hover:border-primary/50 transition-colors">
+              <div
+                className="p-4 rounded-lg border border-dashed border-primary/30 text-center cursor-pointer hover:border-primary/50 transition-colors"
+                onClick={() => {
+                  setSelectedTemplate(null);
+                  setCurrentStep(2);
+                }}
+                data-testid="custom-goal-btn"
+              >
                 <Plus className="h-8 w-8 text-primary mx-auto mb-2" />
                 <h4 className="font-medium text-primary">Custom Goal</h4>
                 <p className="text-sm text-muted-foreground">Create your own financial objective</p>
@@ -279,12 +285,10 @@ export function CreateGoalForm({ trigger }: CreateGoalFormProps) {
               <div className="space-y-2">
                 <Label htmlFor="target-amount">Target Amount</Label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="target-amount"
                     type="number"
                     placeholder={selectedTemplate?.targetAmount.toString() || "50000"}
-                    className="pl-9"
                     value={customGoal.targetAmount}
                     onChange={(e) => setCustomGoal(prev => ({ ...prev, targetAmount: e.target.value }))}
                   />
@@ -319,32 +323,28 @@ export function CreateGoalForm({ trigger }: CreateGoalFormProps) {
               <div className="space-y-2">
                 <Label htmlFor="monthly-income">Monthly Income</Label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="monthly-income"
                     type="number"
                     placeholder="15000"
-                    className="pl-9"
                     value={customGoal.monthlyIncome}
                     onChange={(e) => setCustomGoal(prev => ({ ...prev, monthlyIncome: e.target.value }))}
                   />
-                  <span className="absolute right-3 top-3 text-sm text-muted-foreground">AED</span>
+                  <span className="absolute right-3 top-3 text-sm text-muted-foreground"></span>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="current-savings">Current Savings (for this goal)</Label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="current-savings"
                     type="number"
                     placeholder="0"
-                    className="pl-9"
                     value={customGoal.currentSavings}
                     onChange={(e) => setCustomGoal(prev => ({ ...prev, currentSavings: e.target.value }))}
                   />
-                  <span className="absolute right-3 top-3 text-sm text-muted-foreground">AED</span>
+                  <span className="absolute right-3 top-3 text-sm text-muted-foreground"></span>
                 </div>
               </div>
 

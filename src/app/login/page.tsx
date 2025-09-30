@@ -18,7 +18,7 @@ export default function LoginPage() {
     // Mock success - store user session (in real app, handle JWT tokens)
     localStorage.setItem("kasefra-user", JSON.stringify({
       id: "user-123",
-      name: "Omar Hassan",
+      name: "Areeb Hafeel",
       email: data.email,
     }))
     
