@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { CreateBudgetWizard } from "@/components/budgets/create-budget-wizard"
 import { BudgetCard } from "@/components/budgets/budget-card"
+import { BudgetChart } from "@/components/budgets/budget-chart"
 
 export default function BudgetsPage() {
   return (
@@ -77,8 +78,10 @@ export default function BudgetsPage() {
         </Card>
       </div>
 
-      {/* Budget Progress Overview */}
-      <Card>
+      {/* Budget Progress and Analytics - 50/50 Layout */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Budget Progress Overview */}
+        <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
           <div>
             <CardTitle className="text-lg font-semibold">Budget Progress</CardTitle>
@@ -132,6 +135,10 @@ export default function BudgetsPage() {
           </div>
         </CardContent>
       </Card>
+
+        {/* Budget Analytics Chart */}
+        <BudgetChart />
+      </div>
 
       {/* Budget Management Section */}
       <Card>

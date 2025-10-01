@@ -26,6 +26,7 @@ import {
   BarChart3,
   LineChart as LineChartIcon
 } from "lucide-react"
+import { mockFinancialData } from "@/lib/mock-data"
 
 interface CashFlowData {
   month: string
@@ -41,56 +42,27 @@ interface CashFlowData {
   }
 }
 
-const mockCashFlowData: CashFlowData[] = [
-  {
-    month: 'Aug',
-    income: 15200,
-    expenses: 9100,
-    netCashFlow: 6100,
-    cumulativeCashFlow: 125000,
-    categories: { fixedExpenses: 5500, variableExpenses: 3600, savings: 4200, investments: 1900 }
-  },
-  {
-    month: 'Sep',
-    income: 15500,
-    expenses: 9300,
-    netCashFlow: 6200,
-    cumulativeCashFlow: 131200,
-    categories: { fixedExpenses: 5600, variableExpenses: 3700, savings: 4300, investments: 1900 }
-  },
-  {
-    month: 'Oct',
-    income: 15300,
-    expenses: 8900,
-    netCashFlow: 6400,
-    cumulativeCashFlow: 137600,
-    categories: { fixedExpenses: 5400, variableExpenses: 3500, savings: 4500, investments: 1900 }
-  },
-  {
-    month: 'Nov',
-    income: 15600,
-    expenses: 8600,
-    netCashFlow: 7000,
-    cumulativeCashFlow: 144600,
-    categories: { fixedExpenses: 5300, variableExpenses: 3300, savings: 5000, investments: 2000 }
-  },
-  {
-    month: 'Dec',
-    income: 15400,
-    expenses: 8800,
-    netCashFlow: 6600,
-    cumulativeCashFlow: 151200,
-    categories: { fixedExpenses: 5500, variableExpenses: 3300, savings: 4600, investments: 2000 }
-  },
-  {
-    month: 'Jan',
-    income: 15500,
-    expenses: 8700,
-    netCashFlow: 6800,
-    cumulativeCashFlow: 158000,
-    categories: { fixedExpenses: 5400, variableExpenses: 3300, savings: 4800, investments: 2000 }
+// Use real mock data from the last 6 months
+const mockCashFlowData: CashFlowData[] = mockFinancialData.monthly.data.slice(-6).map((data, index) => {
+  const monthNames = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
+  const fixedExpenses = Math.round(data.expenses * 0.65) // 65% fixed
+  const variableExpenses = Math.round(data.expenses * 0.35) // 35% variable
+  let cumulativeSum = 0
+
+  return {
+    month: monthNames[index],
+    income: data.income,
+    expenses: data.expenses,
+    netCashFlow: data.cashflow,
+    cumulativeCashFlow: data.networth,
+    categories: {
+      fixedExpenses,
+      variableExpenses,
+      savings: Math.round(data.cashflow * 0.7),
+      investments: Math.round(data.cashflow * 0.3)
+    }
   }
-]
+})
 
 export function CashFlowChart() {
   const [chartType, setChartType] = useState<'flow' | 'cumulative' | 'breakdown'>('flow')

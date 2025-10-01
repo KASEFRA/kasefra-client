@@ -22,7 +22,7 @@ export interface FinancialData {
 export type DataType = 'networth' | 'spending' | 'income' | 'expenses' | 'cashflow' | 'all';
 
 // Generate comprehensive financial data
-const generateFinancialData = (days: number, startNetWorth: number = 531800): FinancialDataPoint[] => {
+const generateFinancialData = (days: number, startNetWorth: number = 626800): FinancialDataPoint[] => {
   const data: FinancialDataPoint[] = [];
   let currentNetWorth = startNetWorth;
   let baseIncome = 30500; // Monthly income
@@ -64,22 +64,22 @@ const generateFinancialData = (days: number, startNetWorth: number = 531800): Fi
 
 export const mockFinancialData = {
   daily: {
-    current: 531800,
+    current: 626800,
     change: 2340,
-    changePercent: 0.44,
+    changePercent: 0.37,
     period: '30 days',
-    data: generateFinancialData(30, 529460)
+    data: generateFinancialData(30, 624460)
   } as FinancialData,
 
   weekly: {
-    current: 531800,
+    current: 626800,
     change: 8520,
-    changePercent: 1.63,
+    changePercent: 1.38,
     period: '12 weeks',
     data: Array.from({ length: 12 }, (_, i) => {
       const date = new Date();
       date.setDate(date.getDate() - (i * 7));
-      const baseNetWorth = 524280 + (i * 710);
+      const baseNetWorth = 619280 + (i * 710);
       const baseIncome = 30500 / 4.33; // Weekly income
       const baseExpenses = 22000 / 4.33; // Weekly expenses
 
@@ -97,37 +97,38 @@ export const mockFinancialData = {
   } as FinancialData,
 
   monthly: {
-    current: 531800,
+    current: 626800,
     change: 94550,
-    changePercent: 21.57,
+    changePercent: 17.77,
     period: '12 months',
     data: [
-      { date: '2024-01-01', networth: 438250, income: 30500, expenses: 22000, spending: 15400, cashflow: 8500, change: 0, changePercent: 0 },
-      { date: '2024-02-01', networth: 446700, income: 30500, expenses: 22200, spending: 15540, cashflow: 8300, change: 8450, changePercent: 1.93 },
-      { date: '2024-03-01', networth: 455300, income: 30500, expenses: 22100, spending: 15470, cashflow: 8400, change: 8600, changePercent: 1.93 },
-      { date: '2024-04-01', networth: 464450, income: 31000, expenses: 22300, spending: 15610, cashflow: 8700, change: 9150, changePercent: 2.01 },
-      { date: '2024-05-01', networth: 472700, income: 30500, expenses: 22500, spending: 15750, cashflow: 8000, change: 8250, changePercent: 1.78 },
-      { date: '2024-06-01', networth: 481600, income: 30700, expenses: 22000, spending: 15400, cashflow: 8700, change: 8900, changePercent: 1.88 },
-      { date: '2024-07-01', networth: 490150, income: 30500, expenses: 22200, spending: 15540, cashflow: 8300, change: 8550, changePercent: 1.78 },
-      { date: '2024-08-01', networth: 498800, income: 30800, expenses: 22100, spending: 15470, cashflow: 8700, change: 8650, changePercent: 1.77 },
-      { date: '2024-09-01', networth: 507300, income: 30500, expenses: 22400, spending: 15680, cashflow: 8100, change: 8500, changePercent: 1.70 },
-      { date: '2024-10-01', networth: 515700, income: 30500, expenses: 22600, spending: 15820, cashflow: 7900, change: 8400, changePercent: 1.66 },
-      { date: '2024-11-01', networth: 524350, income: 30500, expenses: 22700, spending: 15890, cashflow: 7800, change: 8650, changePercent: 1.68 },
-      { date: '2024-12-01', networth: 531800, income: 30500, expenses: 22800, spending: 15960, cashflow: 7700, change: 7450, changePercent: 1.42 }
+      { date: '2024-11-01', networth: 533250, income: 30500, expenses: 22000, spending: 15400, cashflow: 8500, change: 0, changePercent: 0 },
+      { date: '2024-12-01', networth: 541700, income: 30500, expenses: 22200, spending: 15540, cashflow: 8300, change: 8450, changePercent: 1.58 },
+      { date: '2025-01-01', networth: 550300, income: 30500, expenses: 22100, spending: 15470, cashflow: 8400, change: 8600, changePercent: 1.59 },
+      { date: '2025-02-01', networth: 559450, income: 31000, expenses: 22300, spending: 15610, cashflow: 8700, change: 9150, changePercent: 1.66 },
+      { date: '2025-03-01', networth: 567700, income: 30500, expenses: 22500, spending: 15750, cashflow: 8000, change: 8250, changePercent: 1.47 },
+      { date: '2025-04-01', networth: 576600, income: 30700, expenses: 22000, spending: 15400, cashflow: 8700, change: 8900, changePercent: 1.57 },
+      { date: '2025-05-01', networth: 585150, income: 30500, expenses: 22200, spending: 15540, cashflow: 8300, change: 8550, changePercent: 1.48 },
+      { date: '2025-06-01', networth: 593800, income: 30800, expenses: 22100, spending: 15470, cashflow: 8700, change: 8650, changePercent: 1.48 },
+      { date: '2025-07-01', networth: 602300, income: 30500, expenses: 22400, spending: 15680, cashflow: 8100, change: 8500, changePercent: 1.43 },
+      { date: '2025-08-01', networth: 610700, income: 30500, expenses: 22600, spending: 15820, cashflow: 7900, change: 8400, changePercent: 1.39 },
+      { date: '2025-09-01', networth: 619350, income: 30500, expenses: 22700, spending: 15890, cashflow: 7800, change: 8650, changePercent: 1.42 },
+      { date: '2025-10-01', networth: 626800, income: 30500, expenses: 22800, spending: 15960, cashflow: 7700, change: 7450, changePercent: 1.20 }
     ]
   } as FinancialData,
 
   yearly: {
-    current: 531800,
-    change: 353550,
-    changePercent: 198.32,
+    current: 626800,
+    change: 448550,
+    changePercent: 251.63,
     period: '5 years',
     data: [
       { date: '2020-01-01', networth: 178250, income: 336000, expenses: 240000, spending: 168000, cashflow: 96000, change: 0, changePercent: 0 },
       { date: '2021-01-01', networth: 248700, income: 348000, expenses: 252000, spending: 176400, cashflow: 96000, change: 70450, changePercent: 39.53 },
       { date: '2022-01-01', networth: 336100, income: 360000, expenses: 258000, spending: 180600, cashflow: 102000, change: 87400, changePercent: 35.14 },
       { date: '2023-01-01', networth: 438250, income: 366000, expenses: 264000, spending: 184800, cashflow: 102000, change: 102150, changePercent: 30.38 },
-      { date: '2024-01-01', networth: 531800, income: 372000, expenses: 270000, spending: 189000, cashflow: 102000, change: 93550, changePercent: 21.35 }
+      { date: '2024-01-01', networth: 531800, income: 372000, expenses: 270000, spending: 189000, cashflow: 102000, change: 93550, changePercent: 21.35 },
+      { date: '2025-01-01', networth: 626800, income: 372000, expenses: 270000, spending: 189000, cashflow: 102000, change: 95000, changePercent: 17.86 }
     ]
   } as FinancialData
 };
@@ -138,5 +139,6 @@ export const mockAccountsBreakdown = [
   { name: 'ADCB Savings', balance: 145000, type: 'savings' },
   { name: 'FAB Credit Card', balance: -4200, type: 'credit' },
   { name: 'Investment Portfolio', balance: 298000, type: 'investment' },
-  { name: 'HSBC USD Account', balance: 41000, type: 'savings' }
+  { name: 'HSBC USD Account', balance: 41000, type: 'savings' },
+  { name: 'Toyota Land Cruiser 2023', balance: 95000, type: 'asset' }
 ];

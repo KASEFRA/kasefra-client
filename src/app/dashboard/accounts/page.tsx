@@ -43,6 +43,9 @@ export default function AccountsPage() {
   const investmentAccounts = mockAccounts.filter(account =>
     account.type === 'investment'
   )
+  const assetAccounts = mockAccounts.filter(account =>
+    account.type === 'asset'
+  )
 
   // Group investments by category for detailed breakdown
   const investmentsByCategory = {
@@ -56,7 +59,8 @@ export default function AccountsPage() {
   const totalCash = cashAccounts.reduce((sum, account) => sum + account.balance, 0)
   const totalDebt = creditAccounts.reduce((sum, account) => sum + Math.abs(account.balance), 0)
   const totalInvestments = investmentAccounts.reduce((sum, account) => sum + account.balance, 0)
-  const totalAssets = totalCash + totalInvestments
+  const totalOtherAssets = assetAccounts.reduce((sum, account) => sum + account.balance, 0)
+  const totalAssets = totalCash + totalInvestments + totalOtherAssets
   const netWorth = totalAssets - totalDebt
 
   const formatCurrency = (amount: number) => {
@@ -248,6 +252,15 @@ export default function AccountsPage() {
                 />
               )}
 
+              {assetAccounts.length > 0 && (
+                <AccountCategory
+                  title="Assets"
+                  icon="🏨"
+                  total={totalOtherAssets}
+                  accounts={assetAccounts}
+                />
+              )}
+
               {investmentAccounts.length > 0 && (
                 <Collapsible defaultOpen className="border-b border-border/50 last:border-b-0">
                   <CollapsibleTrigger asChild>
@@ -392,6 +405,16 @@ export default function AccountsPage() {
                 </div>
                 <div className="text-sm font-medium">{formatCurrency(totalInvestments)}</div>
               </div>
+
+              {assetAccounts.length > 0 && (
+                <div className="flex justify-between items-center">
+                  <div className="space-y-1">
+                    <div className="text-sm text-muted-foreground">Other Assets</div>
+                    <div className="text-xs text-muted-foreground">{assetAccounts.length} asset{assetAccounts.length > 1 ? 's' : ''}</div>
+                  </div>
+                  <div className="text-sm font-medium">{formatCurrency(totalOtherAssets)}</div>
+                </div>
+              )}
 
               <div className="flex justify-between items-center">
                 <div className="space-y-1">

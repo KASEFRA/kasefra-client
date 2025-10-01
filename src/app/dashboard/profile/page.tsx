@@ -40,6 +40,9 @@ export default function ProfilePage() {
   const investmentPortfolioValue = mockAccounts
     .filter(acc => acc.type === 'investment')
     .reduce((sum, acc) => sum + acc.balance, 0)
+  const totalOtherAssets = mockAccounts
+    .filter(acc => acc.type === 'asset')
+    .reduce((sum, acc) => sum + acc.balance, 0)
   const latestNetWorthData = mockFinancialData.monthly.data[mockFinancialData.monthly.data.length - 1]
   const monthlyIncome = mockUser.financialProfile.monthlyIncome
   const monthlyExpenses = mockUser.financialProfile.monthlyExpenses
@@ -54,8 +57,9 @@ export default function ProfilePage() {
   }
 
   // Goals progress
-  const totalGoalsValue = mockGoals.reduce((sum, goal) => sum + goal.targetAmount, 0)
-  const totalGoalsProgress = mockGoals.reduce((sum, goal) => sum + goal.currentAmount, 0)
+  const activeGoals = mockGoals.filter(goal => !goal.isCompleted)
+  const totalGoalsValue = activeGoals.reduce((sum, goal) => sum + goal.targetAmount, 0)
+  const totalGoalsProgress = activeGoals.reduce((sum, goal) => sum + goal.currentAmount, 0)
   const goalsCompletionRate = (totalGoalsProgress / totalGoalsValue) * 100
 
   // Financial health score calculation
@@ -186,10 +190,19 @@ export default function ProfilePage() {
               </div>
               <span className="font-semibold">{formatCurrency(investmentPortfolioValue)}</span>
             </div>
+            {totalOtherAssets > 0 && (
+              <div className="flex justify-between items-center p-3 rounded-lg bg-muted/30">
+                <div className="flex items-center gap-3">
+                  <div className="text-lg">🚗</div>
+                  <span>Vehicle</span>
+                </div>
+                <span className="font-semibold">{formatCurrency(totalOtherAssets)}</span>
+              </div>
+            )}
             <div className="border-t pt-3">
               <div className="flex justify-between items-center font-semibold text-lg">
                 <span>Total Assets</span>
-                <span className="text-green-600">{formatCurrency(totalCash + investmentPortfolioValue)}</span>
+                <span className="text-green-600">{formatCurrency(totalCash + investmentPortfolioValue + totalOtherAssets)}</span>
               </div>
             </div>
           </CardContent>
@@ -316,11 +329,11 @@ export default function ProfilePage() {
               Financial Goals Progress
             </CardTitle>
             <CardDescription>
-              {mockGoals.length} active goals • {goalsCompletionRate.toFixed(1)}% complete
+              {activeGoals.length} active goals • {goalsCompletionRate.toFixed(1)}% complete
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {mockGoals.slice(0, 3).map((goal) => {
+            {activeGoals.slice(0, 3).map((goal) => {
               const progress = (goal.currentAmount / goal.targetAmount) * 100
               const isOnTrack = progress >= 50 // Simple heuristic
 
@@ -393,22 +406,22 @@ export default function ProfilePage() {
         <CardContent>
           <div className="grid gap-4 md:grid-cols-4">
             <div className="p-4 rounded-lg bg-green-50 border border-green-200">
-              <div className="text-2xl font-bold text-green-600">{formatCurrency(monthlyIncome)}</div>
+              <div className="text-2xl font-bold text-green-600">~ {formatCurrency(monthlyIncome)}</div>
               <div className="text-sm text-green-700">Monthly Income</div>
               <div className="text-xs text-green-600 mt-1">Salary + Investments</div>
             </div>
             <div className="p-4 rounded-lg bg-red-50 border border-red-200">
-              <div className="text-2xl font-bold text-red-600">{formatCurrency(monthlyExpenses)}</div>
+              <div className="text-2xl font-bold text-red-600">~ {formatCurrency(monthlyExpenses)}</div>
               <div className="text-sm text-red-700">Monthly Expenses</div>
               <div className="text-xs text-red-600 mt-1">Living + Discretionary</div>
             </div>
             <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">{formatCurrency(monthlyIncome - monthlyExpenses)}</div>
+              <div className="text-2xl font-bold text-blue-600">~ {formatCurrency(monthlyIncome - monthlyExpenses)}</div>
               <div className="text-sm text-blue-700">Monthly Savings</div>
               <div className="text-xs text-blue-600 mt-1">{savingsRate.toFixed(1)}% savings rate</div>
             </div>
             <div className="p-4 rounded-lg bg-purple-50 border border-purple-200">
-              <div className="text-2xl font-bold text-purple-600">{formatCurrency(mockUser.financialProfile.emergencyFund)}</div>
+              <div className="text-2xl font-bold text-purple-600">~ {formatCurrency(mockUser.financialProfile.emergencyFund)}</div>
               <div className="text-sm text-purple-700">Emergency Fund</div>
               <div className="text-xs text-purple-600 mt-1">{(mockUser.financialProfile.emergencyFund / monthlyExpenses).toFixed(1)} months coverage</div>
             </div>

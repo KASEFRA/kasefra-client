@@ -15,6 +15,14 @@ import {
   Zap,
   DollarSign
 } from "lucide-react"
+import {
+  CURRENT_NET_WORTH,
+  MONTHLY_INCOME,
+  MONTHLY_EXPENSES,
+  MONTHLY_SAVINGS,
+  SAVINGS_RATE
+} from "@/lib/mock-data/financial-constants"
+import { mockFinancialData } from "@/lib/mock-data"
 
 interface FinancialSnapshot {
   totalIncome: number
@@ -28,24 +36,27 @@ interface FinancialSnapshot {
 }
 
 const mockSnapshot: FinancialSnapshot = {
-  totalIncome: 15500,
-  totalExpenses: 8700,
-  totalSavings: 6800,
-  netWorth: 145200,
+  totalIncome: MONTHLY_INCOME,
+  totalExpenses: MONTHLY_EXPENSES,
+  totalSavings: MONTHLY_SAVINGS,
+  netWorth: CURRENT_NET_WORTH,
   budgetUtilization: 73,
   goalProgress: 68,
   monthlyTrend: 'up',
-  savingsRate: 44
+  savingsRate: SAVINGS_RATE
 }
 
-const monthlyTrends = [
-  { month: 'Aug', income: 15200, expenses: 9100, savings: 6100, netWorth: 132000 },
-  { month: 'Sep', income: 15500, expenses: 9300, savings: 6200, netWorth: 135800 },
-  { month: 'Oct', income: 15300, expenses: 8900, savings: 6400, netWorth: 138900 },
-  { month: 'Nov', income: 15600, expenses: 8600, savings: 7000, netWorth: 142100 },
-  { month: 'Dec', income: 15400, expenses: 8800, savings: 6600, netWorth: 143700 },
-  { month: 'Jan', income: 15500, expenses: 8700, savings: 6800, netWorth: 145200 }
-]
+// Use real data from the last 6 months
+const monthlyTrends = mockFinancialData.monthly.data.slice(-6).map((data, index) => {
+  const monthNames = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
+  return {
+    month: monthNames[index],
+    income: data.income,
+    expenses: data.expenses,
+    savings: data.cashflow,
+    netWorth: data.networth
+  }
+})
 
 const keyInsights = [
   {
@@ -80,7 +91,9 @@ const keyInsights = [
 
 export function ReportsOverview() {
   const snapshot = mockSnapshot
-  const yearOverYearGrowth = ((snapshot.netWorth - 125000) / 125000 * 100).toFixed(1)
+  // Calculate year-over-year growth using actual previous year data
+  const previousYearNetWorth = mockFinancialData.yearly.data[mockFinancialData.yearly.data.length - 2]?.networth || 531800
+  const yearOverYearGrowth = ((snapshot.netWorth - previousYearNetWorth) / previousYearNetWorth * 100).toFixed(1)
 
   return (
     <Card className="bg-card border shadow-sm">
@@ -92,7 +105,7 @@ export function ReportsOverview() {
               Financial Overview
             </CardTitle>
             <CardDescription>
-              Your complete financial picture for January 2024
+              Your complete financial picture for October 2025
             </CardDescription>
           </div>
           <div className="flex items-center gap-2">
@@ -180,7 +193,7 @@ export function ReportsOverview() {
               {monthlyTrends.slice(-3).map((month, index) => (
                 <div key={month.month} className="flex items-center justify-between p-2 rounded border">
                   <div>
-                    <div className="font-medium text-sm">{month.month} 2024</div>
+                    <div className="font-medium text-sm">{month.month} 2025</div>
                     <div className="text-xs text-muted-foreground">
                       Net Worth: AED {(month.netWorth / 1000).toFixed(0)}K
                     </div>

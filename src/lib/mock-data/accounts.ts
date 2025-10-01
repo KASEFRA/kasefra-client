@@ -56,4 +56,15 @@ export const mockAccounts: Account[] = [
     isActive: true,
     connectedDate: "2024-05-15",
   },
+  {
+    id: "acc-6",
+    name: "Toyota Land Cruiser 2023",
+    bank: "Asset",
+    type: "asset",
+    balance: 95000.00,
+    currency: "AED",
+    accountNumber: "Vehicle",
+    isActive: true,
+    connectedDate: "2023-08-20",
+  },
 ];

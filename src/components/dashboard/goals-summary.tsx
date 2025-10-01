@@ -5,9 +5,9 @@ import { Progress } from "@/components/ui/progress"
 import { mockGoals } from "@/lib/mock-data"
 
 export function GoalsSummary() {
-  // Get top 2 priority goals (Vacation and Down Payment)
+  // Get top 2 active high-priority goals
   const topGoals = mockGoals
-    .filter(goal => goal.priority === 'high' && ['Vacation', 'Down Payment'].includes(goal.name))
+    .filter(goal => goal.priority === 'high' && !goal.isCompleted)
     .slice(0, 2)
 
   const formatCurrency = (amount: number) => {
@@ -20,14 +20,24 @@ export function GoalsSummary() {
   }
 
   const getGoalIcon = (goalName: string) => {
-    switch (goalName) {
-      case 'Vacation':
-        return '🏖️'
-      case 'Down Payment':
-        return '🏠'
-      default:
-        return '🎯'
+    // Check for keyword matches (flexible matching)
+    const nameLower = goalName.toLowerCase()
+    if (nameLower.includes('vacation') || nameLower.includes('travel') || nameLower.includes('trip')) {
+      return '🏖️'
     }
+    if (nameLower.includes('house') || nameLower.includes('down payment') || nameLower.includes('property') || nameLower.includes('villa')) {
+      return '🏠'
+    }
+    if (nameLower.includes('hajj') || nameLower.includes('umrah') || nameLower.includes('pilgrimage')) {
+      return '🕋'
+    }
+    if (nameLower.includes('education') || nameLower.includes('school') || nameLower.includes('university')) {
+      return '📚'
+    }
+    if (nameLower.includes('car') || nameLower.includes('vehicle')) {
+      return '🚗'
+    }
+    return '🎯'
   }
 
   const getProgressInfo = (current: number, target: number) => {

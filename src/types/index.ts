@@ -27,7 +27,7 @@ export interface Account {
   id: string;
   name: string;
   bank: string;
-  type: 'checking' | 'savings' | 'credit' | 'investment';
+  type: 'checking' | 'savings' | 'credit' | 'investment' | 'asset';
   balance: number;
   currency: string;
   accountNumber: string;
