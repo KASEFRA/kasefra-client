@@ -305,7 +305,7 @@ export default function TransactionsPage() {
           <CardContent>
             <div className="text-2xl font-bold">{formatCurrency(largestPurchase)}</div>
             <p className="text-xs text-muted-foreground">
-              This month's biggest expense
+              This month&apos;s biggest expense
             </p>
           </CardContent>
         </Card>
