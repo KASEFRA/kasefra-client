@@ -200,11 +200,10 @@ export function CreateBudgetWizard({ trigger }: CreateBudgetWizardProps) {
               {mockTemplates.map((template) => (
                 <div
                   key={template.id}
-                  className={`p-4 rounded-lg border cursor-pointer transition-all ${
-                    selectedTemplate?.id === template.id
+                  className={`p-4 rounded-lg border cursor-pointer transition-all ${selectedTemplate?.id === template.id
                       ? 'border-primary bg-primary/5'
                       : 'border-border hover:border-primary/50'
-                  }`}
+                    }`}
                   onClick={() => handleTemplateSelect(template)}
                 >
                   <div className="flex items-start justify-between">
@@ -227,10 +226,35 @@ export function CreateBudgetWizard({ trigger }: CreateBudgetWizardProps) {
                 </div>
               ))}
 
-              <div className="p-4 rounded-lg border border-dashed border-primary/30 text-center">
+              <div
+                className={`p-4 rounded-lg border border-dashed border-primary/30 text-center cursor-pointer hover:border-primary/50 transition-colors ${selectedTemplate?.id === 'scratch' ? 'border-primary bg-primary/5' : ''}`}
+                onClick={() => {
+                  const scratchTemplate: BudgetTemplate = {
+                    id: 'scratch',
+                    name: 'Start from Scratch',
+                    description: 'Create a custom budget with your own categories and amounts.',
+                    totalBudget: 0,
+                    uaeSpecific: false,
+                    categories: []
+                  };
+                  setSelectedTemplate(scratchTemplate);
+                  setCustomCategories([]);
+                }}
+                data-testid="scratch-budget-btn"
+              >
                 <Plus className="h-8 w-8 text-primary mx-auto mb-2" />
                 <h4 className="font-medium text-primary">Start from Scratch</h4>
-                <p className="text-sm text-muted-foreground">Create a custom budget</p>
+                <p className="text-sm text-muted-foreground">Create a custom budget with your own categories and amounts.</p>
+                {selectedTemplate?.id === 'scratch' && (
+                  <div className="mt-4 text-left">
+                    <div className="font-semibold text-primary mb-1">Sample Menu</div>
+                    <ul className="text-sm text-muted-foreground list-disc pl-4">
+                      <li>Add categories like Food, Transport, Shopping, etc.</li>
+                      <li>Set your own budget amounts for each category</li>
+                      <li>Customize and save your budget</li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>

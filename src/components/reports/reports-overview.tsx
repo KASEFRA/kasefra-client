@@ -97,50 +97,51 @@ export function ReportsOverview() {
 
   return (
     <Card className="bg-card border shadow-sm">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div>
-            <CardTitle className="flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-primary" />
-              Financial Overview
+      <CardHeader className="px-4 sm:px-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
+              <span className="truncate">Financial Overview</span>
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-xs sm:text-sm">
               Your complete financial picture for October 2025
             </CardDescription>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="text-xs">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+            <Badge variant="secondary" className="text-[10px] sm:text-xs justify-center">
               Updated Today
             </Badge>
-            <Button variant="outline" size="sm">
-              <Calendar className="h-4 w-4 mr-2" />
-              Change Period
+            <Button variant="outline" size="sm" className="w-full sm:w-auto text-xs">
+              <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2" />
+              <span className="hidden sm:inline">Change Period</span>
+              <span className="sm:hidden">Period</span>
             </Button>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-6">
         {/* Financial Summary */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-4 bg-muted/50 rounded-lg text-center">
-            <div className="text-lg font-bold text-primary">AED {snapshot.totalIncome.toLocaleString()}</div>
-            <div className="text-sm text-muted-foreground">Total Income</div>
-            <div className="text-xs text-secondary mt-1">This Month</div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="p-3 sm:p-4 bg-muted/50 rounded-lg text-center">
+            <div className="text-sm sm:text-base lg:text-lg font-bold text-primary">AED {snapshot.totalIncome.toLocaleString()}</div>
+            <div className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">Total Income</div>
+            <div className="text-[10px] sm:text-xs text-secondary mt-0.5 sm:mt-1">This Month</div>
           </div>
-          <div className="p-4 bg-muted/50 rounded-lg text-center">
-            <div className="text-lg font-bold text-accent">AED {snapshot.totalExpenses.toLocaleString()}</div>
-            <div className="text-sm text-muted-foreground">Total Expenses</div>
-            <div className="text-xs text-accent mt-1">-{((snapshot.totalExpenses / 9300) * 100 - 100).toFixed(1)}% vs last month</div>
+          <div className="p-3 sm:p-4 bg-muted/50 rounded-lg text-center">
+            <div className="text-sm sm:text-base lg:text-lg font-bold text-accent">AED {snapshot.totalExpenses.toLocaleString()}</div>
+            <div className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">Total Expenses</div>
+            <div className="text-[10px] sm:text-xs text-accent mt-0.5 sm:mt-1 truncate">-{((snapshot.totalExpenses / 9300) * 100 - 100).toFixed(1)}% vs last month</div>
           </div>
-          <div className="p-4 bg-muted/50 rounded-lg text-center">
-            <div className="text-lg font-bold text-secondary">AED {snapshot.totalSavings.toLocaleString()}</div>
-            <div className="text-sm text-muted-foreground">Total Savings</div>
-            <div className="text-xs text-secondary mt-1">+{((snapshot.totalSavings / 6600) * 100 - 100).toFixed(1)}% vs last month</div>
+          <div className="p-3 sm:p-4 bg-muted/50 rounded-lg text-center">
+            <div className="text-sm sm:text-base lg:text-lg font-bold text-secondary">AED {snapshot.totalSavings.toLocaleString()}</div>
+            <div className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">Total Savings</div>
+            <div className="text-[10px] sm:text-xs text-secondary mt-0.5 sm:mt-1 truncate">+{((snapshot.totalSavings / 6600) * 100 - 100).toFixed(1)}% vs last month</div>
           </div>
-          <div className="p-4 bg-muted/50 rounded-lg text-center">
-            <div className="text-lg font-bold text-primary">AED {(snapshot.netWorth / 1000).toFixed(0)}K</div>
-            <div className="text-sm text-muted-foreground">Net Worth</div>
-            <div className="text-xs text-secondary mt-1">+{yearOverYearGrowth}% YoY</div>
+          <div className="p-3 sm:p-4 bg-muted/50 rounded-lg text-center">
+            <div className="text-sm sm:text-base lg:text-lg font-bold text-primary">AED {(snapshot.netWorth / 1000).toFixed(0)}K</div>
+            <div className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">Net Worth</div>
+            <div className="text-[10px] sm:text-xs text-secondary mt-0.5 sm:mt-1">+{yearOverYearGrowth}% YoY</div>
           </div>
         </div>
 

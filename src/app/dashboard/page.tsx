@@ -82,12 +82,12 @@ export default function Page() {
   }
 
   return (
-    <div className="space-y-8 px-6">
+    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
       {/* Net Worth Chart - Full Width with Dropdown */}
       <NetWorthChart />
 
       {/* Main Dashboard Grid */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {/* Left Column - Budget and Goals */}
         <div className="space-y-6">
           <BudgetOverview />
@@ -98,46 +98,49 @@ export default function Page() {
         <div className="space-y-6">
           {/* Recent Transactions */}
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
+            <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
               <div>
-                <CardTitle>Transactions</CardTitle>
-                <CardDescription>Most recent</CardDescription>
+                <CardTitle className="text-base sm:text-lg">Transactions</CardTitle>
+                <CardDescription className="text-sm">Most recent</CardDescription>
               </div>
-              <Button variant="outline" size="sm" onClick={() => router.push('/dashboard/transactions')}>
+              <Button variant="outline" size="sm" onClick={() => router.push('/dashboard/transactions')} className="w-full sm:w-auto">
                 <ArrowUpDown className="mr-2 h-4 w-4" />
-                All transactions
+                <span className="hidden sm:inline">All transactions</span>
+                <span className="sm:hidden">View All</span>
               </Button>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
+            <CardContent className="px-4 sm:px-6">
+              <div className="space-y-3 sm:space-y-4">
                 {recentTransactions.map((transaction) => (
-                  <div key={transaction.id} className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${transaction.type === 'income' ? 'bg-success/10 text-success' :
+                  <div key={transaction.id} className="flex items-center justify-between gap-2">
+                    <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+                      <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 ${transaction.type === 'income' ? 'bg-success/10 text-success' :
                           transaction.type === 'expense' ? 'bg-destructive/10 text-destructive' :
                             'bg-primary/10 text-primary'
                         }`}>
                         {(() => {
                           const IconComponent = getTransactionIcon(transaction.category)
-                          return <IconComponent className="h-4 w-4" />
+                          return <IconComponent className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                         })()}
                       </div>
-                      <div>
-                        <p className="font-medium text-sm">{transaction.description}</p>
-                        <p className="text-xs text-muted-foreground flex items-center gap-1">
-                          {transaction.category}
-                          <span>•</span>
-                          {transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}
+                      <div className="min-w-0 flex-1">
+                        <p className="font-medium text-xs sm:text-sm truncate">{transaction.description}</p>
+                        <p className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1">
+                          <span className="truncate">{transaction.category}</span>
+                          <span className="shrink-0">•</span>
+                          <span className="shrink-0">{transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}</span>
                         </p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className={`font-medium text-sm ${transaction.amount > 0 ? 'text-success' : 'text-destructive'
+                    <div className="text-right shrink-0">
+                      <p className={`font-semibold text-xs sm:text-sm whitespace-nowrap ${transaction.amount > 0 ? 'text-success' : 'text-destructive'
                         }`}>
                         {transaction.amount > 0 ? '+' : ''}
-                        {transaction.amount.toLocaleString('en-AE', {
+                        {Math.abs(transaction.amount).toLocaleString('en-AE', {
                           style: 'currency',
-                          currency: transaction.currency
+                          currency: transaction.currency,
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 0
                         })}
                       </p>
                     </div>

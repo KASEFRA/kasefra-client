@@ -45,38 +45,38 @@ export function RecurringPayments() {
 
   return (
     <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div>
-            <CardTitle>Recurring</CardTitle>
-            <CardDescription>{formatCurrency(recurringPaymentsSummary.remainingThisMonth)} remaining due</CardDescription>
+      <CardHeader className="px-4 sm:px-6 pb-3">
+        <div className="flex items-center justify-between gap-2">
+          <div className="min-w-0 flex-1">
+            <CardTitle className="text-base sm:text-lg">Recurring</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">{formatCurrency(recurringPaymentsSummary.remainingThisMonth)} remaining due</CardDescription>
           </div>
-          <div className="text-right text-sm">
-            <div className="font-semibold">This month</div>
-          </div>
+          <Badge variant="secondary" className="text-[10px] sm:text-xs px-2 py-0.5 shrink-0">
+            This month
+          </Badge>
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="px-4 sm:px-6 space-y-3 sm:space-y-4">
         {upcomingPayments.map((payment) => (
-          <div key={payment.id} className="flex items-center justify-between p-3 rounded-lg border">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm">
+          <div key={payment.id} className="flex items-center justify-between gap-2 p-2 sm:p-3 rounded-lg border">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs sm:text-sm shrink-0">
                 {getMerchantIcon(payment.merchant)}
               </div>
-              <div>
-                <div className="font-medium text-sm">{payment.name}</div>
-                <div className="text-xs text-muted-foreground flex items-center gap-2">
-                  <span>{payment.merchant}</span>
+              <div className="min-w-0 flex-1">
+                <div className="font-medium text-xs sm:text-sm truncate">{payment.name}</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1.5 sm:gap-2">
+                  <span className="truncate">{payment.merchant}</span>
                   {payment.isAutomatic && (
-                    <Badge variant="outline" className="text-xs px-1">
+                    <Badge variant="outline" className="text-[9px] sm:text-xs px-1 shrink-0">
                       Auto
                     </Badge>
                   )}
                 </div>
               </div>
             </div>
-            <div className="text-right space-y-1">
-              <div className="font-medium text-sm">
+            <div className="text-right space-y-0.5 sm:space-y-1 shrink-0">
+              <div className="font-semibold text-xs sm:text-sm whitespace-nowrap">
                 {formatCurrency(payment.amount)}
               </div>
               {getStatusBadge(payment)}
@@ -85,19 +85,19 @@ export function RecurringPayments() {
         ))}
 
         {/* Summary Stats */}
-        <div className="pt-4 border-t space-y-3">
-          <div className="flex justify-between text-sm">
+        <div className="pt-3 sm:pt-4 border-t space-y-2 sm:space-y-3">
+          <div className="flex justify-between text-xs sm:text-sm">
             <span className="text-muted-foreground">Total Monthly</span>
-            <span className="font-medium">{formatCurrency(recurringPaymentsSummary.totalMonthly)}</span>
+            <span className="font-semibold">{formatCurrency(recurringPaymentsSummary.totalMonthly)}</span>
           </div>
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-xs sm:text-sm">
             <span className="text-muted-foreground">Upcoming (7 days)</span>
-            <span className="font-medium">{recurringPaymentsSummary.upcomingCount} payments</span>
+            <span className="font-semibold">{recurringPaymentsSummary.upcomingCount} payments</span>
           </div>
         </div>
 
         {/* Quick Action */}
-        <button className="w-full text-xs text-primary hover:text-primary/80 p-2 rounded border border-border hover:bg-muted/50 transition-colors">
+        <button className="w-full text-[10px] sm:text-xs text-primary hover:text-primary/80 p-2 sm:p-2.5 rounded border border-border hover:bg-muted/50 transition-colors font-medium">
           View All Recurring Payments
         </button>
       </CardContent>

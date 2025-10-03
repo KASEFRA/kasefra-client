@@ -30,9 +30,9 @@ export default function ReportsPage() {
   const expensesChange = ((MONTHLY_EXPENSES - previousMonthData.expenses) / previousMonthData.expenses) * 100
 
   return (
-    <div className="space-y-8 px-6">
+    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
       {/* Quick Stats */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="bg-card border shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Net Worth</CardTitle>

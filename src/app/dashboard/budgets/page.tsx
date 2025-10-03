@@ -21,10 +21,10 @@ import { BudgetChart } from "@/components/budgets/budget-chart"
 
 export default function BudgetsPage() {
   return (
-    <div className="space-y-8 px-6">
+    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
 
       {/* Budget Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Budget</CardTitle>
@@ -79,18 +79,18 @@ export default function BudgetsPage() {
       </div>
 
       {/* Budget Progress and Analytics - 50/50 Layout */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
         {/* Budget Progress Overview */}
         <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 pb-4">
           <div>
-            <CardTitle className="text-lg font-semibold">Budget Progress</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-base sm:text-lg font-semibold">Budget Progress</CardTitle>
+            <CardDescription className="text-sm">
               October 2025 spending overview
             </CardDescription>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+            <Button variant="outline" size="sm" className="w-full sm:w-auto">
               <Settings className="mr-2 h-4 w-4" />
               Settings
             </Button>
@@ -142,17 +142,17 @@ export default function BudgetsPage() {
 
       {/* Budget Management Section */}
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 pb-4">
           <div>
-            <CardTitle className="text-lg font-semibold">Active Budgets</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-base sm:text-lg font-semibold">Active Budgets</CardTitle>
+            <CardDescription className="text-sm">
               Manage your spending limits and track progress
             </CardDescription>
           </div>
           <CreateBudgetWizard />
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               {
                 id: "1",

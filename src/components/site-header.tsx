@@ -32,8 +32,8 @@ export function SiteHeader() {
   const getHeaderContent = () => {
     if (isDashboardHome) {
       return (
-        <div className="flex items-center gap-3">
-          <h1 className="text-base font-medium text-foreground">
+        <div className="flex items-center gap-2">
+          <h1 className="text-sm sm:text-base font-medium text-foreground truncate">
             Welcome back, {mockUser.name.split(' ')[0]}
           </h1>
         </div>

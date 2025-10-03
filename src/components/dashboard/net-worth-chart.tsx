@@ -176,7 +176,7 @@ export function NetWorthChart({ className }: NetWorthChartProps) {
     if (selectedDataType === 'all') {
       // Multi-line chart for all metrics
       return (
-        <ChartContainer config={chartConfig} className="aspect-auto h-[300px] w-full">
+        <ChartContainer config={chartConfig} className="aspect-auto h-[250px] sm:h-[300px] w-full">
           <LineChart data={currentData.data}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -235,7 +235,7 @@ export function NetWorthChart({ className }: NetWorthChartProps) {
 
     // Single metric area chart
     return (
-      <ChartContainer config={chartConfig} className="aspect-auto h-[300px] w-full">
+      <ChartContainer config={chartConfig} className="aspect-auto h-[250px] sm:h-[300px] w-full">
         <AreaChart data={currentData.data}>
           <defs>
             <linearGradient id={`fill${selectedDataType}`} x1="0" y1="0" x2="0" y2="1">
@@ -287,32 +287,32 @@ export function NetWorthChart({ className }: NetWorthChartProps) {
 
   return (
     <Card className={className}>
-      <CardHeader className="flex items-center gap-2 space-y-0 border-b py-4 sm:flex-row">
-        <div className="grid flex-1 gap-1">
-          <CardTitle className="flex items-center gap-2">
-            AED {currentValue.toLocaleString()}
+      <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-2 space-y-0 border-b py-4 px-4 sm:px-6">
+        <div className="grid flex-1 gap-1 w-full sm:w-auto">
+          <CardTitle className="flex flex-col sm:flex-row sm:items-center gap-2 text-xl sm:text-2xl">
+            <span className="font-bold">AED {currentValue.toLocaleString()}</span>
             {change !== 0 && (
-              <>
+              <span className="flex items-center gap-1 sm:gap-2 text-sm sm:text-base">
                 {isPositiveChange ? (
                   <TrendingUp className="h-4 w-4 text-green-600" />
                 ) : (
                   <TrendingDown className="h-4 w-4 text-red-600" />
                 )}
-                <span className={`text-sm ${isPositiveChange ? 'text-green-600' : 'text-red-600'}`}>
+                <span className={`${isPositiveChange ? 'text-green-600' : 'text-red-600'}`}>
                   {isPositiveChange ? '+' : ''}AED {Math.abs(change).toLocaleString()} ({changePercent.toFixed(1)}%)
                 </span>
-              </>
+              </span>
             )}
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-sm">
             {getDataTypeLabel(selectedDataType)} - {currentData.period}
           </CardDescription>
         </div>
 
         {/* Dual Dropdown System */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full sm:w-auto">
           <Select value={selectedDataType} onValueChange={(value: DataType) => setSelectedDataType(value)}>
-            <SelectTrigger className="w-[140px] rounded-lg" aria-label="Select data type">
+            <SelectTrigger className="w-full sm:w-[140px] rounded-lg" aria-label="Select data type">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="rounded-xl">
@@ -326,7 +326,7 @@ export function NetWorthChart({ className }: NetWorthChartProps) {
           </Select>
 
           <Select value={selectedPeriod} onValueChange={(value: TimePeriod) => setSelectedPeriod(value)}>
-            <SelectTrigger className="w-[120px] rounded-lg" aria-label="Select time period">
+            <SelectTrigger className="w-full sm:w-[120px] rounded-lg" aria-label="Select time period">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="rounded-xl">
@@ -339,8 +339,10 @@ export function NetWorthChart({ className }: NetWorthChartProps) {
         </div>
       </CardHeader>
 
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        {renderChart()}
+      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 pb-2 sm:pb-6">
+        <div className="w-full overflow-x-auto">
+          {renderChart()}
+        </div>
       </CardContent>
     </Card>
   )

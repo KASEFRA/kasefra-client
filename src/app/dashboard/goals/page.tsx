@@ -152,10 +152,10 @@ export default function GoalsPage() {
   const overallProgress = (totalCurrentAmount / totalTargetAmount) * 100
 
   return (
-    <div className="space-y-8 px-6">
+    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
 
       {/* Goals Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Goals</CardTitle>
@@ -211,26 +211,27 @@ export default function GoalsPage() {
 
       {/* Active Goals Grid */}
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 pb-4">
           <div>
-            <CardTitle className="text-lg font-semibold">Your Goals</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-base sm:text-lg font-semibold">Your Goals</CardTitle>
+            <CardDescription className="text-sm">
               Track progress and manage your financial objectives
             </CardDescription>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="text-sm">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+            <Badge variant="secondary" className="text-sm justify-center sm:justify-start">
               {activeGoals} Active
             </Badge>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="w-full sm:w-auto">
               <Settings className="h-4 w-4 mr-2" />
-              Settings
+              <span className="hidden sm:inline">Settings</span>
+              <span className="sm:hidden">Settings</span>
             </Button>
             <CreateGoalForm />
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {mockGoals.map((goal) => (
               <GoalCard key={goal.id} goal={goal} />
             ))}

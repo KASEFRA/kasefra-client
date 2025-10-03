@@ -216,21 +216,21 @@ export default function TransactionsPage() {
               {dayTransactions.map((transaction) => (
                 <TableRow key={transaction.id} className="hover:bg-muted/50">
                   {/* Description Column */}
-                  <TableCell className="py-4 pl-8">
-                    <div className="flex items-center gap-3">
+                  <TableCell className="py-4 pl-4 sm:pl-8">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <BankAvatar
                         bankName={getBankName(transaction.accountId)}
                         size="sm"
                       />
-                      <div className="flex flex-col">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-medium text-sm">{transaction.description}</span>
-                          <Badge variant="secondary" className={cn("text-xs", getCategoryColor(transaction.category))}>
+                      <div className="flex flex-col min-w-0 flex-1">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                          <span className="font-medium text-sm truncate">{transaction.description}</span>
+                          <Badge variant="secondary" className={cn("text-xs w-fit", getCategoryColor(transaction.category))}>
                             {transaction.category}
                           </Badge>
                         </div>
-                        <div className="text-xs text-muted-foreground">{transaction.merchant}</div>
-                        <div className="text-xs text-muted-foreground">
+                        <div className="text-xs text-muted-foreground truncate">{transaction.merchant}</div>
+                        <div className="text-xs text-muted-foreground truncate hidden sm:block">
                           {getAccountName(transaction.accountId)}
                         </div>
                       </div>
@@ -238,9 +238,9 @@ export default function TransactionsPage() {
                   </TableCell>
 
                   {/* Amount Column */}
-                  <TableCell className="text-right py-4 pr-4">
+                  <TableCell className="text-right py-4 pr-2 sm:pr-4 whitespace-nowrap">
                     <div className={cn(
-                      "font-semibold text-base",
+                      "font-semibold text-sm sm:text-base",
                       transaction.amount >= 0 ? "text-green-600" : "text-red-600"
                     )}>
                       {transaction.amount >= 0 ? "+" : ""}{formatCurrency(transaction.amount)}
@@ -268,9 +268,9 @@ export default function TransactionsPage() {
   }
 
   return (
-    <div className="space-y-8 px-6">
+    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
       {/* Insight Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Monthly Spending</CardTitle>
@@ -331,15 +331,15 @@ export default function TransactionsPage() {
 
       {/* Transactions List */}
       <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+            <CardHeader className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between pb-4">
               <div>
-                <CardTitle className="text-lg font-semibold">All Transactions</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-base sm:text-lg font-semibold">All Transactions</CardTitle>
+                <CardDescription className="text-sm">
                   {allTransactions.length} transactions
                 </CardDescription>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="relative w-64">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+                <div className="relative w-full sm:w-64">
                   <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     placeholder="Search transactions..."
@@ -348,22 +348,23 @@ export default function TransactionsPage() {
                     className="pl-10"
                   />
                 </div>
-                <Button variant="outline" size="sm">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Date
-                </Button>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      <Filter className="mr-2 h-4 w-4" />
-                      Filters
-                      {activeFiltersCount > 0 && (
-                        <span className="ml-1 bg-primary text-primary-foreground rounded-full text-xs px-1.5 py-0.5 min-w-[1.25rem] h-5 flex items-center justify-center">
-                          {activeFiltersCount}
-                        </span>
-                      )}
-                    </Button>
-                  </DropdownMenuTrigger>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    <span className="hidden sm:inline">Date</span>
+                  </Button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
+                        <Filter className="mr-2 h-4 w-4" />
+                        <span className="hidden sm:inline">Filters</span>
+                        {activeFiltersCount > 0 && (
+                          <span className="ml-1 bg-primary text-primary-foreground rounded-full text-xs px-1.5 py-0.5 min-w-[1.25rem] h-5 flex items-center justify-center">
+                            {activeFiltersCount}
+                          </span>
+                        )}
+                      </Button>
+                    </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-64">
                     <DropdownMenuLabel>Filter Transactions</DropdownMenuLabel>
                     <DropdownMenuSeparator />
@@ -451,10 +452,12 @@ export default function TransactionsPage() {
                     )}
                   </DropdownMenuContent>
                 </DropdownMenu>
+                </div>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setViewMode(viewMode === 'grouped' ? 'table' : 'grouped')}
+                  className="w-full sm:w-auto"
                 >
                   {viewMode === 'grouped' ? <Grid className="mr-2 h-4 w-4" /> : <List className="mr-2 h-4 w-4" />}
                   {viewMode === 'grouped' ? 'Table view' : 'Grouped view'}

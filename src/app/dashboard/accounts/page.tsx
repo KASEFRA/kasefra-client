@@ -209,27 +209,29 @@ export default function AccountsPage() {
   )
 
   return (
-    <div className="space-y-8 px-6">
+    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
       {/* Main Content */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-3">
         {/* Accounts List */}
         <div className="lg:col-span-2">
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+            <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 pb-4">
               <div>
-                <CardTitle className="text-lg font-semibold">All Accounts</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-base sm:text-lg font-semibold">All Accounts</CardTitle>
+                <CardDescription className="text-sm">
                   {mockAccounts.length} accounts across {new Set(mockAccounts.map(a => a.bank)).size} banks
                 </CardDescription>
               </div>
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+                <Button variant="outline" size="sm" className="w-full sm:w-auto">
                   <RefreshCw className="mr-2 h-4 w-4" />
-                  Refresh all
+                  <span className="hidden sm:inline">Refresh all</span>
+                  <span className="sm:hidden">Refresh</span>
                 </Button>
-                <Button size="sm">
+                <Button size="sm" className="w-full sm:w-auto">
                   <Plus className="mr-2 h-4 w-4" />
-                  Add account
+                  <span className="hidden sm:inline">Add account</span>
+                  <span className="sm:hidden">Add</span>
                 </Button>
               </div>
             </CardHeader>
@@ -341,7 +343,7 @@ export default function AccountsPage() {
                                   {/* Investment Breakdown */}
                                   <div className="mt-3 space-y-2">
                                     <div className="text-xs font-medium text-muted-foreground">Portfolio Breakdown:</div>
-                                    <div className="grid grid-cols-2 gap-2 ml-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 ml-0 sm:ml-4">
                                       {Object.entries(investmentsByCategory).map(([category, investments]) => {
                                         const categoryTotal = investments.reduce((sum, inv) => sum + inv.currentValue, 0);
                                         const categoryIcons: Record<string, string> = {
