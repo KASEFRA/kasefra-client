@@ -82,45 +82,45 @@ export default function Page() {
   }
 
   return (
-    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
+    <div className="space-y-4 sm:space-y-6 lg:space-y-8 px-3 sm:px-4 lg:px-6">
       {/* Net Worth Chart - Full Width with Dropdown */}
       <NetWorthChart />
 
       {/* Main Dashboard Grid */}
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 sm:gap-4 lg:gap-6 grid-cols-1 lg:grid-cols-3">
         {/* Left Column - Budget and Goals */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           <BudgetOverview />
           <GoalsSummary />
         </div>
 
         {/* Middle Column - Transactions and Financial Health */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Recent Transactions */}
           <Card>
-            <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+            <CardHeader className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between pb-3 px-3 sm:px-6">
               <div>
-                <CardTitle className="text-base sm:text-lg">Transactions</CardTitle>
-                <CardDescription className="text-sm">Most recent</CardDescription>
+                <CardTitle className="text-sm sm:text-base lg:text-lg">Transactions</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">Most recent</CardDescription>
               </div>
-              <Button variant="outline" size="sm" onClick={() => router.push('/dashboard/transactions')} className="w-full sm:w-auto">
-                <ArrowUpDown className="mr-2 h-4 w-4" />
+              <Button variant="outline" size="sm" onClick={() => router.push('/dashboard/transactions')} className="w-full sm:w-auto text-xs sm:text-sm">
+                <ArrowUpDown className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 <span className="hidden sm:inline">All transactions</span>
                 <span className="sm:hidden">View All</span>
               </Button>
             </CardHeader>
-            <CardContent className="px-4 sm:px-6">
-              <div className="space-y-3 sm:space-y-4">
+            <CardContent className="px-3 sm:px-4 lg:px-6 pb-3 sm:pb-6">
+              <div className="space-y-2 sm:space-y-3 lg:space-y-4">
                 {recentTransactions.map((transaction) => (
-                  <div key={transaction.id} className="flex items-center justify-between gap-2">
+                  <div key={transaction.id} className="flex items-center justify-between gap-2 py-1">
                     <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
-                      <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 ${transaction.type === 'income' ? 'bg-success/10 text-success' :
-                          transaction.type === 'expense' ? 'bg-destructive/10 text-destructive' :
-                            'bg-primary/10 text-primary'
+                      <div className={`w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full flex items-center justify-center shrink-0 ${transaction.type === 'income' ? 'bg-success/10 text-success' :
+                        transaction.type === 'expense' ? 'bg-destructive/10 text-destructive' :
+                          'bg-primary/10 text-primary'
                         }`}>
                         {(() => {
                           const IconComponent = getTransactionIcon(transaction.category)
-                          return <IconComponent className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                          return <IconComponent className="h-3 w-3 sm:h-3.5 sm:w-3.5 lg:h-4 lg:w-4" />
                         })()}
                       </div>
                       <div className="min-w-0 flex-1">
@@ -155,7 +155,7 @@ export default function Page() {
         </div>
 
         {/* Right Column - Recurring Payments and Investments */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           <RecurringPayments />
           <InvestmentSummary />
         </div>

@@ -164,3 +164,100 @@ export const mockBudgetSummary: BudgetSummary = (() => {
     }
   };
 })();
+
+// Budget Page Data - for dedicated budgets page
+export interface BudgetPageData {
+  activeBudgets: {
+    id: string;
+    name: string;
+    budget: number;
+    spent: number;
+    icon: string;
+    category: string;
+    lastUpdated: string;
+    recommendations: string[];
+  }[];
+}
+
+export const mockBudgetPageData: BudgetPageData = {
+  activeBudgets: [
+    {
+      id: "1",
+      name: "Food & Dining",
+      budget: 2000,
+      spent: 1850,
+      icon: "🍽️",
+      category: "Food & Dining",
+      lastUpdated: "2025-10-03",
+      recommendations: [
+        "Consider cooking at home 2 more days per week to save AED 200",
+        "Your dining expenses peak on weekends - budget accordingly"
+      ]
+    },
+    {
+      id: "2",
+      name: "Transportation",
+      budget: 1200,
+      spent: 980,
+      icon: "🚗",
+      category: "Transportation",
+      lastUpdated: "2025-10-03",
+      recommendations: [
+        "Metro usage is cost-effective - current spending is optimal",
+        "Gas prices may increase next quarter - consider budgeting AED 100 extra"
+      ]
+    },
+    {
+      id: "3",
+      name: "Shopping",
+      budget: 1500,
+      spent: 890,
+      icon: "🛍️",
+      category: "Shopping",
+      lastUpdated: "2025-10-03",
+      recommendations: [
+        "You have AED 610 unused in this category",
+        "Consider moving AED 200 to Entertainment for better balance"
+      ]
+    },
+    {
+      id: "4",
+      name: "Utilities",
+      budget: 600,
+      spent: 450,
+      icon: "⚡",
+      category: "Utilities",
+      lastUpdated: "2025-10-03",
+      recommendations: [
+        "DEWA bills typically increase 25% in summer months",
+        "Your AC usage optimization is working well"
+      ]
+    },
+    {
+      id: "5",
+      name: "Entertainment",
+      budget: 800,
+      spent: 320,
+      icon: "🎬",
+      category: "Entertainment",
+      lastUpdated: "2025-10-03",
+      recommendations: [
+        "You're under-spending on entertainment by 60%",
+        "Consider increasing this budget for better work-life balance"
+      ]
+    },
+    {
+      id: "6",
+      name: "Healthcare",
+      budget: 400,
+      spent: 180,
+      icon: "⚕️",
+      category: "Healthcare",
+      lastUpdated: "2025-10-03",
+      recommendations: [
+        "Healthcare spending is efficiently low",
+        "Keep emergency fund for unexpected medical expenses"
+      ]
+    }
+  ]
+};

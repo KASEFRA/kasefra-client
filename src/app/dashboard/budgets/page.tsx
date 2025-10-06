@@ -18,8 +18,25 @@ import {
 import { CreateBudgetWizard } from "@/components/budgets/create-budget-wizard"
 import { BudgetCard } from "@/components/budgets/budget-card"
 import { BudgetChart } from "@/components/budgets/budget-chart"
+import { RecurringPaymentsCard } from "@/components/budgets/recurring-payments-card"
+import { mockBudgetPageData } from "@/lib/mock-data"
+import {
+  BUDGET_TOTAL,
+  BUDGET_TOTAL_SPENT,
+  BUDGET_TOTAL_REMAINING,
+  BUDGET_USAGE_PERCENTAGE
+} from "@/lib/mock-data/financial-constants"
 
 export default function BudgetsPage() {
+  const formatCurrency = (amount: number) => {
+    return amount.toLocaleString('en-AE', {
+      style: 'currency',
+      currency: 'AED',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    })
+  }
+
   return (
     <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
 
@@ -31,7 +48,7 @@ export default function BudgetsPage() {
             <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">AED 8,450</div>
+            <div className="text-2xl font-bold">{formatCurrency(BUDGET_TOTAL)}</div>
             <p className="text-xs text-muted-foreground">
               October 2025 budget
             </p>
@@ -44,7 +61,7 @@ export default function BudgetsPage() {
             <TrendingDown className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">AED 6,230</div>
+            <div className="text-2xl font-bold">{formatCurrency(BUDGET_TOTAL_SPENT)}</div>
             <p className="text-xs text-muted-foreground">
               Across all categories
             </p>
@@ -57,7 +74,7 @@ export default function BudgetsPage() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">AED 2,220</div>
+            <div className="text-2xl font-bold text-green-600">{formatCurrency(BUDGET_TOTAL_REMAINING)}</div>
             <p className="text-xs text-muted-foreground">
               Available to spend
             </p>
@@ -70,7 +87,7 @@ export default function BudgetsPage() {
             <PieChart className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">74%</div>
+            <div className="text-2xl font-bold">{BUDGET_USAGE_PERCENTAGE.toFixed(0)}%</div>
             <p className="text-xs text-muted-foreground">
               Of monthly budget used
             </p>
@@ -82,59 +99,55 @@ export default function BudgetsPage() {
       <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
         {/* Budget Progress Overview */}
         <Card>
-        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 pb-4">
-          <div>
-            <CardTitle className="text-base sm:text-lg font-semibold">Budget Progress</CardTitle>
-            <CardDescription className="text-sm">
-              October 2025 spending overview
-            </CardDescription>
-          </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
-            <Button variant="outline" size="sm" className="w-full sm:w-auto">
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
-            </Button>
-            <CreateBudgetWizard />
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-6">
-            <div className="space-y-3">
-              <div className="flex justify-between text-sm font-medium">
-                <span>Overall Progress</span>
-                <span className="text-primary">74% of budget used</span>
-              </div>
-              <Progress value={74} className="h-3" />
+          <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 pb-3 sm:pb-4 px-4 sm:px-6">
+            <div>
+              <CardTitle className="text-base sm:text-lg font-semibold">Budget Progress</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">
+                October 2025 spending overview
+              </CardDescription>
             </div>
-
-            {/* Top Categories */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-sm text-foreground">Top Spending Categories</h4>
-              {[
-                { name: "Food & Dining", spent: 1850, budget: 2000, percentage: 93 },
-                { name: "Transportation", spent: 980, budget: 1200, percentage: 82 },
-                { name: "Utilities", spent: 450, budget: 600, percentage: 75 }
-              ].map((category) => (
-                <div key={category.name} className="space-y-2 p-3 bg-muted/30 rounded-lg">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium">{category.name}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold">AED {category.spent.toLocaleString()}</span>
-                      <Badge
-                        variant={category.percentage > 90 ? "destructive" : category.percentage > 75 ? "default" : "secondary"}
-                        className="text-xs"
-                      >
-                        {category.percentage}%
-                      </Badge>
-                    </div>
-                  </div>
-                  <Progress value={category.percentage} className="h-2" />
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+              <CreateBudgetWizard />
+            </div>
+          </CardHeader>
+          <CardContent className="px-4 sm:px-6">
+            <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-2 sm:space-y-3">
+                <div className="flex justify-between text-xs sm:text-sm font-medium">
+                  <span>Overall Progress</span>
+                  <span className="text-primary">{BUDGET_USAGE_PERCENTAGE.toFixed(0)}% of budget used</span>
                 </div>
-              ))}
+                <Progress value={BUDGET_USAGE_PERCENTAGE} className="h-2 sm:h-3" />
+              </div>
+
+              {/* Top Categories */}
+              <div className="space-y-3 sm:space-y-4">
+                <h4 className="font-semibold text-xs sm:text-sm text-foreground">Top Spending Categories</h4>
+                {[
+                  { name: "Food & Dining", spent: 1850, budget: 2000, percentage: 93 },
+                  { name: "Transportation", spent: 980, budget: 1200, percentage: 82 },
+                  { name: "Utilities", spent: 450, budget: 600, percentage: 75 }
+                ].map((category) => (
+                  <div key={category.name} className="space-y-2 p-2 sm:p-3 bg-muted/30 rounded-lg">
+                    <div className="flex items-center justify-between text-xs sm:text-sm">
+                      <span className="font-medium truncate">{category.name}</span>
+                      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                        <span className="font-semibold whitespace-nowrap text-xs sm:text-sm">{formatCurrency(category.spent)}</span>
+                        <Badge
+                          variant={category.percentage > 90 ? "destructive" : category.percentage > 75 ? "default" : "secondary"}
+                          className="text-[10px] sm:text-xs"
+                        >
+                          {category.percentage}%
+                        </Badge>
+                      </div>
+                    </div>
+                    <Progress value={category.percentage} className="h-1.5 sm:h-2" />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
 
         {/* Budget Analytics Chart */}
         <BudgetChart />
@@ -153,86 +166,7 @@ export default function BudgetsPage() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              {
-                id: "1",
-                name: "Food & Dining",
-                budget: 2000,
-                spent: 1850,
-                icon: "🍽️",
-                category: "Food & Dining",
-                lastUpdated: "2024-01-23",
-                recommendations: [
-                  "Consider cooking at home 2 more days per week to save AED 200",
-                  "Your dining expenses peak on weekends - budget accordingly"
-                ]
-              },
-              {
-                id: "2",
-                name: "Transportation",
-                budget: 1200,
-                spent: 980,
-                icon: "🚗",
-                category: "Transportation",
-                lastUpdated: "2024-01-23",
-                recommendations: [
-                  "Metro usage is cost-effective - current spending is optimal",
-                  "Gas prices may increase next quarter - consider budgeting AED 100 extra"
-                ]
-              },
-              {
-                id: "3",
-                name: "Shopping",
-                budget: 1500,
-                spent: 890,
-                icon: "🛍️",
-                category: "Shopping",
-                lastUpdated: "2024-01-23",
-                recommendations: [
-                  "You have AED 610 unused in this category",
-                  "Consider moving AED 200 to Entertainment for better balance"
-                ]
-              },
-              {
-                id: "4",
-                name: "Utilities",
-                budget: 600,
-                spent: 450,
-                icon: "⚡",
-                category: "Utilities",
-                lastUpdated: "2024-01-23",
-                recommendations: [
-                  "DEWA bills typically increase 25% in summer months",
-                  "Your AC usage optimization is working well"
-                ]
-              },
-              {
-                id: "5",
-                name: "Entertainment",
-                budget: 800,
-                spent: 320,
-                icon: "🎬",
-                category: "Entertainment",
-                lastUpdated: "2024-01-23",
-                recommendations: [
-                  "You're under-spending on entertainment by 60%",
-                  "Consider increasing this budget for better work-life balance"
-                ]
-              },
-              {
-                id: "6",
-                name: "Healthcare",
-                budget: 400,
-                spent: 180,
-                icon: "⚕️",
-                category: "Healthcare",
-                lastUpdated: "2024-01-23",
-                recommendations: [
-                  "Healthcare spending is efficiently low",
-                  "Keep emergency fund for unexpected medical expenses"
-                ]
-              }
-            ].map((budget) => (
+            {mockBudgetPageData.activeBudgets.map((budget) => (
               <BudgetCard
                 key={budget.id}
                 budget={budget}
@@ -244,6 +178,9 @@ export default function BudgetsPage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Recurring Payments - Full Width */}
+      <RecurringPaymentsCard />
     </div>
   )
 }

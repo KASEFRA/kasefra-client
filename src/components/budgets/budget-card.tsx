@@ -99,64 +99,65 @@ export function BudgetCard({ budget, onUpdate }: BudgetCardProps) {
 
   return (
     <Card className="hover:shadow-md transition-shadow">
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">{budget.icon}</span>
-            <div>
-              <CardTitle className="text-base font-semibold">{budget.name}</CardTitle>
-              <CardDescription className="text-sm">
+      <CardHeader className="pb-2 sm:pb-3 px-3 sm:px-6">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <span className="text-xl sm:text-2xl shrink-0">{budget.icon}</span>
+            <div className="min-w-0 flex-1">
+              <CardTitle className="text-sm sm:text-base font-semibold truncate">{budget.name}</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">
                 {isOverBudget ? (
                   <span className="text-destructive font-medium">
-                    AED {Math.abs(remaining).toLocaleString()} over budget
+                    AED {Math.abs(remaining).toLocaleString()} over
                   </span>
                 ) : (
-                  <span>AED {remaining.toLocaleString()} remaining</span>
+                  <span>AED {remaining.toLocaleString()} left</span>
                 )}
               </CardDescription>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant={getStatusColor()} className="text-xs">
+          <div className="flex items-center shrink-0">
+            <Badge variant={getStatusColor()} className="text-[10px] sm:text-xs">
               {Math.round(percentage)}%
             </Badge>
           </div>
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-3">
-        <div className="flex justify-between text-sm">
-          <span>AED {budget.spent.toLocaleString()}</span>
-          <span className="text-muted-foreground">of AED {budget.budget.toLocaleString()}</span>
+      <CardContent className="space-y-2 sm:space-y-3 px-3 sm:px-6">
+        <div className="flex justify-between text-xs sm:text-sm">
+          <span className="font-medium">AED {budget.spent.toLocaleString()}</span>
+          <span className="text-muted-foreground">of {budget.budget.toLocaleString()}</span>
         </div>
 
-        <Progress value={Math.min(percentage, 100)} className="h-2" />
+        <Progress value={Math.min(percentage, 100)} className="h-1.5 sm:h-2" />
 
         <div className="flex justify-between items-center">
-          <div className="text-xs text-muted-foreground">
+          <div className="text-[10px] sm:text-xs text-muted-foreground">
             {Math.round(percentage)}% used
           </div>
           {projectedSpend > budget.budget && (
-            <div className="flex items-center gap-1 text-xs text-destructive">
+            <div className="flex items-center gap-1 text-[10px] sm:text-xs text-destructive">
               <AlertTriangle className="h-3 w-3" />
-              <span>Projected overspend</span>
+              <span className="hidden sm:inline">Projected overspend</span>
+              <span className="sm:hidden">Overspend</span>
             </div>
           )}
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2 pt-2">
+        <div className="flex gap-2 pt-1 sm:pt-2">
           <Button
             variant="outline"
             size="sm"
-            className="flex-1 text-xs"
+            className="flex-1 text-[10px] sm:text-xs h-7 sm:h-8"
             onClick={() => setShowDetailsDialog(true)}
           >
             Details
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="flex-1 text-xs">
+              <Button variant="outline" size="sm" className="flex-1 text-[10px] sm:text-xs h-7 sm:h-8">
                 Actions
               </Button>
             </DropdownMenuTrigger>

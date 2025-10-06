@@ -19,6 +19,25 @@ export const MONTHLY_EXPENSES = 22800
 export const MONTHLY_SAVINGS = MONTHLY_INCOME - MONTHLY_EXPENSES // 7,700 AED
 export const SAVINGS_RATE = (MONTHLY_SAVINGS / MONTHLY_INCOME) * 100 // 25.2%
 
+// Budget Totals (October 2025) - Aligned with mockBudgetCategories
+export const BUDGET_FIXED_TOTAL = 13225        // Housing + Utilities + Childcare + Transportation + Insurance
+export const BUDGET_FLEXIBLE_TOTAL = 4600      // Groceries + Dining + Shopping + Healthcare + Entertainment
+export const BUDGET_NON_MONTHLY_TOTAL = 1517   // Non-recurring expenses
+export const BUDGET_TOTAL = BUDGET_FIXED_TOTAL + BUDGET_FLEXIBLE_TOTAL + BUDGET_NON_MONTHLY_TOTAL // 19,342 AED
+
+// Budget Spending (calculated from mockBudgetCategories)
+export const BUDGET_FIXED_SPENT = 13187.80     // Fixed expenses spent
+export const BUDGET_FLEXIBLE_SPENT = 4068.50   // Flexible expenses spent
+export const BUDGET_NON_MONTHLY_SPENT = 308    // Non-monthly spent
+export const BUDGET_TOTAL_SPENT = BUDGET_FIXED_SPENT + BUDGET_FLEXIBLE_SPENT + BUDGET_NON_MONTHLY_SPENT // 17,564.30 AED
+
+// Budget Remaining
+export const BUDGET_TOTAL_REMAINING = BUDGET_TOTAL - BUDGET_TOTAL_SPENT // 1,777.70 AED
+export const BUDGET_USAGE_PERCENTAGE = (BUDGET_TOTAL_SPENT / BUDGET_TOTAL) * 100 // ~91%
+
+// Recurring Payments Total (from recurring-payments.ts)
+export const RECURRING_PAYMENTS_MONTHLY = 4885  // Total monthly recurring payments
+
 // Asset Breakdown for Display
 export const ASSET_BREAKDOWN = [
   {

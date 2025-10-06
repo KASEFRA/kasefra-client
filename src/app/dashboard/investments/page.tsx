@@ -88,6 +88,24 @@ export default function InvestmentsPage() {
     })
   }
 
+  const formatBalanceMobile = (balance: number, currency: string = 'AED') => {
+    if (hideBalances) return "••••••"
+
+    // For mobile, show abbreviated format for large numbers
+    if (balance >= 1000000) {
+      return `${currency} ${(balance / 1000000).toFixed(1)}M`
+    } else if (balance >= 1000) {
+      return `${currency} ${(balance / 1000).toFixed(1)}K`
+    }
+
+    return balance.toLocaleString('en-AE', {
+      style: 'currency',
+      currency: currency,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    })
+  }
+
   const formatChange = (change: number, currency: string = 'AED') => {
     const sign = change >= 0 ? '+' : ''
     return `${sign}${formatBalance(Math.abs(change), currency)}`
@@ -99,19 +117,19 @@ export default function InvestmentsPage() {
   }
 
   return (
-    <div className="space-y-6 px-6">
+    <div className="space-y-4 sm:space-y-6 px-4 sm:px-6">
 
       {/* Investment Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
         <Card className="bg-card border shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Portfolio</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-success/10">
-              <TrendingUp className="h-4 w-4 text-success" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Portfolio</CardTitle>
+            <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-md bg-success/10">
+              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-success" />
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">
               {formatBalance(totalValue)}
             </div>
             <p className="text-xs text-muted-foreground">
@@ -123,18 +141,18 @@ export default function InvestmentsPage() {
         </Card>
 
         <Card className="bg-card border shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Gain/Loss</CardTitle>
-            <div className={`flex h-8 w-8 items-center justify-center rounded-md ${totalGainLoss >= 0 ? 'bg-success/10' : 'bg-destructive/10'}`}>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Gain/Loss</CardTitle>
+            <div className={`flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-md ${totalGainLoss >= 0 ? 'bg-success/10' : 'bg-destructive/10'}`}>
               {totalGainLoss >= 0 ? (
-                <TrendingUp className="h-4 w-4 text-success" />
+                <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-success" />
               ) : (
-                <TrendingDown className="h-4 w-4 text-destructive" />
+                <TrendingDown className="h-3 w-3 sm:h-4 sm:w-4 text-destructive" />
               )}
             </div>
           </CardHeader>
-          <CardContent>
-            <div className={`text-2xl font-bold ${totalGainLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className={`text-lg sm:text-2xl font-bold ${totalGainLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {formatChange(totalGainLoss)}
             </div>
             <p className="text-xs text-muted-foreground">
@@ -144,14 +162,14 @@ export default function InvestmentsPage() {
         </Card>
 
         <Card className="bg-card border shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Asset Allocation</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent/20">
-              <PieChart className="h-4 w-4 text-accent-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Asset Allocation</CardTitle>
+            <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-md bg-accent/20">
+              <PieChart className="h-3 w-3 sm:h-4 sm:w-4 text-accent-foreground" />
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">4 Categories</div>
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">4 Categories</div>
             <p className="text-xs text-muted-foreground">
               Diversified portfolio
             </p>
@@ -159,14 +177,14 @@ export default function InvestmentsPage() {
         </Card>
 
         <Card className="bg-card border shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Positions</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent/20">
-              <Target className="h-4 w-4 text-accent-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Active Positions</CardTitle>
+            <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-md bg-accent/20">
+              <Target className="h-3 w-3 sm:h-4 sm:w-4 text-accent-foreground" />
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{activeInvestments}</div>
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">{activeInvestments}</div>
             <p className="text-xs text-muted-foreground">
               Across 4 categories
             </p>
@@ -176,78 +194,86 @@ export default function InvestmentsPage() {
 
       {/* Investments List with Category Tabs */}
       <Card className="bg-card border shadow-sm">
-        <CardHeader className="pb-6">
-          <div className="flex items-center justify-between">
+        <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
             <div>
-              <CardTitle className="text-xl font-bold">Your Investments</CardTitle>
-              <CardDescription className="text-base">
+              <CardTitle className="text-lg sm:text-xl font-bold">Your Investments</CardTitle>
+              <CardDescription className="text-sm sm:text-base">
                 All investment positions and their current performance
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setHideBalances(!hideBalances)}
+                className="text-xs sm:text-sm"
               >
-                {hideBalances ? <Eye className="mr-2 h-4 w-4" /> : <EyeOff className="mr-2 h-4 w-4" />}
+                {hideBalances ? <Eye className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" /> : <EyeOff className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />}
                 {hideBalances ? 'Show' : 'Hide'} Values
               </Button>
-              <Button variant="outline" size="sm">
-                <RefreshCw className="mr-2 h-4 w-4" />
+              <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                <RefreshCw className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 Sync All
               </Button>
-              <Button size="sm">
-                <Plus className="mr-2 h-4 w-4" />
+              <Button size="sm" className="text-xs sm:text-sm">
+                <Plus className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 Add Investment
               </Button>
             </div>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-4 sm:px-6">
           {/* Category Tabs */}
-          <Tabs value={selectedCategory} onValueChange={(value) => setSelectedCategory(value as InvestmentCategory)} className="space-y-4">
-            <TabsList className="grid w-full grid-cols-5">
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="stocks">Stocks</TabsTrigger>
-              <TabsTrigger value="crypto">Crypto</TabsTrigger>
-              <TabsTrigger value="commodity">Commodity</TabsTrigger>
-              <TabsTrigger value="real-estate">Real Estate</TabsTrigger>
-            </TabsList>
+          <Tabs value={selectedCategory} onValueChange={(value) => setSelectedCategory(value as InvestmentCategory)} className="space-y-3 sm:space-y-4">
+            <div className="overflow-x-auto">
+              <TabsList className="grid w-full min-w-max grid-cols-5 sm:min-w-0">
+                <TabsTrigger value="all" className="text-xs sm:text-sm">All</TabsTrigger>
+                <TabsTrigger value="stocks" className="text-xs sm:text-sm">Stocks</TabsTrigger>
+                <TabsTrigger value="crypto" className="text-xs sm:text-sm">Crypto</TabsTrigger>
+                <TabsTrigger value="commodity" className="text-xs sm:text-sm">Commodity</TabsTrigger>
+                <TabsTrigger value="real-estate" className="text-xs sm:text-sm">Real Estate</TabsTrigger>
+              </TabsList>
+            </div>
 
-            <TabsContent value={selectedCategory} className="space-y-4">
+            <TabsContent value={selectedCategory} className="space-y-3 sm:space-y-4">
               {filteredInvestments.map((investment) => {
                 const isPositiveChange = investment.dailyChange >= 0
                 const isPositiveTotalGain = investment.totalGainLoss >= 0
 
                 return (
-                  <div key={investment.id} className="flex items-center justify-between p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors duration-200 border border-border/50">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                  <div key={investment.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors duration-200 border border-border/50 space-y-3 sm:space-y-0">
+                    {/* Mobile: Stacked Layout, Desktop: Horizontal Layout */}
+                    <div className="flex items-center space-x-3 sm:space-x-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
                         {getCategoryIcon(investment.category)}
                       </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-semibold text-base">{investment.symbol}</h3>
-                          <Badge className={getCategoryColor(investment.category)}>
-                            {investment.category}
-                          </Badge>
-                          {investment.exchange && (
-                            <Badge variant="outline" className="text-xs">
-                              {investment.exchange}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                          <h3 className="font-semibold text-sm sm:text-base truncate">{investment.symbol}</h3>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <Badge className={`${getCategoryColor(investment.category)} text-xs`}>
+                              {investment.category}
                             </Badge>
-                          )}
+                            {investment.exchange && (
+                              <Badge variant="outline" className="text-xs">
+                                {investment.exchange}
+                              </Badge>
+                            )}
+                          </div>
                         </div>
-                        <p className="text-sm text-muted-foreground">{investment.name}</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground truncate">{investment.name}</p>
                         <p className="text-xs text-muted-foreground">
                           {investment.quantity} shares • {investment.sector}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-6">
-                      <div className="text-right">
-                        <div className="text-lg font-semibold">
+                    {/* Financial Data - Mobile: Full Width Row, Desktop: Right Side */}
+                    <div className="flex items-center justify-between sm:justify-end sm:gap-6 w-full sm:w-auto">
+                      {/* Current Value */}
+                      <div className="text-left sm:text-right">
+                        <div className="text-sm sm:text-lg font-semibold">
                           {formatBalance(investment.currentValue, investment.currency)}
                         </div>
                         <div className={`text-xs ${isPositiveChange ? 'text-green-600' : 'text-red-600'}`}>
@@ -255,8 +281,9 @@ export default function InvestmentsPage() {
                         </div>
                       </div>
 
-                      <div className="text-right">
-                        <div className={`text-sm font-medium ${isPositiveTotalGain ? 'text-green-600' : 'text-red-600'}`}>
+                      {/* Total Gain/Loss - Hidden on small mobile, shown on larger screens */}
+                      <div className="text-right hidden xs:block">
+                        <div className={`text-xs sm:text-sm font-medium ${isPositiveTotalGain ? 'text-green-600' : 'text-red-600'}`}>
                           {formatChange(investment.totalGainLoss, investment.currency)}
                         </div>
                         <div className={`text-xs ${isPositiveTotalGain ? 'text-green-600' : 'text-red-600'}`}>
@@ -264,9 +291,10 @@ export default function InvestmentsPage() {
                         </div>
                       </div>
 
+                      {/* Actions Menu */}
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
+                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <MoreHorizontal className="h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>

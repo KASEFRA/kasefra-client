@@ -3,6 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { mockGoals } from "@/lib/mock-data"
+import { handleClientScriptLoad } from "next/script"
 
 export function GoalsSummary() {
   // Get top 2 active high-priority goals
@@ -17,6 +18,11 @@ export function GoalsSummary() {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     })
+  }
+
+  const handleGoalClick = () => {
+    // Navigate to goals page
+    window.location.href = '/dashboard/goals'
   }
 
   const getGoalIcon = (goalName: string) => {
@@ -50,47 +56,47 @@ export function GoalsSummary() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Goals</CardTitle>
-        <CardDescription>Your top 2 priorities</CardDescription>
+      <CardHeader className="px-3 sm:px-6 pb-3 sm:pb-6">
+        <CardTitle className="text-sm sm:text-base lg:text-lg">Goals</CardTitle>
+        <CardDescription className="text-xs sm:text-sm">Your top 2 priorities</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6">
         {topGoals.map((goal) => {
           const progressInfo = getProgressInfo(goal.currentAmount, goal.targetAmount)
           const remainingAmount = goal.targetAmount - goal.currentAmount
 
           return (
-            <div key={goal.id} className="space-y-3">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="text-lg">{getGoalIcon(goal.name)}</div>
-                  <div>
-                    <h4 className="font-semibold text-sm">{goal.name}</h4>
-                    <p className="text-xs text-muted-foreground">{goal.description}</p>
+            <div key={goal.id} className="space-y-2 sm:space-y-3">
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                  <div className="text-sm sm:text-base lg:text-lg shrink-0">{getGoalIcon(goal.name)}</div>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-semibold text-xs sm:text-sm truncate">{goal.name}</h4>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground truncate">{goal.description}</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-sm font-semibold">
+                <div className="text-right shrink-0">
+                  <div className="text-xs sm:text-sm font-semibold">
                     {formatCurrency(goal.targetAmount)}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    {formatCurrency(goal.currentAmount)} ({progressInfo.percentage.toFixed(0)}%) This month
+                  <div className="text-[10px] sm:text-xs text-muted-foreground">
+                    {formatCurrency(goal.currentAmount)} ({progressInfo.percentage.toFixed(0)}%)
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1 sm:space-y-2">
                 <Progress
                   value={progressInfo.percentage}
-                  className="h-2"
+                  className="h-1.5 sm:h-2"
                 />
 
                 {goal.currentAmount === 0 ? (
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-[10px] sm:text-xs text-muted-foreground">
                     {formatCurrency(remainingAmount)} remaining to reach goal
                   </div>
                 ) : (
-                  <div className="flex justify-between text-xs text-muted-foreground">
+                  <div className="flex justify-between text-[10px] sm:text-xs text-muted-foreground">
                     <span>{formatCurrency(goal.currentAmount)} saved</span>
                     <span>{formatCurrency(remainingAmount)} to go</span>
                   </div>
@@ -106,10 +112,10 @@ export function GoalsSummary() {
             Quick Actions
           </h5>
           <div className="grid grid-cols-2 gap-2">
-            <button className="text-xs text-primary hover:text-primary/80 p-2 rounded border border-border hover:bg-muted/50 transition-colors">
+            <button onClick={handleGoalClick} className="text-xs text-primary hover:text-primary/80 p-2 rounded border border-border hover:bg-muted/50 transition-colors">
               Add Funds
             </button>
-            <button className="text-xs text-primary hover:text-primary/80 p-2 rounded border border-border hover:bg-muted/50 transition-colors">
+            <button onClick={handleGoalClick} className="text-xs text-primary hover:text-primary/80 p-2 rounded border border-border hover:bg-muted/50 transition-colors">
               View All Goals
             </button>
           </div>

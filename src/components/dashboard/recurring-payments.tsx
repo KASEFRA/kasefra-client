@@ -3,8 +3,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { mockRecurringPayments, recurringPaymentsSummary } from "@/lib/mock-data"
+import { useRouter } from "next/navigation"
 
 export function RecurringPayments() {
+  const router = useRouter()
   const upcomingPayments = mockRecurringPayments
     .filter(payment => payment.daysUntilDue <= 7)
     .sort((a, b) => a.daysUntilDue - b.daysUntilDue)
@@ -45,10 +47,10 @@ export function RecurringPayments() {
 
   return (
     <Card>
-      <CardHeader className="px-4 sm:px-6 pb-3">
+      <CardHeader className="px-3 sm:px-4 lg:px-6 pb-3">
         <div className="flex items-center justify-between gap-2">
           <div className="min-w-0 flex-1">
-            <CardTitle className="text-base sm:text-lg">Recurring</CardTitle>
+            <CardTitle className="text-sm sm:text-base lg:text-lg">Recurring</CardTitle>
             <CardDescription className="text-xs sm:text-sm">{formatCurrency(recurringPaymentsSummary.remainingThisMonth)} remaining due</CardDescription>
           </div>
           <Badge variant="secondary" className="text-[10px] sm:text-xs px-2 py-0.5 shrink-0">
@@ -56,19 +58,19 @@ export function RecurringPayments() {
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className="px-4 sm:px-6 space-y-3 sm:space-y-4">
+      <CardContent className="px-3 sm:px-4 lg:px-6 space-y-3 sm:space-y-4">
         {upcomingPayments.map((payment) => (
           <div key={payment.id} className="flex items-center justify-between gap-2 p-2 sm:p-3 rounded-lg border">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs sm:text-sm shrink-0">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs shrink-0">
                 {getMerchantIcon(payment.merchant)}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="font-medium text-xs sm:text-sm truncate">{payment.name}</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1.5 sm:gap-2">
+                <div className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1 sm:gap-1.5">
                   <span className="truncate">{payment.merchant}</span>
                   {payment.isAutomatic && (
-                    <Badge variant="outline" className="text-[9px] sm:text-xs px-1 shrink-0">
+                    <Badge variant="outline" className="text-[8px] sm:text-[9px] px-1 shrink-0">
                       Auto
                     </Badge>
                   )}
@@ -86,18 +88,21 @@ export function RecurringPayments() {
 
         {/* Summary Stats */}
         <div className="pt-3 sm:pt-4 border-t space-y-2 sm:space-y-3">
-          <div className="flex justify-between text-xs sm:text-sm">
+          <div className="flex justify-between text-[10px] sm:text-xs lg:text-sm">
             <span className="text-muted-foreground">Total Monthly</span>
             <span className="font-semibold">{formatCurrency(recurringPaymentsSummary.totalMonthly)}</span>
           </div>
-          <div className="flex justify-between text-xs sm:text-sm">
+          <div className="flex justify-between text-[10px] sm:text-xs lg:text-sm">
             <span className="text-muted-foreground">Upcoming (7 days)</span>
             <span className="font-semibold">{recurringPaymentsSummary.upcomingCount} payments</span>
           </div>
         </div>
 
         {/* Quick Action */}
-        <button className="w-full text-[10px] sm:text-xs text-primary hover:text-primary/80 p-2 sm:p-2.5 rounded border border-border hover:bg-muted/50 transition-colors font-medium">
+        <button
+          onClick={() => router.push('/dashboard/budgets')}
+          className="w-full text-[10px] sm:text-xs text-primary hover:text-primary/80 p-2 sm:p-2.5 rounded border border-border hover:bg-muted/50 transition-colors font-medium"
+        >
           View All Recurring Payments
         </button>
       </CardContent>

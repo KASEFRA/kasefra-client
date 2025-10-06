@@ -188,46 +188,46 @@ export function CreateBudgetWizard({ trigger }: CreateBudgetWizardProps) {
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-2">Choose a Budget Template</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="text-base sm:text-lg font-semibold mb-1.5 sm:mb-2">Choose a Budget Template</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Start with a pre-built template or create from scratch
               </p>
             </div>
 
-            <div className="grid gap-4">
+            <div className="grid gap-3 sm:gap-4">
               {mockTemplates.map((template) => (
                 <div
                   key={template.id}
-                  className={`p-4 rounded-lg border cursor-pointer transition-all ${selectedTemplate?.id === template.id
+                  className={`p-3 sm:p-4 rounded-lg border cursor-pointer transition-all ${selectedTemplate?.id === template.id
                       ? 'border-primary bg-primary/5'
                       : 'border-border hover:border-primary/50'
                     }`}
                   onClick={() => handleTemplateSelect(template)}
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <h4 className="font-medium">{template.name}</h4>
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                    <div className="space-y-1 flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                        <h4 className="font-medium text-sm sm:text-base">{template.name}</h4>
                         {template.uaeSpecific && (
-                          <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10">
+                          <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10 text-[10px] sm:text-xs">
                             UAE
                           </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-muted-foreground">{template.description}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">{template.description}</p>
                     </div>
-                    <div className="text-right">
-                      <div className="font-semibold">AED {template.totalBudget.toLocaleString()}</div>
-                      <div className="text-xs text-muted-foreground">{template.categories.length} categories</div>
+                    <div className="text-left sm:text-right shrink-0">
+                      <div className="font-semibold text-sm sm:text-base">AED {template.totalBudget.toLocaleString()}</div>
+                      <div className="text-[10px] sm:text-xs text-muted-foreground">{template.categories.length} categories</div>
                     </div>
                   </div>
                 </div>
               ))}
 
               <div
-                className={`p-4 rounded-lg border border-dashed border-primary/30 text-center cursor-pointer hover:border-primary/50 transition-colors ${selectedTemplate?.id === 'scratch' ? 'border-primary bg-primary/5' : ''}`}
+                className={`p-3 sm:p-4 rounded-lg border border-dashed border-primary/30 text-center cursor-pointer hover:border-primary/50 transition-colors ${selectedTemplate?.id === 'scratch' ? 'border-primary bg-primary/5' : ''}`}
                 onClick={() => {
                   const scratchTemplate: BudgetTemplate = {
                     id: 'scratch',
@@ -242,13 +242,13 @@ export function CreateBudgetWizard({ trigger }: CreateBudgetWizardProps) {
                 }}
                 data-testid="scratch-budget-btn"
               >
-                <Plus className="h-8 w-8 text-primary mx-auto mb-2" />
-                <h4 className="font-medium text-primary">Start from Scratch</h4>
-                <p className="text-sm text-muted-foreground">Create a custom budget with your own categories and amounts.</p>
+                <Plus className="h-6 w-6 sm:h-8 sm:w-8 text-primary mx-auto mb-1.5 sm:mb-2" />
+                <h4 className="font-medium text-sm sm:text-base text-primary">Start from Scratch</h4>
+                <p className="text-xs sm:text-sm text-muted-foreground">Create a custom budget with your own categories and amounts.</p>
                 {selectedTemplate?.id === 'scratch' && (
-                  <div className="mt-4 text-left">
-                    <div className="font-semibold text-primary mb-1">Sample Menu</div>
-                    <ul className="text-sm text-muted-foreground list-disc pl-4">
+                  <div className="mt-3 sm:mt-4 text-left">
+                    <div className="font-semibold text-xs sm:text-sm text-primary mb-1">Sample Menu</div>
+                    <ul className="text-xs sm:text-sm text-muted-foreground list-disc pl-4">
                       <li>Add categories like Food, Transport, Shopping, etc.</li>
                       <li>Set your own budget amounts for each category</li>
                       <li>Customize and save your budget</li>
@@ -467,52 +467,59 @@ export function CreateBudgetWizard({ trigger }: CreateBudgetWizardProps) {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-md sm:max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <Target className="h-5 w-5 text-primary" />
-            Create New Budget
+          <DialogTitle className="flex items-center gap-2 text-base sm:text-lg">
+            <Target className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
+            <span className="truncate">Create New Budget</span>
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-xs sm:text-sm">
             Set up a new budget with AI-powered recommendations
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Progress Bar */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
+          <div className="space-y-1.5 sm:space-y-2">
+            <div className="flex justify-between text-xs sm:text-sm">
               <span>Step {currentStep} of {totalSteps}</span>
               <span>{Math.round(progress)}% complete</span>
             </div>
-            <Progress value={progress} className="h-2" />
+            <Progress value={progress} className="h-1.5 sm:h-2" />
           </div>
 
           {/* Step Content */}
           {renderStepContent()}
 
           {/* Navigation */}
-          <div className="flex justify-between pt-4 border-t">
+          <div className="flex justify-between pt-3 sm:pt-4 border-t gap-2">
             <Button
               variant="outline"
+              size="sm"
               onClick={() => setCurrentStep(prev => Math.max(1, prev - 1))}
               disabled={currentStep === 1}
+              className="text-xs sm:text-sm"
             >
-              <ChevronLeft className="h-4 w-4 mr-1" />
-              Back
+              <ChevronLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1" />
+              <span className="hidden sm:inline">Back</span>
+              <span className="sm:hidden">Back</span>
             </Button>
 
             <div className="flex gap-2">
               {currentStep < totalSteps ? (
                 <Button
+                  size="sm"
                   onClick={() => setCurrentStep(prev => prev + 1)}
                   disabled={currentStep === 1 && !selectedTemplate}
+                  className="text-xs sm:text-sm"
                 >
-                  Next
-                  <ChevronRight className="h-4 w-4 ml-1" />
+                  <span className="hidden sm:inline">Next</span>
+                  <span className="sm:hidden">Next</span>
+                  <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 ml-1" />
                 </Button>
               ) : (
                 <Button
+                  size="sm"
                   onClick={() => {
                     // Handle budget creation
                     console.log('Creating budget:', {
@@ -523,9 +530,11 @@ export function CreateBudgetWizard({ trigger }: CreateBudgetWizardProps) {
                     })
                     setOpen(false)
                   }}
+                  className="text-xs sm:text-sm"
                 >
-                  <CheckCircle className="h-4 w-4 mr-1" />
-                  Create Budget
+                  <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1" />
+                  <span className="hidden sm:inline">Create Budget</span>
+                  <span className="sm:hidden">Create</span>
                 </Button>
               )}
             </div>
