@@ -119,13 +119,14 @@ export default function AccountsPage() {
     total: number
     accounts: typeof mockAccounts
   }) => (
-    <Collapsible defaultOpen className="border-b border-border/50 last:border-b-0">
+    <Collapsible defaultOpen={false} className="border-b border-border/50 last:border-b-0">
       <CollapsibleTrigger asChild>
         <Button variant="ghost" className="w-full justify-between p-2 sm:p-3 h-auto hover:bg-muted/50">
           <div className="flex items-center gap-2 sm:gap-3">
             <span className="text-sm sm:text-base lg:text-lg">{icon}</span>
             <div className="flex items-center gap-1 sm:gap-2">
               <span className="font-medium text-xs sm:text-sm text-muted-foreground">{title}</span>
+              <span className="text-[10px] sm:text-xs text-muted-foreground">({accounts.length})</span>
             </div>
           </div>
           <div className="flex items-center gap-1 sm:gap-2">
@@ -266,13 +267,14 @@ export default function AccountsPage() {
               )}
 
               {investmentAccounts.length > 0 && (
-                <Collapsible defaultOpen className="border-b border-border/50 last:border-b-0">
+                <Collapsible defaultOpen={false} className="border-b border-border/50 last:border-b-0">
                   <CollapsibleTrigger asChild>
                     <Button variant="ghost" className="w-full justify-between p-2 sm:p-3 h-auto hover:bg-muted/50">
                       <div className="flex items-center gap-2 sm:gap-3">
                         <span className="text-sm sm:text-base lg:text-lg">📈</span>
                         <div className="flex items-center gap-1 sm:gap-2">
                           <span className="font-medium text-xs sm:text-sm text-muted-foreground">Investments</span>
+                          <span className="text-[10px] sm:text-xs text-muted-foreground">({investmentAccounts.length})</span>
                         </div>
                       </div>
                       <div className="flex items-center gap-1 sm:gap-2">
