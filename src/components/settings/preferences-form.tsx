@@ -97,58 +97,62 @@ export function PreferencesForm() {
 
   return (
     <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between">
+      <CardHeader className="px-4 sm:px-6">
+        <div className="flex flex-col gap-4">
           <div>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
               <Settings className="h-5 w-5 text-primary" />
               Application Preferences
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm sm:text-base mt-1">
               Customize your app experience and regional settings
             </CardDescription>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3">
             {hasChanges && (
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="text-sm self-start sm:self-auto">
                 Unsaved Changes
               </Badge>
             )}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              disabled={!hasChanges}
-            >
-              <RefreshCw className="h-4 w-4 mr-2" />
-              Reset
-            </Button>
-            <Button
-              size="sm"
-              onClick={handleSave}
-              disabled={!hasChanges}
-            >
-              <Save className="h-4 w-4 mr-2" />
-              Save
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleReset}
+                disabled={!hasChanges}
+                className="flex-1 sm:flex-none h-9 sm:h-10"
+              >
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Reset
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleSave}
+                disabled={!hasChanges}
+                className="flex-1 sm:flex-none h-9 sm:h-10"
+              >
+                <Save className="h-4 w-4 mr-2" />
+                Save Changes
+              </Button>
+            </div>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-8">
+      <CardContent className="space-y-6 sm:space-y-8 px-4 sm:px-6">
         {/* Regional Settings */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm flex items-center gap-2">
-            <Globe className="h-4 w-4" />
+          <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+            <Globe className="h-4 w-4 text-primary" />
             Regional & Language Settings
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="space-y-2">
-              <Label htmlFor="currency">Primary Currency</Label>
+              <Label htmlFor="currency" className="text-sm font-medium">Primary Currency</Label>
               <Select
                 value={preferences.currency}
                 onValueChange={(value) => handlePreferenceChange('currency', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="h-10 sm:h-11">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -165,12 +169,12 @@ export function PreferencesForm() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="language">Interface Language</Label>
+              <Label htmlFor="language" className="text-sm font-medium">Interface Language</Label>
               <Select
                 value={preferences.language}
                 onValueChange={(value) => handlePreferenceChange('language', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="h-10 sm:h-11">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -192,12 +196,12 @@ export function PreferencesForm() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="dateFormat">Date Format</Label>
+              <Label htmlFor="dateFormat" className="text-sm font-medium">Date Format</Label>
               <Select
                 value={preferences.dateFormat}
                 onValueChange={(value) => handlePreferenceChange('dateFormat', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="h-10 sm:h-11">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

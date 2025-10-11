@@ -23,7 +23,8 @@ import {
   CreditCard,
   AlertTriangle,
   Save,
-  RefreshCw
+  RefreshCw,
+  Clock
 } from "lucide-react"
 
 interface NotificationPreferences {
@@ -99,58 +100,59 @@ export function NotificationSettings() {
 
   return (
     <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between">
+      <CardHeader className="px-4 sm:px-6">
+        <div className="flex flex-col gap-4">
           <div>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
               <Bell className="h-5 w-5 text-primary" />
               Notification Settings
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm sm:text-base mt-1">
               Customize how and when you receive alerts and updates
             </CardDescription>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3">
             {hasChanges && (
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="text-sm self-start sm:self-auto">
                 Unsaved Changes
               </Badge>
             )}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleTestNotification}
-            >
-              Test
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              disabled={!hasChanges}
-            >
-              <RefreshCw className="h-4 w-4 mr-2" />
-              Reset
-            </Button>
-            <Button
-              size="sm"
-              onClick={handleSave}
-              disabled={!hasChanges}
-            >
-              <Save className="h-4 w-4 mr-2" />
-              Save
-            </Button>
+            <div className="flex gap-2">
+             
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleReset}
+                disabled={!hasChanges}
+                className="flex-1 sm:flex-none h-9 sm:h-10"
+              >
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Reset
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleSave}
+                disabled={!hasChanges}
+                className="flex-1 sm:flex-none h-9 sm:h-10"
+              >
+                <Save className="h-4 w-4 mr-2" />
+                Save Changes
+              </Button>
+            </div>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-8">
+      <CardContent className="space-y-6 sm:space-y-8 px-4 sm:px-6">
         {/* Delivery Methods */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm">Delivery Methods</h4>
+          <h4 className="font-semibold text-lg sm:text-xl flex items-center gap-2 border-b pb-3 text-foreground">
+            <Smartphone className="h-5 w-5 text-primary" />
+            Delivery Methods
+          </h4>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="pushNotifications" className="text-base flex items-center gap-2">
+            <div className="flex flex-col gap-4 p-4 sm:p-6 rounded-lg border bg-card">
+              <div className="space-y-2 flex-1">
+                <Label htmlFor="pushNotifications" className="text-base font-semibold flex items-center gap-2">
                   <Smartphone className="h-4 w-4" />
                   Push Notifications
                 </Label>
@@ -158,16 +160,18 @@ export function NotificationSettings() {
                   Instant alerts on your device
                 </div>
               </div>
-              <Switch
-                id="pushNotifications"
-                checked={preferences.pushNotifications}
-                onCheckedChange={(checked) => handlePreferenceChange('pushNotifications', checked)}
-              />
+              <div className="flex justify-end">
+                <Switch
+                  id="pushNotifications"
+                  checked={preferences.pushNotifications}
+                  onCheckedChange={(checked) => handlePreferenceChange('pushNotifications', checked)}
+                />
+              </div>
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="emailNotifications" className="text-base flex items-center gap-2">
+            <div className="flex flex-col gap-4 p-4 sm:p-6 rounded-lg border bg-card">
+              <div className="space-y-2 flex-1">
+                <Label htmlFor="emailNotifications" className="text-base font-semibold flex items-center gap-2">
                   <Mail className="h-4 w-4" />
                   Email Notifications
                 </Label>
@@ -175,16 +179,18 @@ export function NotificationSettings() {
                   Detailed updates via email
                 </div>
               </div>
-              <Switch
-                id="emailNotifications"
-                checked={preferences.emailNotifications}
-                onCheckedChange={(checked) => handlePreferenceChange('emailNotifications', checked)}
-              />
+              <div className="flex justify-end">
+                <Switch
+                  id="emailNotifications"
+                  checked={preferences.emailNotifications}
+                  onCheckedChange={(checked) => handlePreferenceChange('emailNotifications', checked)}
+                />
+              </div>
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="smsNotifications" className="text-base flex items-center gap-2">
+            <div className="flex flex-col gap-4 p-4 sm:p-6 rounded-lg border bg-card">
+              <div className="space-y-2 flex-1">
+                <Label htmlFor="smsNotifications" className="text-base font-semibold flex items-center gap-2">
                   <MessageSquare className="h-4 w-4" />
                   SMS Notifications
                 </Label>
@@ -192,25 +198,27 @@ export function NotificationSettings() {
                   Critical alerts via text message
                 </div>
               </div>
-              <Switch
-                id="smsNotifications"
-                checked={preferences.smsNotifications}
-                onCheckedChange={(checked) => handlePreferenceChange('smsNotifications', checked)}
-              />
+              <div className="flex justify-end">
+                <Switch
+                  id="smsNotifications"
+                  checked={preferences.smsNotifications}
+                  onCheckedChange={(checked) => handlePreferenceChange('smsNotifications', checked)}
+                />
+              </div>
             </div>
           </div>
         </div>
 
         {/* Financial Alerts */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm flex items-center gap-2">
-            <CreditCard className="h-4 w-4" />
+          <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+            <CreditCard className="h-4 w-4 text-primary" />
             Financial Alerts
           </h4>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="budgetAlerts" className="text-base">Budget Alerts</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="budgetAlerts" className="text-base font-medium">Budget Alerts</Label>
                 <div className="text-sm text-muted-foreground">
                   Get notified when approaching budget limits
                 </div>
@@ -219,12 +227,13 @@ export function NotificationSettings() {
                 id="budgetAlerts"
                 checked={preferences.budgetAlerts}
                 onCheckedChange={(checked) => handlePreferenceChange('budgetAlerts', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="goalReminders" className="text-base">Goal Reminders</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="goalReminders" className="text-base font-medium">Goal Reminders</Label>
                 <div className="text-sm text-muted-foreground">
                   Progress updates and milestone notifications
                 </div>
@@ -233,12 +242,13 @@ export function NotificationSettings() {
                 id="goalReminders"
                 checked={preferences.goalReminders}
                 onCheckedChange={(checked) => handlePreferenceChange('goalReminders', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="transactionAlerts" className="text-base">Transaction Alerts</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="transactionAlerts" className="text-base font-medium">Transaction Alerts</Label>
                 <div className="text-sm text-muted-foreground">
                   Notifications for new transactions
                 </div>
@@ -247,17 +257,18 @@ export function NotificationSettings() {
                 id="transactionAlerts"
                 checked={preferences.transactionAlerts}
                 onCheckedChange={(checked) => handlePreferenceChange('transactionAlerts', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
             {preferences.transactionAlerts && (
-              <div className="space-y-2 pl-6">
-                <Label htmlFor="minimumAmount">Minimum Amount (AED)</Label>
+              <div className="space-y-2 pl-0 sm:pl-6">
+                <Label htmlFor="minimumAmount" className="text-sm font-medium">Minimum Amount (AED)</Label>
                 <Select
                   value={preferences.minimumAmount.toString()}
                   onValueChange={(value) => handlePreferenceChange('minimumAmount', parseInt(value))}
                 >
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full h-10 sm:h-11">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -271,9 +282,9 @@ export function NotificationSettings() {
               </div>
             )}
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="billReminders" className="text-base">Bill Reminders</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="billReminders" className="text-base font-medium">Bill Reminders</Label>
                 <div className="text-sm text-muted-foreground">
                   Upcoming due dates and payment reminders
                 </div>
@@ -282,6 +293,7 @@ export function NotificationSettings() {
                 id="billReminders"
                 checked={preferences.billReminders}
                 onCheckedChange={(checked) => handlePreferenceChange('billReminders', checked)}
+                className="self-start sm:self-center"
               />
             </div>
           </div>
@@ -289,14 +301,14 @@ export function NotificationSettings() {
 
         {/* AI & Insights */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm flex items-center gap-2">
-            <TrendingUp className="h-4 w-4" />
+          <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+            <TrendingUp className="h-4 w-4 text-primary" />
             AI Insights & Reports
           </h4>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="aiInsights" className="text-base">AI Insights</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="aiInsights" className="text-base font-medium">AI Insights</Label>
                 <div className="text-sm text-muted-foreground">
                   Smart recommendations and spending insights
                 </div>
@@ -305,12 +317,13 @@ export function NotificationSettings() {
                 id="aiInsights"
                 checked={preferences.aiInsights}
                 onCheckedChange={(checked) => handlePreferenceChange('aiInsights', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="weeklyReports" className="text-base">Weekly Reports</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="weeklyReports" className="text-base font-medium">Weekly Reports</Label>
                 <div className="text-sm text-muted-foreground">
                   Summary of spending and budget progress
                 </div>
@@ -319,12 +332,13 @@ export function NotificationSettings() {
                 id="weeklyReports"
                 checked={preferences.weeklyReports}
                 onCheckedChange={(checked) => handlePreferenceChange('weeklyReports', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="monthlyReports" className="text-base">Monthly Reports</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="monthlyReports" className="text-base font-medium">Monthly Reports</Label>
                 <div className="text-sm text-muted-foreground">
                   Comprehensive financial analysis and trends
                 </div>
@@ -333,24 +347,25 @@ export function NotificationSettings() {
                 id="monthlyReports"
                 checked={preferences.monthlyReports}
                 onCheckedChange={(checked) => handlePreferenceChange('monthlyReports', checked)}
+                className="self-start sm:self-center"
               />
             </div>
           </div>
         </div>
 
         {/* UAE-Specific Notifications */}
-        <div className="p-4 bg-primary/10 dark:bg-primary/10/20 rounded-lg border border-blue-200 dark:border-blue-800 space-y-4">
-          <div className="flex items-center gap-2">
-            <Badge className="bg-primary/10 text-primary hover:bg-primary/10">
-              UAE
+        <div className="p-4 sm:p-6 bg-primary/5 dark:bg-primary/10 rounded-lg border border-primary/20 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-2">
+            <Badge className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm self-start">
+              UAE Exclusive
             </Badge>
-            <h4 className="font-medium text-sm">UAE-Specific Notifications</h4>
+            <h4 className="font-semibold text-base sm:text-lg">UAE-Specific Notifications</h4>
           </div>
 
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 rounded-lg border border-blue-200 dark:border-blue-700 bg-background">
-              <div className="space-y-0.5">
-                <Label htmlFor="uaeAlerts" className="text-base">UAE Market Alerts</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border border-primary/30 bg-background">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="uaeAlerts" className="text-base font-medium">UAE Market Alerts</Label>
                 <div className="text-sm text-muted-foreground">
                   Banking updates, holiday schedules, market changes
                 </div>
@@ -359,12 +374,13 @@ export function NotificationSettings() {
                 id="uaeAlerts"
                 checked={preferences.uaeSpecificAlerts}
                 onCheckedChange={(checked) => handlePreferenceChange('uaeSpecificAlerts', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border border-blue-200 dark:border-blue-700 bg-background">
-              <div className="space-y-0.5">
-                <Label htmlFor="islamicEvents" className="text-base">Islamic Event Reminders</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border border-primary/30 bg-background">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="islamicEvents" className="text-base font-medium">Islamic Event Reminders</Label>
                 <div className="text-sm text-muted-foreground">
                   Ramadan, Eid, and other Islamic calendar events
                 </div>
@@ -373,12 +389,13 @@ export function NotificationSettings() {
                 id="islamicEvents"
                 checked={preferences.islamicEventReminders}
                 onCheckedChange={(checked) => handlePreferenceChange('islamicEventReminders', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border border-blue-200 dark:border-blue-700 bg-background">
-              <div className="space-y-0.5">
-                <Label htmlFor="hajjReminders" className="text-base">Hajj Savings Reminders</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border border-primary/30 bg-background">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="hajjReminders" className="text-base font-medium">Hajj Savings Reminders</Label>
                 <div className="text-sm text-muted-foreground">
                   Progress updates for Hajj and Umrah savings goals
                 </div>
@@ -387,6 +404,7 @@ export function NotificationSettings() {
                 id="hajjReminders"
                 checked={preferences.hajjSavingsReminders}
                 onCheckedChange={(checked) => handlePreferenceChange('hajjSavingsReminders', checked)}
+                className="self-start sm:self-center"
               />
             </div>
           </div>
@@ -394,26 +412,26 @@ export function NotificationSettings() {
 
         {/* Security & System Alerts */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm flex items-center gap-2">
-            <AlertTriangle className="h-4 w-4" />
+          <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+            <AlertTriangle className="h-4 w-4 text-primary" />
             Security & System
           </h4>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="securityAlerts" className="text-base">Security Alerts</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="securityAlerts" className="text-base font-medium">Security Alerts</Label>
                 <div className="text-sm text-muted-foreground">
                   Login attempts, password changes, suspicious activity
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Always On</Badge>
+              <div className="flex items-center gap-2 self-start sm:self-center">
+                <Badge variant="secondary" className="text-sm">Always On</Badge>
               </div>
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="marketingEmails" className="text-base">Marketing Communications</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="marketingEmails" className="text-base font-medium">Marketing Communications</Label>
                 <div className="text-sm text-muted-foreground">
                   Product updates, tips, and promotional offers
                 </div>
@@ -422,6 +440,7 @@ export function NotificationSettings() {
                 id="marketingEmails"
                 checked={preferences.marketingEmails}
                 onCheckedChange={(checked) => handlePreferenceChange('marketingEmails', checked)}
+                className="self-start sm:self-center"
               />
             </div>
           </div>
@@ -429,11 +448,14 @@ export function NotificationSettings() {
 
         {/* Notification Schedule */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm">Notification Schedule</h4>
+          <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+            <Clock className="h-4 w-4 text-primary" />
+            Notification Schedule
+          </h4>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="quietHours" className="text-base">Quiet Hours</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="quietHours" className="text-base font-medium">Quiet Hours</Label>
                 <div className="text-sm text-muted-foreground">
                   Pause non-critical notifications during specified hours
                 </div>
@@ -442,18 +464,19 @@ export function NotificationSettings() {
                 id="quietHours"
                 checked={preferences.quietHours}
                 onCheckedChange={(checked) => handlePreferenceChange('quietHours', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
             {preferences.quietHours && (
-              <div className="grid grid-cols-2 gap-4 p-3 rounded-lg bg-muted/50 border">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-lg bg-muted/50 border">
                 <div className="space-y-2">
-                  <Label htmlFor="quietStart">Quiet hours start</Label>
+                  <Label htmlFor="quietStart" className="text-sm font-medium">Quiet hours start</Label>
                   <Select
                     value={preferences.quietStart}
                     onValueChange={(value) => handlePreferenceChange('quietStart', value)}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-10 sm:h-11">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -469,12 +492,12 @@ export function NotificationSettings() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="quietEnd">Quiet hours end</Label>
+                  <Label htmlFor="quietEnd" className="text-sm font-medium">Quiet hours end</Label>
                   <Select
                     value={preferences.quietEnd}
                     onValueChange={(value) => handlePreferenceChange('quietEnd', value)}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-10 sm:h-11">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -493,12 +516,12 @@ export function NotificationSettings() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="frequency">Notification Frequency</Label>
+              <Label htmlFor="frequency" className="text-sm font-medium">Notification Frequency</Label>
               <Select
                 value={preferences.notificationFrequency}
                 onValueChange={(value: 'instant' | 'hourly' | 'daily') => handlePreferenceChange('notificationFrequency', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger className="h-10 sm:h-11">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

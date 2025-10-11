@@ -23,7 +23,8 @@ import {
   Eye,
   Smartphone,
   Save,
-  RefreshCw
+  RefreshCw,
+  Clock
 } from "lucide-react"
 
 interface ThemePreferences {
@@ -116,48 +117,55 @@ export function ThemeSettings() {
 
   return (
     <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between">
+      <CardHeader className="px-4 sm:px-6">
+        <div className="flex flex-col gap-4">
           <div>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
               <Palette className="h-5 w-5 text-primary" />
               Appearance & Theme
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm sm:text-base mt-1">
               Customize the look and feel of your Kasefra experience
             </CardDescription>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3">
             {hasChanges && (
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="text-sm self-start sm:self-auto">
                 Unsaved Changes
               </Badge>
             )}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              disabled={!hasChanges}
-            >
-              <RefreshCw className="h-4 w-4 mr-2" />
-              Reset
-            </Button>
-            <Button
-              size="sm"
-              onClick={handleSave}
-              disabled={!hasChanges}
-            >
-              <Save className="h-4 w-4 mr-2" />
-              Save
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleReset}
+                disabled={!hasChanges}
+                className="flex-1 sm:flex-none h-9 sm:h-10"
+              >
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Reset
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleSave}
+                disabled={!hasChanges}
+                className="flex-1 sm:flex-none h-9 sm:h-10"
+              >
+                <Save className="h-4 w-4 mr-2" />
+                Save Changes
+              </Button>
+            </div>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-8">
+      <CardContent className="space-y-6 sm:space-y-8 px-4 sm:px-6">
         {/* Theme Mode Selection */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm">Theme Mode</h4>
-          <div className="grid grid-cols-3 gap-3">
+          <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+            <Sun className="h-4 w-4 text-primary" />
+            Theme Mode
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             {[
               { id: 'light', label: 'Light', icon: Sun, description: 'Bright and clean' },
               { id: 'dark', label: 'Dark', icon: Moon, description: 'Easy on the eyes' },
@@ -165,16 +173,15 @@ export function ThemeSettings() {
             ].map((mode) => (
               <div
                 key={mode.id}
-                className={`p-4 rounded-lg border-2 cursor-pointer transition-all hover:border-primary/50 ${
-                  theme === mode.id ? 'border-primary bg-primary/5' : 'border-border'
-                }`}
+                className={`p-4 sm:p-6 rounded-lg border-2 cursor-pointer transition-all hover:border-primary/50 ${theme === mode.id ? 'border-primary bg-primary/5' : 'border-border'
+                  }`}
                 onClick={() => handleThemeChange(mode.id)}
               >
-                <div className="flex flex-col items-center text-center space-y-2">
-                  <mode.icon className="h-6 w-6" />
-                  <div>
-                    <div className="font-medium text-sm">{mode.label}</div>
-                    <div className="text-xs text-muted-foreground">{mode.description}</div>
+                <div className="flex sm:flex-col items-center sm:text-center gap-3 sm:gap-2">
+                  <mode.icon className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
+                  <div className="flex-1 sm:flex-none">
+                    <div className="font-semibold text-base sm:text-lg">{mode.label}</div>
+                    <div className="text-sm text-muted-foreground mt-1">{mode.description}</div>
                   </div>
                 </div>
               </div>
@@ -184,27 +191,29 @@ export function ThemeSettings() {
 
         {/* Color Scheme Selection */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm">Color Scheme</h4>
-          <div className="grid grid-cols-2 gap-4">
+          <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+            <Palette className="h-4 w-4 text-primary" />
+            Color Scheme
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {colorSchemes.map((scheme) => (
               <div
                 key={scheme.id}
-                className={`p-4 rounded-lg border-2 cursor-pointer transition-all hover:border-primary/50 ${
-                  preferences.colorScheme === scheme.id ? 'border-primary bg-primary/5' : 'border-border'
-                }`}
+                className={`p-4 sm:p-6 rounded-lg border-2 cursor-pointer transition-all hover:border-primary/50 ${preferences.colorScheme === scheme.id ? 'border-primary bg-primary/5' : 'border-border'
+                  }`}
                 onClick={() => handlePreferenceChange('colorScheme', scheme.id)}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <div
-                    className="w-12 h-12 rounded-lg border"
+                    className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg border flex-shrink-0"
                     style={{ background: scheme.preview }}
                   />
                   <div className="flex-1">
-                    <div className="font-medium text-sm">{scheme.name}</div>
-                    <div className="text-xs text-muted-foreground">{scheme.description}</div>
+                    <div className="font-semibold text-base">{scheme.name}</div>
+                    <div className="text-sm text-muted-foreground">{scheme.description}</div>
                     {scheme.id === 'kasefra' && (
-                      <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10 text-xs mt-1">
-                        Default
+                      <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10 text-sm mt-2">
+                        Default Theme
                       </Badge>
                     )}
                   </div>
@@ -216,11 +225,14 @@ export function ThemeSettings() {
 
         {/* Auto Theme Switching */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm">Automatic Theme Switching</h4>
+          <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+            <Clock className="h-4 w-4 text-primary" />
+            Automatic Theme Switching
+          </h4>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="autoSwitch" className="text-base">Schedule-based switching</Label>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="autoSwitch" className="text-base font-medium">Schedule-based switching</Label>
                 <div className="text-sm text-muted-foreground">
                   Automatically switch between light and dark themes
                 </div>
@@ -229,18 +241,19 @@ export function ThemeSettings() {
                 id="autoSwitch"
                 checked={preferences.autoThemeSwitch}
                 onCheckedChange={(checked) => handlePreferenceChange('autoThemeSwitch', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
             {preferences.autoThemeSwitch && (
-              <div className="grid grid-cols-2 gap-4 p-3 rounded-lg bg-muted/50 border">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-lg bg-muted/50 border">
                 <div className="space-y-2">
-                  <Label htmlFor="scheduleStart">Dark theme starts</Label>
+                  <Label htmlFor="scheduleStart" className="text-sm font-medium">Dark theme starts</Label>
                   <Select
                     value={preferences.scheduleStart}
                     onValueChange={(value) => handlePreferenceChange('scheduleStart', value)}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-10 sm:h-11">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -256,12 +269,12 @@ export function ThemeSettings() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="scheduleEnd">Light theme starts</Label>
+                  <Label htmlFor="scheduleEnd" className="text-sm font-medium">Light theme starts</Label>
                   <Select
                     value={preferences.scheduleEnd}
                     onValueChange={(value) => handlePreferenceChange('scheduleEnd', value)}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="h-10 sm:h-11">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -283,11 +296,14 @@ export function ThemeSettings() {
 
         {/* Display Options */}
         <div className="space-y-4">
-          <h4 className="font-medium text-sm">Display Options</h4>
+          <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+            <Eye className="h-4 w-4 text-primary" />
+            Display Options
+          </h4>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="highContrast" className="text-base flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="highContrast" className="text-base font-medium flex items-center gap-2">
                   <Contrast className="h-4 w-4" />
                   High Contrast Mode
                 </Label>
@@ -299,12 +315,13 @@ export function ThemeSettings() {
                 id="highContrast"
                 checked={preferences.highContrast}
                 onCheckedChange={(checked) => handlePreferenceChange('highContrast', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="reducedMotion" className="text-base flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="reducedMotion" className="text-base font-medium flex items-center gap-2">
                   <Eye className="h-4 w-4" />
                   Reduced Motion
                 </Label>
@@ -316,12 +333,13 @@ export function ThemeSettings() {
                 id="reducedMotion"
                 checked={preferences.reducedMotion}
                 onCheckedChange={(checked) => handlePreferenceChange('reducedMotion', checked)}
+                className="self-start sm:self-center"
               />
             </div>
 
-            <div className="flex items-center justify-between p-3 rounded-lg border">
-              <div className="space-y-0.5">
-                <Label htmlFor="compactMode" className="text-base flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+              <div className="space-y-1 flex-1">
+                <Label htmlFor="compactMode" className="text-base font-medium flex items-center gap-2">
                   <Smartphone className="h-4 w-4" />
                   Compact Mode
                 </Label>
@@ -333,6 +351,7 @@ export function ThemeSettings() {
                 id="compactMode"
                 checked={preferences.compactMode}
                 onCheckedChange={(checked) => handlePreferenceChange('compactMode', checked)}
+                className="self-start sm:self-center"
               />
             </div>
           </div>

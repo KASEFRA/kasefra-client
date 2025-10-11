@@ -82,52 +82,56 @@ export function AIAssistantSettings() {
 
   return (
     <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between">
+      <CardHeader className="px-4 sm:px-6">
+        <div className="flex flex-col gap-4">
           <div>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
               <Zap className="h-5 w-5 text-primary" />
               AI Assistant Settings
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm sm:text-base mt-1">
               Customize your smart financial assistant experience
             </CardDescription>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3">
             {hasChanges && (
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="text-sm self-start sm:self-auto">
                 Unsaved Changes
               </Badge>
             )}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              disabled={!hasChanges}
-            >
-              <RefreshCw className="h-4 w-4 mr-2" />
-              Reset
-            </Button>
-            <Button
-              size="sm"
-              onClick={handleSave}
-              disabled={!hasChanges}
-            >
-              <Save className="h-4 w-4 mr-2" />
-              Save
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleReset}
+                disabled={!hasChanges}
+                className="flex-1 sm:flex-none h-9 sm:h-10"
+              >
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Reset
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleSave}
+                disabled={!hasChanges}
+                className="flex-1 sm:flex-none h-9 sm:h-10"
+              >
+                <Save className="h-4 w-4 mr-2" />
+                Save Changes
+              </Button>
+            </div>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-8">
+      <CardContent className="space-y-6 sm:space-y-8 px-4 sm:px-6">
         {/* Master Toggle */}
-        <div className="flex items-center justify-between p-4 rounded-lg border-2 border-primary/20 bg-primary/5">
-          <div className="space-y-0.5">
-            <Label htmlFor="aiEnabled" className="text-base font-medium flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 sm:p-6 rounded-lg border-2 border-primary/20 bg-primary/5">
+          <div className="space-y-2 flex-1">
+            <Label htmlFor="aiEnabled" className="text-base sm:text-lg font-semibold flex items-center gap-2">
               <Brain className="h-5 w-5 text-primary" />
               AI Assistant
             </Label>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm sm:text-base text-muted-foreground">
               Enable or disable all AI-powered features
             </div>
           </div>
@@ -135,6 +139,7 @@ export function AIAssistantSettings() {
             id="aiEnabled"
             checked={preferences.enabled}
             onCheckedChange={(checked) => handlePreferenceChange('enabled', checked)}
+            className="self-start sm:self-center"
           />
         </div>
 
@@ -142,14 +147,14 @@ export function AIAssistantSettings() {
           <>
             {/* AI Features */}
             <div className="space-y-4">
-              <h4 className="font-medium text-sm flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" />
+              <h4 className="font-semibold text-base sm:text-lg flex items-center gap-2 border-b pb-2">
+                <TrendingUp className="h-4 w-4 text-primary" />
                 Smart Features
               </h4>
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 rounded-lg border">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="proactiveInsights" className="text-base">Proactive Insights</Label>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+                  <div className="space-y-1 flex-1">
+                    <Label htmlFor="proactiveInsights" className="text-base font-medium">Proactive Insights</Label>
                     <div className="text-sm text-muted-foreground">
                       Get smart suggestions without asking
                     </div>
@@ -158,12 +163,13 @@ export function AIAssistantSettings() {
                     id="proactiveInsights"
                     checked={preferences.proactiveInsights}
                     onCheckedChange={(checked) => handlePreferenceChange('proactiveInsights', checked)}
+                    className="self-start sm:self-center"
                   />
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-lg border">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="budgetAlerts" className="text-base">Budget Alerts</Label>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+                  <div className="space-y-1 flex-1">
+                    <Label htmlFor="budgetAlerts" className="text-base font-medium">Budget Alerts</Label>
                     <div className="text-sm text-muted-foreground">
                       AI-powered overspending predictions
                     </div>
@@ -172,12 +178,13 @@ export function AIAssistantSettings() {
                     id="budgetAlerts"
                     checked={preferences.budgetAlerts}
                     onCheckedChange={(checked) => handlePreferenceChange('budgetAlerts', checked)}
+                    className="self-start sm:self-center"
                   />
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-lg border">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="goalReminders" className="text-base">Goal Reminders</Label>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+                  <div className="space-y-1 flex-1">
+                    <Label htmlFor="goalReminders" className="text-base font-medium">Goal Reminders</Label>
                     <div className="text-sm text-muted-foreground">
                       Smart notifications for your financial goals
                     </div>
@@ -186,12 +193,13 @@ export function AIAssistantSettings() {
                     id="goalReminders"
                     checked={preferences.goalReminders}
                     onCheckedChange={(checked) => handlePreferenceChange('goalReminders', checked)}
+                    className="self-start sm:self-center"
                   />
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-lg border">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="spendingAnalysis" className="text-base">Spending Analysis</Label>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border">
+                  <div className="space-y-1 flex-1">
+                    <Label htmlFor="spendingAnalysis" className="text-base font-medium">Spending Analysis</Label>
                     <div className="text-sm text-muted-foreground">
                       Automatic transaction categorization and insights
                     </div>
