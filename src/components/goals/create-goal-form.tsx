@@ -450,14 +450,15 @@ export function CreateGoalForm({ trigger }: CreateGoalFormProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {trigger || (
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            Create Goal
+          <Button size="sm" className="text-xs sm:text-sm h-7 sm:h-8">
+            <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Create Goal</span>
+            <span className="sm:hidden">New Goal</span>
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
+      <DialogContent className="max-w-sm sm:max-w-md lg:max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
+        <DialogHeader className="px-1 sm:px-0">
           <DialogTitle className="flex items-center gap-2">
             <Target className="h-5 w-5 text-primary" />
             Create New Goal

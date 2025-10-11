@@ -1,4 +1,25 @@
-import { User } from '@/types';
+interface User {
+  id: string
+  name: string
+  email: string
+  avatar: string
+  currency: string
+  language: string
+  joinedDate: string
+  preferences: {
+    theme: string
+    notifications: boolean
+    twoFactor: boolean
+    aiAssistant: boolean
+  }
+  financialProfile: {
+    monthlyIncome: number
+    monthlyExpenses: number
+    savingsRate: number
+    debtRatio: number
+    emergencyFund: number
+  }
+}
 
 export const mockUser: User = {
   id: "user-123",
@@ -16,9 +37,9 @@ export const mockUser: User = {
   },
   financialProfile: {
     monthlyIncome: 30500,
-    monthlyExpenses: 22000,
-    savingsRate: 27.9,
-    debtRatio: 0.8,
-    emergencyFund: 65000,
+    monthlyExpenses: 22800,
+    savingsRate: 25.2,
+    debtRatio: 13.8,
+    emergencyFund: 238000, // Aligned with CASH_ASSETS
   },
 };

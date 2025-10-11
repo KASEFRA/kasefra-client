@@ -62,7 +62,7 @@ export function RecurringPaymentsCard() {
             </CardDescription>
           </div>
           <Badge variant="secondary" className="text-[10px] sm:text-xs px-2 py-1 shrink-0">
-            October 2025
+            December 2025
           </Badge>
         </div>
       </CardHeader>
@@ -113,36 +113,36 @@ export function RecurringPaymentsCard() {
             {mockRecurringPayments
               .sort((a, b) => a.daysUntilDue - b.daysUntilDue)
               .map((payment) => (
-              <div
-                key={payment.id}
-                className="flex items-center justify-between gap-2 p-2 sm:p-3 rounded-lg border hover:bg-muted/50 transition-colors"
-              >
-                <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs sm:text-sm shrink-0">
-                    {getMerchantIcon(payment.merchant)}
+                <div
+                  key={payment.id}
+                  className="flex items-center justify-between gap-2 p-2 sm:p-3 rounded-lg border hover:bg-muted/50 transition-colors"
+                >
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs sm:text-sm shrink-0">
+                      {getMerchantIcon(payment.merchant)}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="font-medium text-xs sm:text-sm truncate flex items-center gap-1.5">
+                        {payment.name}
+                        {payment.isAutomatic && (
+                          <CheckCircle2 className="h-3 w-3 text-secondary shrink-0" />
+                        )}
+                      </div>
+                      <div className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1.5">
+                        <span className="truncate">{payment.merchant}</span>
+                        <span className="shrink-0">•</span>
+                        <span className="shrink-0">{payment.category}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-medium text-xs sm:text-sm truncate flex items-center gap-1.5">
-                      {payment.name}
-                      {payment.isAutomatic && (
-                        <CheckCircle2 className="h-3 w-3 text-secondary shrink-0" />
-                      )}
+                  <div className="text-right space-y-0.5 shrink-0">
+                    <div className="font-semibold text-xs sm:text-sm whitespace-nowrap">
+                      {formatCurrency(payment.amount)}
                     </div>
-                    <div className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1.5">
-                      <span className="truncate">{payment.merchant}</span>
-                      <span className="shrink-0">•</span>
-                      <span className="shrink-0">{payment.category}</span>
-                    </div>
+                    {getStatusBadge(payment)}
                   </div>
                 </div>
-                <div className="text-right space-y-0.5 shrink-0">
-                  <div className="font-semibold text-xs sm:text-sm whitespace-nowrap">
-                    {formatCurrency(payment.amount)}
-                  </div>
-                  {getStatusBadge(payment)}
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
 

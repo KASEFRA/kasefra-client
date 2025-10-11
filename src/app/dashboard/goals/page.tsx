@@ -152,102 +152,103 @@ export default function GoalsPage() {
   const overallProgress = (totalCurrentAmount / totalTargetAmount) * 100
 
   return (
-    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
+    <div className="space-y-4 sm:space-y-6 lg:space-y-8 px-3 sm:px-4 lg:px-6">
 
       {/* Goals Summary Cards */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Goals</CardTitle>
-            <Target className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Active Goals</CardTitle>
+            <Target className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold mb-2">{activeGoals}</div>
-            <p className="text-xs text-muted-foreground">
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{activeGoals}</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">
               {mockGoals.filter(g => g.aiPredictions.successProbability > 0.8).length} on track
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Target</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Target</CardTitle>
+            <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold mb-2">
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">
               AED {(totalTargetAmount / 1000).toFixed(0)}K
             </div>
-            <p className="text-xs text-muted-foreground">Across all goals</p>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">Across all goals</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Saved</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Saved</CardTitle>
+            <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600 mb-2">
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold text-green-600 mb-1 sm:mb-2">
               AED {(totalCurrentAmount / 1000).toFixed(0)}K
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-[10px] sm:text-xs text-muted-foreground">
               {overallProgress.toFixed(1)}% of total target
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Progress Rate</CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Progress Rate</CardTitle>
+            <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold mb-2">{overallProgress.toFixed(1)}%</div>
-            <p className="text-xs text-muted-foreground">Overall completion</p>
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{overallProgress.toFixed(1)}%</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">Overall completion</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Active Goals Grid */}
       <Card>
-        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 pb-4">
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0 pb-3 sm:pb-4 px-3 sm:px-6 pt-3 sm:pt-6">
           <div>
-            <CardTitle className="text-base sm:text-lg font-semibold">Your Goals</CardTitle>
-            <CardDescription className="text-sm">
+            <CardTitle className="text-lg sm:text-xl font-semibold">Your Goals</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">
               Track progress and manage your financial objectives
             </CardDescription>
           </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
-            <Badge variant="secondary" className="text-sm justify-center sm:justify-start">
+          <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:gap-2 w-full sm:w-auto">
+            <Badge variant="secondary" className="text-xs sm:text-sm justify-center sm:justify-start">
               {activeGoals} Active
             </Badge>
-            <Button variant="outline" size="sm" className="w-full sm:w-auto">
-              <Settings className="h-4 w-4 mr-2" />
-              <span className="hidden sm:inline">Settings</span>
-              <span className="sm:hidden">Settings</span>
-            </Button>
-            <CreateGoalForm />
+            <div className="flex gap-2">
+              <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
+                <Settings className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="text-xs sm:text-sm">Settings</span>
+              </Button>
+              <CreateGoalForm />
+            </div>
           </div>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
             {mockGoals.map((goal) => (
               <GoalCard key={goal.id} goal={goal} />
             ))}
           </div>
 
           {/* Add New Goal Card */}
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <CreateGoalForm
               trigger={
                 <Card className="border-dashed border-2 border-primary/30 hover:border-primary/50 cursor-pointer transition-all duration-200 hover:shadow-md">
-                  <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 mb-4">
-                      <Plus className="h-8 w-8 text-primary" />
+                  <CardContent className="flex flex-col items-center justify-center py-8 sm:py-12 text-center px-3 sm:px-6">
+                    <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-md bg-primary/10 mb-3 sm:mb-4">
+                      <Plus className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
                     </div>
-                    <h3 className="font-semibold text-primary mb-2">Create New Goal</h3>
-                    <p className="text-xs text-muted-foreground">
+                    <h3 className="text-sm sm:text-base font-semibold text-primary mb-1 sm:mb-2">Create New Goal</h3>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">
                       Set a new financial target and track your progress
                     </p>
                   </CardContent>

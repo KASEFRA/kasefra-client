@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -37,6 +38,7 @@ import { BankAvatar } from "@/components/accounts/bank-avatar"
 import { cn } from "@/lib/utils"
 
 export default function TransactionsPage() {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState("")
   const [viewMode, setViewMode] = useState<'grouped' | 'table'>('table')
 
@@ -61,7 +63,7 @@ export default function TransactionsPage() {
     let filtered = mockTransactions.filter(transaction => {
       // Search filter
       const matchesSearch = transaction.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           transaction.merchant.toLowerCase().includes(searchQuery.toLowerCase())
+        transaction.merchant.toLowerCase().includes(searchQuery.toLowerCase())
 
       // Category filter
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(transaction.category)
@@ -193,20 +195,20 @@ export default function TransactionsPage() {
     return (
       <Collapsible defaultOpen className="border-b border-border/50 last:border-b-0">
         <CollapsibleTrigger asChild>
-          <Button variant="ghost" className="w-full justify-between p-4 h-auto hover:bg-muted/50">
-            <div className="flex items-center gap-3">
+          <Button variant="ghost" className="w-full justify-between px-3 py-3 sm:p-4 h-auto hover:bg-muted/50">
+            <div className="flex items-center gap-2 sm:gap-3">
               <div className="flex items-center gap-2">
-                <span className="font-medium text-sm text-muted-foreground">{formattedDate}</span>
+                <span className="font-medium text-xs sm:text-sm text-muted-foreground">{formattedDate}</span>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <span className={cn(
-                "font-semibold text-lg",
+                "font-semibold text-base sm:text-lg",
                 dayTotal >= 0 ? "text-green-600" : "text-red-600"
               )}>
                 {dayTotal >= 0 ? "+" : ""}{formatCurrency(dayTotal)}
               </span>
-              <ChevronDown className="h-4 w-4 text-muted-foreground" />
+              <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
             </div>
           </Button>
         </CollapsibleTrigger>
@@ -214,22 +216,29 @@ export default function TransactionsPage() {
           <Table>
             <TableBody>
               {dayTransactions.map((transaction) => (
-                <TableRow key={transaction.id} className="hover:bg-muted/50">
+                <TableRow
+                  key={transaction.id}
+                  className="hover:bg-muted/50 cursor-pointer"
+                  onClick={() => router.push(`/dashboard/transactions/${transaction.id}`)}
+                >
                   {/* Description Column */}
-                  <TableCell className="py-4 pl-4 sm:pl-8">
-                    <div className="flex items-center gap-2 sm:gap-3">
+                  <TableCell className="py-3 sm:py-4 pl-3 sm:pl-8">
+                    <div className="flex items-start sm:items-center gap-2 sm:gap-3">
                       <BankAvatar
                         bankName={getBankName(transaction.accountId)}
                         size="sm"
                       />
                       <div className="flex flex-col min-w-0 flex-1">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
-                          <span className="font-medium text-sm truncate">{transaction.description}</span>
-                          <Badge variant="secondary" className={cn("text-xs w-fit", getCategoryColor(transaction.category))}>
+                          <span className="font-medium text-xs sm:text-sm truncate">{transaction.description}</span>
+                          <Badge variant="secondary" className={cn("text-[10px] sm:text-xs w-fit", getCategoryColor(transaction.category))}>
                             {transaction.category}
                           </Badge>
                         </div>
-                        <div className="text-xs text-muted-foreground truncate">{transaction.merchant}</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground truncate">{transaction.merchant}</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground truncate sm:hidden">
+                          {getAccountName(transaction.accountId)}
+                        </div>
                         <div className="text-xs text-muted-foreground truncate hidden sm:block">
                           {getAccountName(transaction.accountId)}
                         </div>
@@ -238,7 +247,7 @@ export default function TransactionsPage() {
                   </TableCell>
 
                   {/* Amount Column */}
-                  <TableCell className="text-right py-4 pr-2 sm:pr-4 whitespace-nowrap">
+                  <TableCell className="text-right py-3 sm:py-4 pr-2 sm:pr-4 whitespace-nowrap">
                     <div className={cn(
                       "font-semibold text-sm sm:text-base",
                       transaction.amount >= 0 ? "text-green-600" : "text-red-600"
@@ -268,61 +277,61 @@ export default function TransactionsPage() {
   }
 
   return (
-    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
+    <div className="space-y-4 sm:space-y-6 lg:space-y-8 px-3 sm:px-4 lg:px-6">
       {/* Insight Cards */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Monthly Spending</CardTitle>
-            <TrendingDown className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Monthly Spending</CardTitle>
+            <TrendingDown className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{formatCurrency(monthlySpending)}</div>
-            <p className="text-xs text-muted-foreground">
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">{formatCurrency(monthlySpending)}</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">
               October 2025 expenses
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Average Transaction</CardTitle>
-            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Average Transaction</CardTitle>
+            <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{formatCurrency(averageTransaction)}</div>
-            <p className="text-xs text-muted-foreground">
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">{formatCurrency(averageTransaction)}</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">
               Across all transactions
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Largest Purchase</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Largest Purchase</CardTitle>
+            <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{formatCurrency(largestPurchase)}</div>
-            <p className="text-xs text-muted-foreground">
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">{formatCurrency(largestPurchase)}</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">
               This month&apos;s biggest expense
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Income vs Expenses</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Income vs Expenses</CardTitle>
+            <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
             <div className={cn(
-              "text-2xl font-bold",
+              "text-lg sm:text-2xl font-bold",
               incomeVsExpenseRatio >= 0 ? "text-green-600" : "text-red-600"
             )}>
               {incomeVsExpenseRatio >= 0 ? "+" : ""}{incomeVsExpenseRatio.toFixed(1)}%
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-[10px] sm:text-xs text-muted-foreground">
               Savings rate
             </p>
           </CardContent>
@@ -331,40 +340,46 @@ export default function TransactionsPage() {
 
       {/* Transactions List */}
       <Card>
-            <CardHeader className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between pb-4">
+        <CardHeader className="px-3 sm:px-6 py-3 sm:py-6">
+          <div className="flex flex-col space-y-3 sm:space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <CardTitle className="text-base sm:text-lg font-semibold">All Transactions</CardTitle>
-                <CardDescription className="text-sm">
+                <CardTitle className="text-lg sm:text-xl">All Transactions</CardTitle>
+                <CardDescription className="text-xs sm:text-sm mt-1">
                   {allTransactions.length} transactions
                 </CardDescription>
               </div>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
-                <div className="relative w-full sm:w-64">
-                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input
-                    placeholder="Search transactions..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
-                    <Calendar className="mr-2 h-4 w-4" />
-                    <span className="hidden sm:inline">Date</span>
-                  </Button>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
-                        <Filter className="mr-2 h-4 w-4" />
-                        <span className="hidden sm:inline">Filters</span>
-                        {activeFiltersCount > 0 && (
-                          <span className="ml-1 bg-primary text-primary-foreground rounded-full text-xs px-1.5 py-0.5 min-w-[1.25rem] h-5 flex items-center justify-center">
-                            {activeFiltersCount}
-                          </span>
-                        )}
-                      </Button>
-                    </DropdownMenuTrigger>
+            </div>
+
+            <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:gap-3">
+              <div className="relative flex-1 sm:max-w-xs">
+                <Search className="absolute left-2 sm:left-3 top-1/2 h-3 w-3 sm:h-4 sm:w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Search transactions..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-8 sm:pl-10 text-sm h-8 sm:h-9"
+                />
+              </div>
+
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" className="flex-1 sm:flex-none px-2 sm:px-3">
+                  <Calendar className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" />
+                  <span className="hidden sm:inline text-xs sm:text-sm">Date</span>
+                </Button>
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="flex-1 sm:flex-none px-2 sm:px-3">
+                      <Filter className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" />
+                      <span className="hidden sm:inline text-xs sm:text-sm">Filters</span>
+                      {activeFiltersCount > 0 && (
+                        <span className="ml-1 bg-primary text-primary-foreground rounded-full text-xs px-1.5 py-0.5 min-w-[1.25rem] h-5 flex items-center justify-center">
+                          {activeFiltersCount}
+                        </span>
+                      )}
+                    </Button>
+                  </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-64">
                     <DropdownMenuLabel>Filter Transactions</DropdownMenuLabel>
                     <DropdownMenuSeparator />
@@ -452,97 +467,155 @@ export default function TransactionsPage() {
                     )}
                   </DropdownMenuContent>
                 </DropdownMenu>
-                </div>
+
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setViewMode(viewMode === 'grouped' ? 'table' : 'grouped')}
-                  className="w-full sm:w-auto"
+                  className="flex-1 sm:flex-none px-2 sm:px-3"
                 >
-                  {viewMode === 'grouped' ? <Grid className="mr-2 h-4 w-4" /> : <List className="mr-2 h-4 w-4" />}
-                  {viewMode === 'grouped' ? 'Table view' : 'Grouped view'}
+                  {viewMode === 'grouped' ? <Grid className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" /> : <List className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" />}
+                  <span className="hidden sm:inline text-xs sm:text-sm">
+                    {viewMode === 'grouped' ? 'Table view' : 'Grouped view'}
+                  </span>
                 </Button>
               </div>
-            </CardHeader>
-            <CardContent className="p-0">
-              {viewMode === 'grouped' ? (
-                <>
-                  {/* Table Headers */}
-                  <div className="border-b border-border/50">
-                    <div className="grid grid-cols-2 gap-4 p-4 text-sm font-medium text-muted-foreground">
-                      <div className="pl-8">Description</div>
-                      <div className="text-right pr-4">Amount</div>
-                    </div>
-                  </div>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="p-0">
+          {viewMode === 'grouped' ? (
+            <>
+              {/* Table Headers - Hidden on mobile */}
+              <div className="border-b border-border/50 hidden sm:block">
+                <div className="grid grid-cols-2 gap-4 p-4 text-sm font-medium text-muted-foreground">
+                  <div className="pl-8">Description</div>
+                  <div className="text-right pr-4">Amount</div>
+                </div>
+              </div>
 
-                  {/* Transaction Groups */}
-                  {groupedTransactions.map(([date, dayTransactions]) => (
-                    <DateGroup
-                      key={date}
-                      date={date}
-                      dayTransactions={dayTransactions}
-                    />
-                  ))}
-                </>
-              ) : (
-                <>
-                  {/* Standard Table View */}
-                  <Table>
-                    <thead>
-                      <tr className="border-b">
-                        <th className="text-left py-3 px-4 font-medium">Date</th>
-                        <th className="text-left py-3 px-4 font-medium">Description</th>
-                        <th className="text-left py-3 px-4 font-medium">Category</th>
-                        <th className="text-left py-3 px-4 font-medium">Account</th>
-                        <th className="text-right py-3 px-4 font-medium">Amount</th>
-                      </tr>
-                    </thead>
-                    <TableBody>
-                      {filteredTransactions.map((transaction) => (
-                        <TableRow key={transaction.id} className="hover:bg-muted/50">
-                          <TableCell className="py-3 px-4">
-                            <div className="text-sm text-muted-foreground">
-                              {new Date(transaction.date).toLocaleDateString('en-US', {
-                                month: 'short',
-                                day: 'numeric'
-                              })}
+              {/* Transaction Groups */}
+              {groupedTransactions.map(([date, dayTransactions]) => (
+                <DateGroup
+                  key={date}
+                  date={date}
+                  dayTransactions={dayTransactions as typeof mockTransactions}
+                />
+              ))}
+            </>
+          ) : (
+            <>
+              {/* Standard Table View */}
+              <div className="hidden sm:block">
+                <Table>
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-3 px-4 font-medium text-sm">Date</th>
+                      <th className="text-left py-3 px-4 font-medium text-sm">Description</th>
+                      <th className="text-left py-3 px-4 font-medium text-sm">Category</th>
+                      <th className="text-left py-3 px-4 font-medium text-sm">Account</th>
+                      <th className="text-right py-3 px-4 font-medium text-sm">Amount</th>
+                    </tr>
+                  </thead>
+                  <TableBody>
+                    {filteredTransactions.map((transaction) => (
+                      <TableRow
+                        key={transaction.id}
+                        className="hover:bg-muted/50 cursor-pointer"
+                        onClick={() => router.push(`/dashboard/transactions/${transaction.id}`)}
+                      >
+                        <TableCell className="py-3 px-4">
+                          <div className="text-sm text-muted-foreground">
+                            {new Date(transaction.date).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric'
+                            })}
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-3 px-4">
+                          <div className="flex items-center gap-3">
+                            <BankAvatar
+                              bankName={getBankName(transaction.accountId)}
+                              size="sm"
+                            />
+                            <div className="flex flex-col">
+                              <div className="font-medium text-sm">{transaction.description}</div>
+                              <div className="text-xs text-muted-foreground">{transaction.merchant}</div>
                             </div>
-                          </TableCell>
-                          <TableCell className="py-3 px-4">
-                            <div className="flex items-center gap-3">
-                              <BankAvatar
-                                bankName={getBankName(transaction.accountId)}
-                                size="sm"
-                              />
-                              <div className="flex flex-col">
-                                <div className="font-medium text-sm">{transaction.description}</div>
-                                <div className="text-xs text-muted-foreground">{transaction.merchant}</div>
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-3 px-4">
+                          <Badge variant="secondary" className={cn("text-xs", getCategoryColor(transaction.category))}>
+                            {transaction.category}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="py-3 px-4">
+                          <div className="text-sm">{getAccountName(transaction.accountId)}</div>
+                        </TableCell>
+                        <TableCell className="text-right py-3 px-4">
+                          <div className={cn(
+                            "font-semibold",
+                            transaction.amount >= 0 ? "text-green-600" : "text-red-600"
+                          )}>
+                            {transaction.amount >= 0 ? "+" : ""}{formatCurrency(transaction.amount)}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+
+              {/* Mobile Card View */}
+              <div className="block sm:hidden">
+                <div className="divide-y divide-border">
+                  {filteredTransactions.map((transaction) => (
+                    <div
+                      key={transaction.id}
+                      className="p-3 hover:bg-muted/50 cursor-pointer"
+                      onClick={() => router.push(`/dashboard/transactions/${transaction.id}`)}
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-2 flex-1 min-w-0">
+                          <BankAvatar
+                            bankName={getBankName(transaction.accountId)}
+                            size="sm"
+                          />
+                          <div className="flex flex-col min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-2 mb-1">
+                              <span className="font-medium text-sm truncate">{transaction.description}</span>
+                              <div className={cn(
+                                "font-semibold text-sm whitespace-nowrap",
+                                transaction.amount >= 0 ? "text-green-600" : "text-red-600"
+                              )}>
+                                {transaction.amount >= 0 ? "+" : ""}{formatCurrency(transaction.amount)}
                               </div>
                             </div>
-                          </TableCell>
-                          <TableCell className="py-3 px-4">
-                            <Badge variant="secondary" className={cn("text-xs", getCategoryColor(transaction.category))}>
-                              {transaction.category}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="py-3 px-4">
-                            <div className="text-sm">{getAccountName(transaction.accountId)}</div>
-                          </TableCell>
-                          <TableCell className="text-right py-3 px-4">
-                            <div className={cn(
-                              "font-semibold",
-                              transaction.amount >= 0 ? "text-green-600" : "text-red-600"
-                            )}>
-                              {transaction.amount >= 0 ? "+" : ""}{formatCurrency(transaction.amount)}
+                            <div className="text-xs text-muted-foreground truncate mb-1">{transaction.merchant}</div>
+                            <div className="flex items-center justify-between gap-2">
+                              <Badge variant="secondary" className={cn("text-[10px] w-fit", getCategoryColor(transaction.category))}>
+                                {transaction.category}
+                              </Badge>
+                              <div className="text-xs text-muted-foreground">
+                                {new Date(transaction.date).toLocaleDateString('en-US', {
+                                  month: 'short',
+                                  day: 'numeric'
+                                })}
+                              </div>
                             </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </>
-              )}
-            </CardContent>
+                            <div className="text-xs text-muted-foreground truncate mt-1">
+                              {getAccountName(transaction.accountId)}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </CardContent>
       </Card>
     </div>
   )

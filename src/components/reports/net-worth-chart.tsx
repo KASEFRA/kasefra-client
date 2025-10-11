@@ -28,8 +28,51 @@ import {
   DollarSign,
   Home,
   Car,
+  Building,
+  Wallet,
+  CreditCard,
   Briefcase
 } from "lucide-react"
+import {
+  mockFinancialData
+} from "@/lib/mock-data"
+import {
+  CURRENT_NET_WORTH,
+  CASH_ASSETS,
+  INVESTMENTS,
+  VEHICLE,
+  DEBT
+} from "@/lib/mock-data/financial-constants"
+
+// Generate net worth data from actual financial data
+const generateNetWorthData = () => {
+  return mockFinancialData.monthly.data.slice(-6).map((data, index) => {
+    const monthNames = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
+    const totalAssets = data.networth + Math.abs(DEBT) // Add back debt to get total assets
+    const totalLiabilities = Math.abs(DEBT)
+
+    return {
+      month: monthNames[index],
+      totalAssets,
+      totalLiabilities,
+      netWorth: data.networth,
+      assets: {
+        cash: Math.round(CASH_ASSETS * 0.4), // Current account portion
+        savings: Math.round(CASH_ASSETS * 0.6), // Savings account portion  
+        investments: INVESTMENTS,
+        property: 0, // No property in our data
+        vehicle: VEHICLE,
+        other: 0
+      },
+      liabilities: {
+        mortgage: 0,
+        carLoan: 0,
+        creditCard: Math.abs(DEBT),
+        personalLoan: 0
+      }
+    }
+  })
+}
 
 interface NetWorthData {
   month: string
@@ -52,56 +95,7 @@ interface NetWorthData {
   }
 }
 
-const mockNetWorthData: NetWorthData[] = [
-  {
-    month: 'Aug',
-    totalAssets: 135000,
-    totalLiabilities: 10000,
-    netWorth: 125000,
-    assets: { cash: 25000, savings: 45000, investments: 15000, property: 35000, vehicle: 12000, other: 3000 },
-    liabilities: { mortgage: 0, carLoan: 8000, creditCard: 1500, personalLoan: 500 }
-  },
-  {
-    month: 'Sep',
-    totalAssets: 142300,
-    totalLiabilities: 9500,
-    netWorth: 132800,
-    assets: { cash: 27000, savings: 48000, investments: 16500, property: 35000, vehicle: 12500, other: 3300 },
-    liabilities: { mortgage: 0, carLoan: 7500, creditCard: 1300, personalLoan: 700 }
-  },
-  {
-    month: 'Oct',
-    totalAssets: 148400,
-    totalLiabilities: 9000,
-    netWorth: 139400,
-    assets: { cash: 28500, savings: 52000, investments: 18000, property: 35000, vehicle: 11900, other: 3000 },
-    liabilities: { mortgage: 0, carLoan: 7000, creditCard: 1200, personalLoan: 800 }
-  },
-  {
-    month: 'Nov',
-    totalAssets: 153100,
-    totalLiabilities: 8500,
-    netWorth: 144600,
-    assets: { cash: 30000, savings: 55000, investments: 19500, property: 35000, vehicle: 10600, other: 3000 },
-    liabilities: { mortgage: 0, carLoan: 6500, creditCard: 1000, personalLoan: 1000 }
-  },
-  {
-    month: 'Dec',
-    totalAssets: 160200,
-    totalLiabilities: 9000,
-    netWorth: 151200,
-    assets: { cash: 32000, savings: 58000, investments: 21000, property: 35000, vehicle: 11200, other: 3000 },
-    liabilities: { mortgage: 0, carLoan: 6000, creditCard: 1500, personalLoan: 1500 }
-  },
-  {
-    month: 'Jan',
-    totalAssets: 167000,
-    totalLiabilities: 9800,
-    netWorth: 157200,
-    assets: { cash: 35000, savings: 62000, investments: 22500, property: 35000, vehicle: 9500, other: 3000 },
-    liabilities: { mortgage: 0, carLoan: 5500, creditCard: 1800, personalLoan: 2500 }
-  }
-]
+const mockNetWorthData: NetWorthData[] = generateNetWorthData()
 
 const ASSET_COLORS = [
   'hsl(var(--primary))',
@@ -120,15 +114,15 @@ export function NetWorthChart() {
   const growthAmount = currentData.netWorth - previousData.netWorth
   const growthRate = ((growthAmount / previousData.netWorth) * 100).toFixed(1)
 
-  // Calculate year-over-year growth
-  const yearAgoNetWorth = 125000 // Mock value
-  const yoyGrowth = ((currentData.netWorth - yearAgoNetWorth) / yearAgoNetWorth * 100).toFixed(1)
+  // Calculate year-over-year growth using real previous year data
+  const previousYearNetWorth = mockFinancialData.yearly.data[mockFinancialData.yearly.data.length - 2]?.networth || 531800
+  const yoyGrowth = ((currentData.netWorth - previousYearNetWorth) / previousYearNetWorth * 100).toFixed(1)
 
   // Asset allocation data for pie chart
   const assetData = Object.entries(currentData.assets).map(([key, value]) => ({
     name: key.charAt(0).toUpperCase() + key.slice(1),
-    value,
-    percentage: ((value / currentData.totalAssets) * 100).toFixed(1)
+    value: value as number,
+    percentage: (((value as number) / currentData.totalAssets) * 100).toFixed(1)
   }))
 
   const renderTrendChart = () => (
@@ -150,7 +144,7 @@ export function NetWorthChart() {
           formatter={(value, name) => [
             `AED ${value.toLocaleString()}`,
             name === 'totalAssets' ? 'Total Assets' :
-            name === 'totalLiabilities' ? 'Total Liabilities' : 'Net Worth'
+              name === 'totalLiabilities' ? 'Total Liabilities' : 'Net Worth'
           ]}
         />
         <Area
@@ -244,7 +238,7 @@ export function NetWorthChart() {
       case 'trend':
         return [
           `Net worth increased by AED ${growthAmount.toLocaleString()} (${growthRate}%) this month`,
-          `Year-over-year growth: ${yoyGrowth}% (AED ${(currentData.netWorth - yearAgoNetWorth).toLocaleString()})`,
+          `Year-over-year growth: ${yoyGrowth}% (AED ${(currentData.netWorth - previousYearNetWorth).toLocaleString()})`,
           `Asset to liability ratio: ${(currentData.totalAssets / currentData.totalLiabilities).toFixed(1)}:1`
         ]
       case 'assets':
@@ -270,74 +264,77 @@ export function NetWorthChart() {
 
   return (
     <Card className="bg-card border shadow-sm">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-primary" />
-              Net Worth Analysis
+      <CardHeader className="px-3 sm:px-6 py-3 sm:py-6">
+        <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0 flex-1">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
+              <span className="truncate">Net Worth Analysis</span>
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-xs sm:text-sm">
               {chartType === 'trend' && 'Net worth growth over time'}
               {chartType === 'assets' && 'Asset allocation breakdown'}
               {chartType === 'comparison' && 'Assets vs liabilities comparison'}
             </CardDescription>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 justify-start sm:justify-end">
             <Button
               variant={chartType === 'trend' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setChartType('trend')}
+              className="h-7 sm:h-8 px-2 sm:px-3"
             >
-              <TrendingUp className="h-4 w-4" />
+              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
             <Button
               variant={chartType === 'assets' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setChartType('assets')}
+              className="h-7 sm:h-8 px-2 sm:px-3"
             >
-              <PieChartIcon className="h-4 w-4" />
+              <PieChartIcon className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
             <Button
               variant={chartType === 'comparison' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setChartType('comparison')}
+              className="h-7 sm:h-8 px-2 sm:px-3"
             >
-              <BarChart3 className="h-4 w-4" />
+              <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6 pb-3 sm:pb-6">
         {/* Key Metrics */}
-        <div className="grid grid-cols-3 gap-4">
-          <div className="text-center p-3 bg-muted/50 rounded-lg">
-            <div className="text-lg font-bold text-secondary">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4">
+          <div className="text-center p-2 sm:p-3 bg-muted/50 rounded-lg">
+            <div className="text-sm sm:text-lg font-bold text-secondary">
               AED {(currentData.netWorth / 1000).toFixed(0)}K
             </div>
-            <div className="text-sm text-muted-foreground">Net Worth</div>
-            <div className="flex items-center justify-center gap-1 text-xs mt-1">
-              <TrendingUp className="h-3 w-3 text-secondary" />
+            <div className="text-[10px] sm:text-sm text-muted-foreground">Net Worth</div>
+            <div className="flex items-center justify-center gap-1 text-[9px] sm:text-xs mt-1">
+              <TrendingUp className="h-2 w-2 sm:h-3 sm:w-3 text-secondary" />
               <span className="text-secondary">+{growthRate}%</span>
             </div>
           </div>
 
-          <div className="text-center p-3 bg-muted/50 rounded-lg">
-            <div className="text-lg font-bold text-primary">
+          <div className="text-center p-2 sm:p-3 bg-muted/50 rounded-lg">
+            <div className="text-sm sm:text-lg font-bold text-primary">
               AED {(currentData.totalAssets / 1000).toFixed(0)}K
             </div>
-            <div className="text-sm text-muted-foreground">Total Assets</div>
-            <div className="text-xs text-primary mt-1">
+            <div className="text-[10px] sm:text-sm text-muted-foreground">Total Assets</div>
+            <div className="text-[9px] sm:text-xs text-primary mt-1">
               {assetData.length} Categories
             </div>
           </div>
 
-          <div className="text-center p-3 bg-muted/50 rounded-lg">
-            <div className="text-lg font-bold text-destructive">
+          <div className="text-center p-2 sm:p-3 bg-muted/50 rounded-lg">
+            <div className="text-sm sm:text-lg font-bold text-destructive">
               AED {(currentData.totalLiabilities / 1000).toFixed(0)}K
             </div>
-            <div className="text-sm text-muted-foreground">Total Liabilities</div>
-            <div className="text-xs text-destructive mt-1">
+            <div className="text-[10px] sm:text-sm text-muted-foreground">Total Liabilities</div>
+            <div className="text-[9px] sm:text-xs text-destructive mt-1">
               {((currentData.totalLiabilities / currentData.totalAssets) * 100).toFixed(0)}% of Assets
             </div>
           </div>

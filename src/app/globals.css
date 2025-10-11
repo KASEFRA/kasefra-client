@@ -69,11 +69,11 @@
     /* Kasefra purple #6e4993 */
     --primary-foreground: 0 0% 100%;
     /* Pure white */
-    --secondary: 270 40% 55%;
+    --secondary: 270 40% 64%;
     /* Visible purple for secondary elements */
-    --secondary-foreground: 0 0% 100%;
+    --secondary-foreground: 0 0% 96%;
     /* White text on secondary */
-    --accent: 220 13% 92%;
+    --accent: 220 13% 62%;
     /* Subtle accent background */
     --accent-foreground: 270 34% 25%;
     /* Darker Kasefra purple text */
@@ -143,7 +143,7 @@
     /* Bright visible purple for dark mode */
     --secondary-foreground: 0 0% 100%;
     /* Pure white text */
-    --accent: 244 47 15%;
+    --accent: 244 47 65%;
     /* Premium dark purple accent */
     --accent-foreground: 220 13% 95%;
     /* Clean white text */

@@ -27,7 +27,7 @@ export function BudgetOverview() {
     <Card>
       <CardHeader className="px-3 sm:px-6 pb-3 sm:pb-6">
         <CardTitle className="text-sm sm:text-base lg:text-lg">Budget</CardTitle>
-        <CardDescription className="text-xs sm:text-sm">January 2025</CardDescription>
+        <CardDescription className="text-xs sm:text-sm">December 2025</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6">
         {/* Fixed Expenses */}
@@ -51,7 +51,7 @@ export function BudgetOverview() {
             />
             <div className="flex justify-between text-[10px] sm:text-xs text-muted-foreground">
               <span>{formatCurrency(fixed.budgeted)} budget</span>
-              <span>{((fixed.spent / fixed.budgeted) * 100).toFixed(0)}%</span>
+              <span>{((fixed.spent / fixed.budgeted) * 100).toFixed(1)}%</span>
             </div>
           </div>
         </div>

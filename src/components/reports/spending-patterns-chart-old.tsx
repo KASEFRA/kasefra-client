@@ -34,11 +34,11 @@ import {
   CheckCircle,
   Zap
 } from "lucide-react"
-import {
-  reportsSpendingData,
+import { 
+  reportsSpendingData, 
   getSpendingInsights,
-  REPORTS_CATEGORY_COLORS,
-  type SpendingCategoryData
+  CATEGORY_COLORS,
+  type SpendingCategoryData 
 } from "@/lib/mock-data"
 
 const CATEGORY_ICONS = {
@@ -58,6 +58,29 @@ export function SpendingPatternsChart() {
   const totalSpending = mockSpendingData.reduce((sum, item) => sum + item.amount, 0)
   const insights = getSpendingInsights()
 
+const CATEGORY_COLORS = [
+  'hsl(var(--primary))',
+  'hsl(var(--secondary))',
+  'hsl(var(--accent))',
+  'hsl(var(--muted-foreground))',
+  '#22c55e',
+  '#f59e0b'
+]
+
+const CATEGORY_ICONS = {
+  'Housing': Home,
+  'Food & Dining': Utensils,
+  'Transportation': Car,
+  'Shopping': ShoppingCart,
+  'Healthcare': Heart,
+  'Entertainment': Plane
+}
+
+export function SpendingPatternsChart() {
+  const [chartType, setChartType] = useState<'breakdown' | 'trends' | 'comparison'>('breakdown')
+
+  const totalSpending = mockSpendingData.reduce((sum, item) => sum + item.amount, 0)
+
   const renderBreakdownChart = () => (
     <ResponsiveContainer width="100%" height={300}>
       <PieChart>
@@ -71,7 +94,7 @@ export function SpendingPatternsChart() {
           dataKey="amount"
         >
           {mockSpendingData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={REPORTS_CATEGORY_COLORS[index % REPORTS_CATEGORY_COLORS.length]} />
+            <Cell key={`cell-${index}`} fill={CATEGORY_COLORS[index % CATEGORY_COLORS.length]} />
           ))}
         </Pie>
         <Tooltip
@@ -106,6 +129,7 @@ export function SpendingPatternsChart() {
             borderRadius: '6px',
             color: 'hsl(var(--card-foreground))'
           }}
+          formatter={(value, name) => [`AED ${value.toLocaleString()}`, name]}
         />
         {mockSpendingData.slice(0, 3).map((category, index) => (
           <Line
@@ -113,7 +137,7 @@ export function SpendingPatternsChart() {
             type="monotone"
             dataKey="amount"
             data={category.monthlyData}
-            stroke={REPORTS_CATEGORY_COLORS[index]}
+            stroke={CATEGORY_COLORS[index]}
             strokeWidth={2}
             name={category.category}
           />
@@ -152,6 +176,18 @@ export function SpendingPatternsChart() {
     return mockSpendingData
       .sort((a, b) => b.amount - a.amount)
       .slice(0, 3)
+  }
+
+  const getSpendingInsights = () => {
+    const highestCategory = mockSpendingData.reduce((max, cat) => cat.amount > max.amount ? cat : max)
+    const increasingSpending = mockSpendingData.filter(cat => cat.trend === 'up')
+    const decreasingSpending = mockSpendingData.filter(cat => cat.trend === 'down')
+
+    return [
+      `Highest spending category: ${highestCategory.category} (${highestCategory.percentage}% of total)`,
+      `${increasingSpending.length} categories increased, ${decreasingSpending.length} categories decreased this month`,
+      `Food & Dining spending is 23% above UAE average - consider meal planning`
+    ]
   }
 
   return (
@@ -244,7 +280,7 @@ export function SpendingPatternsChart() {
                     <div className="flex items-center gap-3 min-w-0 flex-1">
                       <div
                         className="w-4 h-4 rounded-full shrink-0"
-                        style={{ backgroundColor: REPORTS_CATEGORY_COLORS[index % REPORTS_CATEGORY_COLORS.length] }}
+                        style={{ backgroundColor: CATEGORY_COLORS[index % CATEGORY_COLORS.length] }}
                       />
                       <IconComponent className="h-4 w-4 text-muted-foreground shrink-0" />
                       <span className="font-medium text-sm truncate">{category.category}</span>
@@ -287,11 +323,11 @@ export function SpendingPatternsChart() {
           <div className="space-y-1 text-sm text-muted-foreground">
             <div className="flex items-start gap-2">
               <Home className="h-3 w-3 mt-1 text-primary" />
-              <span>Housing costs aligned with Dubai Marina average</span>
+              <span>Housing costs are 12% below Dubai average for your area</span>
             </div>
             <div className="flex items-start gap-2">
               <Utensils className="h-3 w-3 mt-1 text-primary" />
-              <span>Food & Dining: {insights.overBudgetCount > 0 ? 'Above' : 'Within'} UAE resident average</span>
+              <span>Restaurant spending 23% above UAE resident average</span>
             </div>
             <div className="flex items-start gap-2">
               <Car className="h-3 w-3 mt-1 text-primary" />
@@ -307,7 +343,7 @@ export function SpendingPatternsChart() {
             <span className="font-medium text-sm">Spending Insights</span>
           </div>
           <div className="space-y-1 text-sm text-muted-foreground">
-            {insights.insights.map((insight, index) => (
+            {getSpendingInsights().map((insight, index) => (
               <div key={index} className="flex items-start gap-2">
                 <span>•</span>
                 <span>{insight}</span>
@@ -321,24 +357,24 @@ export function SpendingPatternsChart() {
           <div className="p-3 rounded-lg border bg-secondary/5">
             <div className="flex items-center gap-2 mb-2">
               <CheckCircle className="h-4 w-4 text-secondary" />
-              <span className="font-medium text-sm text-secondary">Budget Performance</span>
+              <span className="font-medium text-sm text-secondary">Optimization Opportunities</span>
             </div>
             <div className="space-y-1 text-sm text-muted-foreground">
-              <div>• {insights.decreasingCount} categories under budget</div>
-              <div>• Total spending: {((insights.totalSpending / 22800) * 100).toFixed(1)}% of income</div>
-              <div>• Savings potential: AED {(22800 - insights.totalSpending).toLocaleString()}</div>
+              <div>• Consider meal planning to reduce dining expenses</div>
+              <div>• Bundle entertainment subscriptions for savings</div>
+              <div>• Use grocery delivery to avoid impulse purchases</div>
             </div>
           </div>
 
           <div className="p-3 rounded-lg border bg-accent/5">
             <div className="flex items-center gap-2 mb-2">
               <AlertTriangle className="h-4 w-4 text-accent" />
-              <span className="font-medium text-sm text-accent">Areas to Watch</span>
+              <span className="font-medium text-sm text-accent">Budget Alerts</span>
             </div>
             <div className="space-y-1 text-sm text-muted-foreground">
-              <div>• {insights.overBudgetCount} categories over budget</div>
-              <div>• {insights.increasingCount} categories trending upward</div>
-              <div>• Monitor discretionary spending closely</div>
+              <div>• Shopping budget exceeded by 15%</div>
+              <div>• Food spending trending upward (+8.4%)</div>
+              <div>• Entertainment within healthy range</div>
             </div>
           </div>
         </div>

@@ -8,6 +8,19 @@ export { mockCategories, mockUAEBanks, mockUAEMerchants } from './categories';
 export { mockFinancialData, mockAccountsBreakdown, type DataType, type FinancialData, type FinancialDataPoint } from './net-worth';
 export { mockRecurringPayments, recurringPaymentsSummary } from './recurring-payments';
 export { mockInvestments, mockPortfolioSummary, mockInvestmentPerformance } from './investments';
+export {
+  reportsSpendingData,
+  reportsNetWorthData,
+  reportsCashFlowData,
+  generateSpendingData,
+  generateNetWorthData,
+  getCashFlowData,
+  getSpendingInsights,
+  CATEGORY_ICONS as REPORTS_CATEGORY_ICONS,
+  CATEGORY_COLORS as REPORTS_CATEGORY_COLORS,
+  type SpendingCategoryData,
+  type NetWorthReportData
+} from './reports-data';
 
 export const mockChartData = {
   spendingTrend: [

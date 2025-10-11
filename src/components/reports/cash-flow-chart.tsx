@@ -152,8 +152,8 @@ export function CashFlowChart() {
           formatter={(value, name) => [
             `AED ${value.toLocaleString()}`,
             name === 'fixedExpenses' ? 'Fixed Expenses' :
-            name === 'variableExpenses' ? 'Variable Expenses' :
-            name === 'savings' ? 'Savings' : 'Investments'
+              name === 'variableExpenses' ? 'Variable Expenses' :
+                name === 'savings' ? 'Savings' : 'Investments'
           ]}
         />
         <Bar dataKey="categories.fixedExpenses" stackId="a" fill="hsl(var(--accent))" />
@@ -175,7 +175,7 @@ export function CashFlowChart() {
       case 'cumulative':
         return [
           `Total cash flow growth: AED ${(currentMonth.cumulativeCashFlow - mockCashFlowData[0].cumulativeCashFlow).toLocaleString()}`,
-          `Monthly growth rate: ${(((currentMonth.cumulativeCashFlow / mockCashFlowData[0].cumulativeCashFlow) ** (1/6) - 1) * 100).toFixed(1)}%`,
+          `Monthly growth rate: ${(((currentMonth.cumulativeCashFlow / mockCashFlowData[0].cumulativeCashFlow) ** (1 / 6) - 1) * 100).toFixed(1)}%`,
           `Projected year-end cash flow: AED ${(currentMonth.cumulativeCashFlow + (averageCashFlow * 11)).toLocaleString()}`
         ]
       case 'breakdown':
@@ -191,57 +191,60 @@ export function CashFlowChart() {
 
   return (
     <Card className="bg-card border shadow-sm">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div>
-            <CardTitle className="flex items-center gap-2">
-              <Activity className="h-5 w-5 text-primary" />
-              Cash Flow Analysis
+      <CardHeader className="px-3 sm:px-6 py-3 sm:py-6">
+        <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0 flex-1">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Activity className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
+              <span className="truncate">Cash Flow Analysis</span>
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-xs sm:text-sm">
               {chartType === 'flow' && 'Monthly income vs expenses flow'}
               {chartType === 'cumulative' && 'Cumulative cash flow over time'}
               {chartType === 'breakdown' && 'Expense and savings breakdown'}
             </CardDescription>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 justify-start sm:justify-end">
             <Button
               variant={chartType === 'flow' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setChartType('flow')}
+              className="h-7 sm:h-8 px-2 sm:px-3"
             >
-              <BarChart3 className="h-4 w-4" />
+              <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
             <Button
               variant={chartType === 'cumulative' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setChartType('cumulative')}
+              className="h-7 sm:h-8 px-2 sm:px-3"
             >
-              <LineChartIcon className="h-4 w-4" />
+              <LineChartIcon className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
             <Button
               variant={chartType === 'breakdown' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setChartType('breakdown')}
+              className="h-7 sm:h-8 px-2 sm:px-3"
             >
-              <Activity className="h-4 w-4" />
+              <Activity className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6 pb-3 sm:pb-6">
         {/* Key Metrics */}
-        <div className="grid grid-cols-3 gap-4">
-          <div className="text-center p-3 bg-muted/50 rounded-lg">
-            <div className="text-lg font-bold text-primary">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4">
+          <div className="text-center p-2 sm:p-3 bg-muted/50 rounded-lg">
+            <div className="text-sm sm:text-lg font-bold text-primary">
               AED {currentMonth.netCashFlow.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">Net Cash Flow</div>
-            <div className="flex items-center justify-center gap-1 text-xs mt-1">
+            <div className="text-[10px] sm:text-sm text-muted-foreground">Net Cash Flow</div>
+            <div className="flex items-center justify-center gap-1 text-[9px] sm:text-xs mt-1">
               {cashFlowChange > 0 ? (
-                <TrendingUp className="h-3 w-3 text-secondary" />
+                <TrendingUp className="h-2 w-2 sm:h-3 sm:w-3 text-secondary" />
               ) : (
-                <TrendingDown className="h-3 w-3 text-destructive" />
+                <TrendingDown className="h-2 w-2 sm:h-3 sm:w-3 text-destructive" />
               )}
               <span className={cashFlowChange > 0 ? 'text-secondary' : 'text-destructive'}>
                 {cashFlowChangePercent}%
@@ -249,22 +252,22 @@ export function CashFlowChart() {
             </div>
           </div>
 
-          <div className="text-center p-3 bg-muted/50 rounded-lg">
-            <div className="text-lg font-bold text-secondary">
+          <div className="text-center p-2 sm:p-3 bg-muted/50 rounded-lg">
+            <div className="text-sm sm:text-lg font-bold text-secondary">
               {((currentMonth.netCashFlow / currentMonth.income) * 100).toFixed(0)}%
             </div>
-            <div className="text-sm text-muted-foreground">Cash Flow Ratio</div>
-            <div className="text-xs text-secondary mt-1">
+            <div className="text-[10px] sm:text-sm text-muted-foreground">Cash Flow Ratio</div>
+            <div className="text-[9px] sm:text-xs text-secondary mt-1">
               {isAboveAverage ? 'Above Average' : 'Below Average'}
             </div>
           </div>
 
-          <div className="text-center p-3 bg-muted/50 rounded-lg">
-            <div className="text-lg font-bold text-accent">
+          <div className="text-center p-2 sm:p-3 bg-muted/50 rounded-lg">
+            <div className="text-sm sm:text-lg font-bold text-accent">
               AED {(currentMonth.cumulativeCashFlow / 1000).toFixed(0)}K
             </div>
-            <div className="text-sm text-muted-foreground">Total Assets</div>
-            <div className="text-xs text-accent mt-1">6-Month Growth</div>
+            <div className="text-[10px] sm:text-sm text-muted-foreground">Total Assets</div>
+            <div className="text-[9px] sm:text-xs text-accent mt-1">6-Month Growth</div>
           </div>
         </div>
 

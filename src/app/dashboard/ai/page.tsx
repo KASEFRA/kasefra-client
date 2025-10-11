@@ -189,36 +189,36 @@ export default function AIAssistantPage() {
   }
 
   return (
-    <div className="space-y-6 px-6">
+    <div className="space-y-4 sm:space-y-6 px-3 sm:px-4 lg:px-6">
       {/* Main Chat Interface - Full Width */}
       <div className="max-w-4xl mx-auto">
-        <div className="space-y-6">
-          <Card className="bg-card border shadow-sm h-[600px] flex flex-col bg-gradient-to-br from-card via-card to-muted/20">
+        <div className="space-y-4 sm:space-y-6">
+          <Card className="bg-card border shadow-sm h-[500px] sm:h-[600px] flex flex-col bg-gradient-to-br from-card via-card to-muted/20">
 
             {/* Messages Area */}
-            <CardContent className="flex-1 overflow-y-auto p-6 space-y-4">
+            <CardContent className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-3 sm:space-y-4">
               {messages.length === 1 && (
-                <div className="text-center py-12">
-                  <div className="mb-8">
-                    <div className="w-16 h-1 bg-gradient-to-r from-primary/30 via-primary to-primary/30 rounded-full mx-auto mb-6"></div>
-                    <p className="text-muted-foreground text-sm">
+                <div className="text-center py-8 sm:py-12">
+                  <div className="mb-6 sm:mb-8">
+                    <div className="w-12 sm:w-16 h-1 bg-gradient-to-r from-primary/30 via-primary to-primary/30 rounded-full mx-auto mb-4 sm:mb-6"></div>
+                    <p className="text-muted-foreground text-xs sm:text-sm">
                       Ask me anything about your UAE finances
                     </p>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-3xl mx-auto">
+                  <div className="grid grid-cols-1 gap-2 sm:gap-3 max-w-3xl mx-auto">
                     {conversationStarters.map((starter, index) => (
                       <div
                         key={index}
-                        className="group cursor-pointer p-4 rounded-xl bg-gradient-to-br from-muted/30 via-muted/20 to-transparent border border-border/30 hover:border-primary/30 hover:bg-gradient-to-br hover:from-primary/5 hover:via-primary/3 hover:to-transparent transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+                        className="group cursor-pointer p-3 sm:p-4 rounded-xl bg-gradient-to-br from-muted/30 via-muted/20 to-transparent border border-border/30 hover:border-primary/30 hover:bg-gradient-to-br hover:from-primary/5 hover:via-primary/3 hover:to-transparent transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
                         onClick={() => handleStarterClick(starter)}
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300">
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300 shrink-0">
                             {starter.icon}
                           </div>
-                          <div className="text-left">
-                            <div className="font-medium text-sm group-hover:text-primary transition-colors duration-300">{starter.title}</div>
-                            <div className="text-xs text-muted-foreground mt-1">{starter.category}</div>
+                          <div className="text-left min-w-0 flex-1">
+                            <div className="font-medium text-xs sm:text-sm group-hover:text-primary transition-colors duration-300">{starter.title}</div>
+                            <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">{starter.category}</div>
                           </div>
                         </div>
                       </div>
@@ -229,29 +229,28 @@ export default function AIAssistantPage() {
 
               {messages.map((message) => (
                 <div key={message.id} className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`max-w-[80%] space-y-3 ${message.isBot ? 'items-start' : 'items-end'}`}>
-                    <div className={`p-4 rounded-2xl backdrop-blur-sm ${
-                      message.isBot
+                  <div className={`max-w-[85%] sm:max-w-[80%] space-y-2 sm:space-y-3 ${message.isBot ? 'items-start' : 'items-end'}`}>
+                    <div className={`p-3 sm:p-4 rounded-2xl backdrop-blur-sm ${message.isBot
                         ? message.isTyping
                           ? 'bg-gradient-to-br from-muted/60 to-muted/40 text-muted-foreground animate-pulse border border-border/30'
                           : 'bg-gradient-to-br from-muted/80 via-muted/60 to-muted/40 text-foreground border border-border/20 shadow-sm'
                         : 'bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-primary-foreground shadow-lg shadow-primary/20'
-                    }`}>
+                      }`}>
                       {message.isTyping ? (
                         <div className="flex items-center space-x-3">
                           <div className="flex space-x-1">
                             <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
-                            <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                            <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                            <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                           </div>
                           <span className="text-sm">{message.content}</span>
                         </div>
                       ) : (
                         <>
-                          <div className="text-sm leading-relaxed">{message.content}</div>
+                          <div className="text-xs sm:text-sm leading-relaxed">{message.content}</div>
                           {message.confidence && (
                             <div className="mt-2 pt-2 border-t border-current/20">
-                              <div className="flex items-center gap-2 text-xs opacity-70">
+                              <div className="flex items-center gap-2 text-[10px] sm:text-xs opacity-70">
                                 <Sparkles className="h-3 w-3" />
                                 <span>Confidence: {Math.round(message.confidence * 100)}%</span>
                               </div>
@@ -263,13 +262,13 @@ export default function AIAssistantPage() {
 
                     {/* Action buttons for bot messages */}
                     {message.isBot && message.actions && !message.isTyping && (
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1 sm:gap-2">
                         {message.actions.map((action, index) => (
                           <Button
                             key={index}
                             variant="outline"
                             size="sm"
-                            className="text-xs h-7 px-3 "
+                            className="text-[10px] sm:text-xs h-6 sm:h-7 px-2 sm:px-3"
                             onClick={() => handleActionClick(action)}
                           >
                             {action.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
@@ -280,14 +279,14 @@ export default function AIAssistantPage() {
 
                     {/* Related charts indicator */}
                     {message.isBot && message.relatedCharts && message.relatedCharts.length > 0 && !message.isTyping && (
-                      <div className="text-xs text-muted-foreground flex items-center gap-1">
+                      <div className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1">
                         <PieChart className="h-3 w-3" />
                         <span>Related charts available</span>
                       </div>
                     )}
 
                     {/* Timestamp */}
-                    <div className="text-xs text-muted-foreground">
+                    <div className="text-[10px] sm:text-xs text-muted-foreground">
                       {message.timestamp.toLocaleTimeString('en-AE', {
                         hour: '2-digit',
                         minute: '2-digit'
@@ -300,10 +299,10 @@ export default function AIAssistantPage() {
             </CardContent>
 
             {/* Enhanced Input Area */}
-            <div className="p-6">
-              <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-muted/20 via-muted/10 to-muted/20 rounded-2xl border border-border/20 backdrop-blur-sm">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary transition-colors duration-200">
-                  <Paperclip className="h-4 w-4" />
+            <div className="p-3 sm:p-6">
+              <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gradient-to-r from-muted/20 via-muted/10 to-muted/20 rounded-2xl border border-border/20 backdrop-blur-sm">
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary transition-colors duration-200 h-6 w-6 sm:h-auto sm:w-auto p-1 sm:p-2">
+                  <Paperclip className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
                 <div className="flex-1 relative">
                   <Input
@@ -312,66 +311,63 @@ export default function AIAssistantPage() {
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Ask about your finances..."
-                    className="border-0 bg-transparent focus:bg-transparent pr-12 text-sm placeholder:text-muted-foreground/60"
+                    className="border-0 bg-transparent focus:bg-transparent pr-8 sm:pr-12 text-xs sm:text-sm placeholder:text-muted-foreground/60"
                     disabled={isTyping}
                   />
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors duration-200"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors duration-200 h-6 w-6 sm:h-auto sm:w-auto p-1 sm:p-2"
                   >
-                    <Mic className="h-4 w-4" />
+                    <Mic className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 </div>
                 <Button
                   onClick={() => handleSendMessage()}
                   disabled={!inputValue.trim() || isTyping}
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-primary/90 to-primary/80 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 border-0 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-200 hover:scale-105"
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-primary via-primary/90 to-primary/80 hover:from-primary/90 hover:via-primary/80 hover:to-primary/70 border-0 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-200 hover:scale-105"
                 >
-                  <Send className="h-4 w-4" />
+                  <Send className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
               </div>
             </div>
           </Card>
 
           {/* Sleek AI Widget Toggle Buttons */}
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-1 sm:gap-2 flex-wrap">
             <button
               onClick={() => toggleWidget('health')}
-              className={`group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                activeWidget === 'health'
+              className={`group relative px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 ${activeWidget === 'health'
                   ? 'bg-gradient-to-r from-success/20 to-success/30 text-success border border-success/30 shadow-lg shadow-success/10'
                   : 'bg-gradient-to-r from-muted/30 to-muted/20 text-muted-foreground border border-border/30 hover:border-primary/30 hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5'
-              }`}
+                }`}
             >
-              <div className="flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" />
+              <div className="flex items-center gap-1 sm:gap-2">
+                <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Health</span>
               </div>
             </button>
             <button
               onClick={() => toggleWidget('recommendations')}
-              className={`group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                activeWidget === 'recommendations'
+              className={`group relative px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 ${activeWidget === 'recommendations'
                   ? 'bg-gradient-to-r from-primary/20 to-primary/30 text-primary border border-primary/30 shadow-lg shadow-primary/10'
                   : 'bg-gradient-to-r from-muted/30 to-muted/20 text-muted-foreground border border-border/30 hover:border-primary/30 hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5'
-              }`}
+                }`}
             >
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-4 w-4" />
+              <div className="flex items-center gap-1 sm:gap-2">
+                <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Tips</span>
               </div>
             </button>
             <button
               onClick={() => toggleWidget('predictions')}
-              className={`group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                activeWidget === 'predictions'
+              className={`group relative px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 ${activeWidget === 'predictions'
                   ? 'bg-gradient-to-r from-accent/20 to-accent/30 text-accent-foreground border border-accent/30 shadow-lg shadow-accent/10'
                   : 'bg-gradient-to-r from-muted/30 to-muted/20 text-muted-foreground border border-border/30 hover:border-primary/30 hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5'
-              }`}
+                }`}
             >
-              <div className="flex items-center gap-2">
-                <AlertTriangle className="h-4 w-4" />
+              <div className="flex items-center gap-1 sm:gap-2">
+                <AlertTriangle className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Insights</span>
               </div>
             </button>

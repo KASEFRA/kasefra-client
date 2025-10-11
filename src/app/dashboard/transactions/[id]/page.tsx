@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { 
+import {
   ArrowLeft,
   Edit,
   Save,
@@ -45,7 +45,7 @@ export default function TransactionDetailPage() {
   const params = useParams()
   const router = useRouter()
   const transactionId = params.id as string
-  
+
   const [transaction, setTransaction] = useState(mockTransactions.find(t => t.id === transactionId))
   const [isEditing, setIsEditing] = useState(false)
   const [editForm, setEditForm] = useState({
@@ -68,14 +68,14 @@ export default function TransactionDetailPage() {
 
   if (!transaction) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-2">Transaction Not Found</h2>
-          <p className="text-muted-foreground mb-4">The transaction you&apos;re looking for doesn&apos;t exist.</p>
-          <Button asChild>
+      <div className="flex items-center justify-center min-h-[300px] sm:min-h-[400px] px-3 sm:px-6">
+        <div className="text-center max-w-md">
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">Transaction Not Found</h2>
+          <p className="text-sm sm:text-base text-muted-foreground mb-4">The transaction you&apos;re looking for doesn&apos;t exist.</p>
+          <Button asChild size="sm" className="w-full sm:w-auto">
             <Link href="/dashboard/transactions">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Transactions
+              <ArrowLeft className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm">Back to Transactions</span>
             </Link>
           </Button>
         </div>
@@ -94,10 +94,10 @@ export default function TransactionDetailPage() {
       amount: parseFloat(editForm.amount),
       notes: editForm.notes
     }
-    
+
     setTransaction(updatedTransaction)
     setIsEditing(false)
-    
+
     // In a real app, this would make an API call
     console.log("Updated transaction:", updatedTransaction)
   }
@@ -120,71 +120,70 @@ export default function TransactionDetailPage() {
   }
 
   return (
-    <div className="space-y-6 px-6">
+    <div className="space-y-4 sm:space-y-6 px-3 sm:px-4 lg:px-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Button variant="outline" size="sm" asChild>
+      <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:gap-4">
+          <Button variant="outline" size="sm" asChild className="w-fit">
             <Link href="/dashboard/transactions">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
+              <ArrowLeft className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm">Back</span>
             </Link>
           </Button>
-          <div>
-            <h1 className="text-2xl font-bold">{transaction.description}</h1>
-            <p className="text-muted-foreground">Transaction Details</p>
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold truncate">{transaction.description}</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground">Transaction Details</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 self-start sm:self-auto">
           {!isEditing ? (
             <>
-              <Button variant="outline" size="sm" onClick={() => setIsEditing(true)}>
-                <Edit className="mr-2 h-4 w-4" />
-                Edit
+              <Button variant="outline" size="sm" onClick={() => setIsEditing(true)} className="flex-1 sm:flex-none">
+                <Edit className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm">Edit</span>
               </Button>
-              <Button variant="outline" size="sm" onClick={handleDelete} className="text-red-600">
-                <Trash2 className="mr-2 h-4 w-4" />
-                Delete
+              <Button variant="outline" size="sm" onClick={handleDelete} className="text-red-600 flex-1 sm:flex-none">
+                <Trash2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm">Delete</span>
               </Button>
             </>
           ) : (
             <>
-              <Button variant="outline" size="sm" onClick={() => setIsEditing(false)}>
-                <X className="mr-2 h-4 w-4" />
-                Cancel
+              <Button variant="outline" size="sm" onClick={() => setIsEditing(false)} className="flex-1 sm:flex-none">
+                <X className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm">Cancel</span>
               </Button>
-              <Button size="sm" onClick={handleSave}>
-                <Save className="mr-2 h-4 w-4" />
-                Save
+              <Button size="sm" onClick={handleSave} className="flex-1 sm:flex-none">
+                <Save className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm">Save</span>
               </Button>
             </>
           )}
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
         {/* Transaction Overview */}
         <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>Transaction Details</CardTitle>
-            <CardDescription>
+          <CardHeader className="px-3 sm:px-6 py-3 sm:py-6">
+            <CardTitle className="text-base sm:text-lg">Transaction Details</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">
               {isEditing ? "Edit transaction information" : "Complete transaction information"}
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6 pb-3 sm:pb-6">
             {!isEditing ? (
               <>
                 {/* Read-only view */}
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label className="text-muted-foreground">Description</Label>
-                    <p className="text-lg font-medium">{transaction.description}</p>
+                <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label className="text-xs sm:text-sm text-muted-foreground">Description</Label>
+                    <p className="text-sm sm:text-base lg:text-lg font-medium">{transaction.description}</p>
                   </div>
-                  <div className="space-y-2">
-                    <Label className="text-muted-foreground">Amount</Label>
-                    <p className={`text-2xl font-bold ${
-                      transaction.amount > 0 ? 'text-green-600' : 'text-red-600'
-                    }`}>
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label className="text-xs sm:text-sm text-muted-foreground">Amount</Label>
+                    <p className={`text-xl sm:text-2xl font-bold ${transaction.amount > 0 ? 'text-green-600' : 'text-red-600'
+                      }`}>
                       {transaction.amount > 0 ? '+' : ''}
                       {transaction.amount.toLocaleString('en-AE', {
                         style: 'currency',
@@ -192,67 +191,69 @@ export default function TransactionDetailPage() {
                       })}
                     </p>
                   </div>
-                  <div className="space-y-2">
-                    <Label className="text-muted-foreground">Category</Label>
-                    <Badge className={getTransactionTypeColor(transaction.type)}>
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label className="text-xs sm:text-sm text-muted-foreground">Category</Label>
+                    <Badge className={getTransactionTypeColor(transaction.type)} variant="secondary">
                       {transaction.category}
                     </Badge>
                   </div>
-                  <div className="space-y-2">
-                    <Label className="text-muted-foreground">Type</Label>
-                    <Badge variant="outline">{transaction.type}</Badge>
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label className="text-xs sm:text-sm text-muted-foreground">Type</Label>
+                    <Badge variant="outline" className="text-xs sm:text-sm">{transaction.type}</Badge>
                   </div>
-                  <div className="space-y-2">
-                    <Label className="text-muted-foreground">Merchant</Label>
-                    <p className="font-medium">{transaction.merchant}</p>
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label className="text-xs sm:text-sm text-muted-foreground">Merchant</Label>
+                    <p className="text-sm sm:text-base font-medium">{transaction.merchant}</p>
                   </div>
-                  <div className="space-y-2">
-                    <Label className="text-muted-foreground">Date</Label>
-                    <p className="font-medium">{transaction.date}</p>
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label className="text-xs sm:text-sm text-muted-foreground">Date</Label>
+                    <p className="text-sm sm:text-base font-medium">{transaction.date}</p>
                   </div>
                 </div>
-                
+
                 {transaction.notes && (
-                  <div className="space-y-2">
-                    <Label className="text-muted-foreground">Notes</Label>
-                    <p className="p-3 bg-muted rounded-lg">{transaction.notes}</p>
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label className="text-xs sm:text-sm text-muted-foreground">Notes</Label>
+                    <p className="p-2 sm:p-3 bg-muted rounded-lg text-xs sm:text-sm">{transaction.notes}</p>
                   </div>
                 )}
               </>
             ) : (
               <>
                 {/* Edit form */}
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="description">Description</Label>
+                <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label htmlFor="description" className="text-xs sm:text-sm">Description</Label>
                     <Input
                       id="description"
                       value={editForm.description}
-                      onChange={(e) => setEditForm({...editForm, description: e.target.value})}
+                      onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                      className="text-sm h-8 sm:h-9"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="amount">Amount</Label>
+                  <div className="space-y-1 sm:space-y-2">
+                    <Label htmlFor="amount" className="text-xs sm:text-sm">Amount</Label>
                     <Input
                       id="amount"
                       type="number"
                       step="0.01"
                       value={editForm.amount}
-                      onChange={(e) => setEditForm({...editForm, amount: e.target.value})}
+                      onChange={(e) => setEditForm({ ...editForm, amount: e.target.value })}
+                      className="text-sm h-8 sm:h-9"
                     />
                   </div>
-                  <div className="space-y-2 sm:col-span-2">
-                    <Label htmlFor="category">Category</Label>
-                    <Select 
+                  <div className="space-y-1 sm:space-y-2 col-span-1 sm:col-span-2">
+                    <Label htmlFor="category" className="text-xs sm:text-sm">Category</Label>
+                    <Select
                       value={editForm.category}
-                      onValueChange={(value) => setEditForm({...editForm, category: value})}
+                      onValueChange={(value) => setEditForm({ ...editForm, category: value })}
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="text-sm h-8 sm:h-9">
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent>
                         {CATEGORIES.map((category) => (
-                          <SelectItem key={category} value={category}>
+                          <SelectItem key={category} value={category} className="text-sm">
                             {category}
                           </SelectItem>
                         ))}
@@ -260,14 +261,15 @@ export default function TransactionDetailPage() {
                     </Select>
                   </div>
                 </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="notes">Notes</Label>
+
+                <div className="space-y-1 sm:space-y-2">
+                  <Label htmlFor="notes" className="text-xs sm:text-sm">Notes</Label>
                   <Textarea
                     id="notes"
                     placeholder="Add notes about this transaction..."
                     value={editForm.notes}
-                    onChange={(e) => setEditForm({...editForm, notes: e.target.value})}
+                    onChange={(e) => setEditForm({ ...editForm, notes: e.target.value })}
+                    className="text-sm min-h-[80px] sm:min-h-[100px]"
                   />
                 </div>
               </>
@@ -276,38 +278,38 @@ export default function TransactionDetailPage() {
         </Card>
 
         {/* Transaction Metadata */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Account Information */}
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Building className="h-5 w-5" />
+            <CardHeader className="px-3 sm:px-6 py-3 sm:py-6">
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <Building className="h-4 w-4 sm:h-5 sm:w-5" />
                 Account
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6 pb-3 sm:pb-6">
               {account && (
                 <>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-lg">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-lg flex items-center justify-center text-base sm:text-lg">
                       {account.type === 'checking' && '💳'}
                       {account.type === 'savings' && '🏦'}
                       {account.type === 'credit' && '💰'}
                       {account.type === 'investment' && '📈'}
                     </div>
-                    <div>
-                      <p className="font-medium">{account.name}</p>
-                      <p className="text-sm text-muted-foreground">{account.bank}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm sm:text-base font-medium truncate">{account.name}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground truncate">{account.bank}</p>
                     </div>
                   </div>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
+                  <div className="space-y-2 text-xs sm:text-sm">
+                    <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Account Type:</span>
-                      <Badge variant="outline">{account.type}</Badge>
+                      <Badge variant="outline" className="text-xs">{account.type}</Badge>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Account Number:</span>
-                      <span>{account.accountNumber}</span>
+                      <span className="font-mono text-xs truncate ml-2">{account.accountNumber}</span>
                     </div>
                   </div>
                 </>
@@ -317,26 +319,26 @@ export default function TransactionDetailPage() {
 
           {/* Transaction Metadata */}
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="h-5 w-5" />
+            <CardHeader className="px-3 sm:px-6 py-3 sm:py-6">
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
                 Metadata
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 text-sm">
-              <div className="flex justify-between">
+            <CardContent className="space-y-2 sm:space-y-3 text-xs sm:text-sm px-3 sm:px-6 pb-3 sm:pb-6">
+              <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">Transaction ID:</span>
-                <span className="font-mono text-xs">{transaction.id}</span>
+                <span className="font-mono text-[10px] sm:text-xs truncate ml-2">{transaction.id}</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">Currency:</span>
                 <span>{transaction.currency}</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">Status:</span>
-                <Badge variant="default">Completed</Badge>
+                <Badge variant="default" className="text-xs">Completed</Badge>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">Created:</span>
                 <span>{transaction.date}</span>
               </div>
@@ -345,23 +347,23 @@ export default function TransactionDetailPage() {
 
           {/* Quick Actions */}
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Tag className="h-5 w-5" />
+            <CardHeader className="px-3 sm:px-6 py-3 sm:py-6">
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                <Tag className="h-4 w-4 sm:h-5 sm:w-5" />
                 Quick Actions
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
-              <Button variant="outline" size="sm" className="w-full justify-start">
-                <Calendar className="mr-2 h-4 w-4" />
+            <CardContent className="space-y-2 px-3 sm:px-6 pb-3 sm:pb-6">
+              <Button variant="outline" size="sm" className="w-full justify-start text-xs sm:text-sm h-8 sm:h-9">
+                <Calendar className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 View Similar Transactions
               </Button>
-              <Button variant="outline" size="sm" className="w-full justify-start">
-                <CreditCard className="mr-2 h-4 w-4" />
+              <Button variant="outline" size="sm" className="w-full justify-start text-xs sm:text-sm h-8 sm:h-9">
+                <CreditCard className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 View Account History
               </Button>
-              <Button variant="outline" size="sm" className="w-full justify-start">
-                <AlertTriangle className="mr-2 h-4 w-4" />
+              <Button variant="outline" size="sm" className="w-full justify-start text-xs sm:text-sm h-8 sm:h-9">
+                <AlertTriangle className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 Report Issue
               </Button>
             </CardContent>

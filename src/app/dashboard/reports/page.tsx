@@ -30,69 +30,71 @@ export default function ReportsPage() {
   const expensesChange = ((MONTHLY_EXPENSES - previousMonthData.expenses) / previousMonthData.expenses) * 100
 
   return (
-    <div className="space-y-6 sm:space-y-8 px-4 sm:px-6">
+    <div className="space-y-4 sm:space-y-6 lg:space-y-8 px-3 sm:px-4 lg:px-6">
       {/* Quick Stats */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <Card className="bg-card border shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Net Worth</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-emerald-100 dark:bg-emerald-900/20">
-              <TrendingUp className="h-4 w-4 text-emerald-600" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Net Worth</CardTitle>
+            <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-md bg-emerald-100 dark:bg-emerald-900/20">
+              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-600" />
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{formatCompactCurrency(CURRENT_NET_WORTH)}</div>
-            <div className="flex items-center gap-1 text-sm">
-              <TrendingUp className="h-4 w-4 text-emerald-600" />
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">{formatCompactCurrency(CURRENT_NET_WORTH)}</div>
+            <div className="flex items-center gap-1 text-xs sm:text-sm">
+              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-600" />
               <span className="text-emerald-600 font-semibold">+{netWorthChange.toFixed(1)}%</span>
-              <span className="text-muted-foreground">vs last month</span>
+              <span className="text-muted-foreground hidden sm:inline">vs last month</span>
+              <span className="text-muted-foreground sm:hidden">vs last</span>
             </div>
           </CardContent>
         </Card>
 
         <Card className="bg-card border shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Monthly Income</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
-              <DollarSign className="h-4 w-4 text-primary" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Monthly Income</CardTitle>
+            <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-md bg-primary/10">
+              <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{formatCompactCurrency(MONTHLY_INCOME)}</div>
-            <div className="flex items-center gap-1 text-sm">
-              <span className="text-muted-foreground">Consistent monthly income</span>
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">{formatCompactCurrency(MONTHLY_INCOME)}</div>
+            <div className="flex items-center gap-1 text-xs sm:text-sm">
+              <span className="text-muted-foreground text-[10px] sm:text-sm">Consistent monthly income</span>
             </div>
           </CardContent>
         </Card>
 
         <Card className="bg-card border shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Monthly Expenses</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-blue-100 dark:bg-blue-900/20">
-              <Activity className="h-4 w-4 text-blue-600" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Monthly Expenses</CardTitle>
+            <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-md bg-blue-100 dark:bg-blue-900/20">
+              <Activity className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{formatCompactCurrency(MONTHLY_EXPENSES)}</div>
-            <div className="flex items-center gap-1 text-sm">
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">{formatCompactCurrency(MONTHLY_EXPENSES)}</div>
+            <div className="flex items-center gap-1 text-xs sm:text-sm">
               <span className="text-blue-600 font-semibold">{expensesChange > 0 ? '+' : ''}{expensesChange.toFixed(1)}%</span>
-              <span className="text-muted-foreground">vs last month</span>
+              <span className="text-muted-foreground hidden sm:inline">vs last month</span>
+              <span className="text-muted-foreground sm:hidden">vs last</span>
             </div>
           </CardContent>
         </Card>
 
         <Card className="bg-card border shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Savings Rate</CardTitle>
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-purple-100 dark:bg-purple-900/20">
-              <PieChart className="h-4 w-4 text-purple-600" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Savings Rate</CardTitle>
+            <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-md bg-purple-100 dark:bg-purple-900/20">
+              <PieChart className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{formatPercentage(SAVINGS_RATE, 1)}</div>
-            <div className="flex items-center gap-1 text-sm">
-              <TrendingUp className="h-4 w-4 text-purple-600" />
-              <span className="text-purple-600 font-semibold">Above target</span>
+          <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
+            <div className="text-lg sm:text-2xl font-bold">{formatPercentage(SAVINGS_RATE, 1)}</div>
+            <div className="flex items-center gap-1 text-xs sm:text-sm">
+              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
+              <span className="text-purple-600 font-semibold text-[10px] sm:text-sm">Above target</span>
             </div>
           </CardContent>
         </Card>
@@ -102,7 +104,7 @@ export default function ReportsPage() {
       <ReportsOverview />
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <CashFlowChart />
         <NetWorthChart />
       </div>

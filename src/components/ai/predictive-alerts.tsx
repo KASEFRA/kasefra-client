@@ -162,20 +162,20 @@ export function PredictiveAlerts() {
 
   return (
     <Card className="premium-card hover-lift border-0 shadow-md">
-      <CardHeader className="pb-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+      <CardHeader className="pb-3 sm:pb-4 px-3 sm:px-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+          <div className="flex items-center gap-2 flex-wrap">
             <div className="icon-container bg-primary/10">
-              <TrendingUp className="h-5 w-5 text-primary" />
+              <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
             </div>
-            <CardTitle className="text-lg font-bold">Predictive Insights</CardTitle>
+            <CardTitle className="text-base sm:text-lg font-bold">Predictive Insights</CardTitle>
             {criticalAlerts > 0 && (
-              <Badge variant="destructive" className="text-xs">
+              <Badge variant="destructive" className="text-[10px] sm:text-xs">
                 {criticalAlerts} Critical
               </Badge>
             )}
             {warningAlerts > 0 && (
-              <Badge variant="default" className="text-xs">
+              <Badge variant="default" className="text-[10px] sm:text-xs">
                 {warningAlerts} Warning
               </Badge>
             )}
@@ -185,44 +185,47 @@ export function PredictiveAlerts() {
               variant="ghost"
               size="sm"
               onClick={() => setShowAll(!showAll)}
+              className="text-xs sm:text-sm self-start sm:self-auto"
             >
               {showAll ? 'Show Less' : `View All (${alerts.length})`}
             </Button>
           )}
         </div>
-        <CardDescription className="text-base">
+        <CardDescription className="text-sm sm:text-base">
           AI-powered financial predictions
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
+      <CardContent className="px-3 sm:px-6">
+        <div className="space-y-3 sm:space-y-4">
           {visibleAlerts.map((alert) => (
             <Alert key={alert.id} variant={getSeverityColor(alert.severity) as any}>
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-3 flex-1">
-                  <div className="flex items-center gap-2 mt-0.5">
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+                  <div className="flex items-center gap-1 sm:gap-2 mt-0.5 shrink-0">
                     {getSeverityIcon(alert.severity)}
                     {getTypeIcon(alert.type)}
                   </div>
-                  <div className="flex-1 space-y-2">
-                    <div className="flex items-center gap-2 mb-1">
-                      <AlertTitle className="text-sm font-semibold">
+                  <div className="flex-1 space-y-1 sm:space-y-2 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                      <AlertTitle className="text-xs sm:text-sm font-semibold">
                         {alert.title}
                       </AlertTitle>
-                      {alert.isUAESpecific && (
-                        <Badge size="sm" className="bg-primary/10 text-primary hover:bg-primary/10">
-                          UAE
+                      <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
+                        {alert.isUAESpecific && (
+                          <Badge className="bg-primary/10 text-primary hover:bg-primary/10 text-[10px] sm:text-xs">
+                            UAE
+                          </Badge>
+                        )}
+                        <Badge variant="outline" className="text-[10px] sm:text-xs">
+                          {Math.round(alert.confidence * 100)}% confident
                         </Badge>
-                      )}
-                      <Badge size="sm" variant="outline">
-                        {Math.round(alert.confidence * 100)}% confident
-                      </Badge>
+                      </div>
                     </div>
-                    <AlertDescription className="text-sm">
+                    <AlertDescription className="text-xs sm:text-sm">
                       <div className="space-y-1">
                         <p><strong>{alert.message}</strong></p>
                         <p className="text-muted-foreground">{alert.prediction}</p>
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-[10px] sm:text-xs text-muted-foreground">
                           <span>📅 {alert.timeframe}</span>
                           <span>📊 {alert.category}</span>
                           {alert.amount && (
@@ -235,13 +238,13 @@ export function PredictiveAlerts() {
                     </AlertDescription>
 
                     {/* Action buttons */}
-                    <div className="flex flex-wrap gap-2 mt-3">
+                    <div className="flex flex-wrap gap-1 sm:gap-2 mt-2 sm:mt-3">
                       {alert.actions.map((action, index) => (
                         <Button
                           key={index}
                           variant="outline"
                           size="sm"
-                          className="text-xs h-6 px-2"
+                          className="text-[10px] sm:text-xs h-6 sm:h-7 px-2 sm:px-3"
                         >
                           {action}
                         </Button>
@@ -252,7 +255,7 @@ export function PredictiveAlerts() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-6 w-6 p-0 ml-2"
+                  className="h-6 w-6 p-0 ml-1 sm:ml-2 shrink-0"
                   onClick={() => dismissAlert(alert.id)}
                 >
                   ×
@@ -263,10 +266,10 @@ export function PredictiveAlerts() {
         </div>
 
         {alerts.length === 0 && (
-          <div className="text-center py-8 text-muted-foreground">
-            <TrendingUp className="h-12 w-12 mx-auto mb-3 opacity-50" />
-            <p>No predictive alerts at this time</p>
-            <p className="text-sm">Your finances are on track!</p>
+          <div className="text-center py-6 sm:py-8 text-muted-foreground">
+            <TrendingUp className="h-8 w-8 sm:h-12 sm:w-12 mx-auto mb-2 sm:mb-3 opacity-50" />
+            <p className="text-sm sm:text-base">No predictive alerts at this time</p>
+            <p className="text-xs sm:text-sm">Your finances are on track!</p>
           </div>
         )}
       </CardContent>

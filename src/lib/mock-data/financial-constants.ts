@@ -28,12 +28,12 @@ export const BUDGET_TOTAL = BUDGET_FIXED_TOTAL + BUDGET_FLEXIBLE_TOTAL + BUDGET_
 // Budget Spending (calculated from mockBudgetCategories)
 export const BUDGET_FIXED_SPENT = 13187.80     // Fixed expenses spent
 export const BUDGET_FLEXIBLE_SPENT = 4068.50   // Flexible expenses spent
-export const BUDGET_NON_MONTHLY_SPENT = 308    // Non-monthly spent
-export const BUDGET_TOTAL_SPENT = BUDGET_FIXED_SPENT + BUDGET_FLEXIBLE_SPENT + BUDGET_NON_MONTHLY_SPENT // 17,564.30 AED
+export const BUDGET_NON_MONTHLY_SPENT = 0      // Non-monthly spent (not used in current budget)
+export const BUDGET_TOTAL_SPENT = 17256.30     // Total spent (aligned with actual budget data)
 
 // Budget Remaining
-export const BUDGET_TOTAL_REMAINING = BUDGET_TOTAL - BUDGET_TOTAL_SPENT // 1,777.70 AED
-export const BUDGET_USAGE_PERCENTAGE = (BUDGET_TOTAL_SPENT / BUDGET_TOTAL) * 100 // ~91%
+export const BUDGET_TOTAL_REMAINING = BUDGET_TOTAL - BUDGET_TOTAL_SPENT // 2,085.70 AED
+export const BUDGET_USAGE_PERCENTAGE = (BUDGET_TOTAL_SPENT / BUDGET_TOTAL) * 100 // ~89.2%
 
 // Recurring Payments Total (from recurring-payments.ts)
 export const RECURRING_PAYMENTS_MONTHLY = 4885  // Total monthly recurring payments

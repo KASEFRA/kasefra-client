@@ -201,8 +201,8 @@ export function CreateBudgetWizard({ trigger }: CreateBudgetWizardProps) {
                 <div
                   key={template.id}
                   className={`p-3 sm:p-4 rounded-lg border cursor-pointer transition-all ${selectedTemplate?.id === template.id
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border hover:border-primary/50'
                     }`}
                   onClick={() => handleTemplateSelect(template)}
                 >
@@ -461,9 +461,9 @@ export function CreateBudgetWizard({ trigger }: CreateBudgetWizardProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {trigger || (
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            Create Budget
+          <Button size="sm" className="w-full sm:w-auto">
+            <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="text-xs sm:text-sm">Create Budget</span>
           </Button>
         )}
       </DialogTrigger>
