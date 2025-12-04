@@ -24,8 +24,8 @@ interface User {
 export const mockUser: User = {
   id: "user-123",
   name: "Areeb Hafeel",
-  email: "areebhafeel@technx.com",
-  avatar: "/profile.PNG",
+  email: "areeb@kasefra.io",
+  avatar: "/profile.jpeg",
   currency: "AED",
   language: "en",
   joinedDate: "2023-01-15",

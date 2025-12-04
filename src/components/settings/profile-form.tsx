@@ -42,13 +42,13 @@ interface UserProfile {
 const mockProfile: UserProfile = {
   firstName: "Areeb",
   lastName: "Hafeel",
-  email: "areebhafeel@technx.com",
+  email: "areeb@kasefra.io",
   phone: "+971 50 123 4567",
   dateOfBirth: "1990-03-15",
   nationality: "UAE",
   emirate: "Dubai",
   occupation: "Software Engineer",
-  avatar: "/profile.PNG"
+  avatar: "/profile.jpeg"
 }
 
 const uaeEmirates = [

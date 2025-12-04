@@ -116,7 +116,7 @@ export function RegisterForm({ onSubmit }: RegisterFormProps) {
                     <Input
                       {...field}
                       type="email"
-                      placeholder="areebhafeel@technx.com"
+                      placeholder="areeb@kasefra.io"
                       disabled={isLoading}
                     />
                   </FormControl>

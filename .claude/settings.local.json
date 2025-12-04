@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/munsif/Kasefra/**)",
+      "WebSearch",
+      "Bash(node:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
