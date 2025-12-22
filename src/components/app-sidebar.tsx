@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import {
   ArrowUpCircleIcon,
   BarChartIcon,
@@ -32,6 +33,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+
+// Custom Loky icon component
+const LokyIcon = () => (
+  <Image
+    src="/loky.png"
+    alt="Loky AI"
+    width={20}
+    height={20}
+  />
+)
 
 const data = {
   user: {
@@ -76,9 +87,9 @@ const data = {
       icon: BarChartIcon,
     },
     {
-      title: "AI Assistant",
-      url: "/dashboard/ai",
-      icon: BrainIcon,
+      title: "Loky AI",
+      url: "https://loky.kasefra.io",
+      icon: LokyIcon,
     },
   ],
   navClouds: [

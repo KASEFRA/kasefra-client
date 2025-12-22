@@ -18,7 +18,7 @@ export function NavMain({
   items: {
     title: string
     url: string
-    icon?: LucideIcon
+    icon?: LucideIcon | React.ComponentType
   }[]
 }) {
   const { isMobile, setOpenMobile } = useSidebar()
@@ -33,18 +33,34 @@ export function NavMain({
     <SidebarGroup>
       <SidebarGroupContent>
         <SidebarMenu>
-          {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title} asChild>
-                <Link href={item.url} onClick={handleClick}>
-                  {item.icon && <item.icon />}
-                  <span>{item.title}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
+          {items.map((item) => {
+            const isExternalLink = item.url.startsWith('http')
+            const Icon = item.icon
+            
+            return (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton tooltip={item.title} asChild>
+                  {isExternalLink ? (
+                    <a 
+                      href={item.url} 
+                      onClick={handleClick}
+                    >
+                      {Icon && <Icon />}
+                      <span>{item.title}</span>
+                    </a>
+                  ) : (
+                    <Link href={item.url} onClick={handleClick}>
+                      {Icon && <Icon />}
+                      <span>{item.title}</span>
+                    </Link>
+                  )}
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            )
+          })}
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
   )
 }
+
